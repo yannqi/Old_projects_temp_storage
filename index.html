@@ -166,7 +166,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://yannqi.github.io/2022/07/24/Continue-Learning-Summarize/">
+    <link itemprop="mainEntityOfPage" href="https://yannqi.github.io/2022/07/24/CLsurvey/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -184,7 +184,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/24/Continue-Learning-Summarize/" class="post-title-link" itemprop="url">A brief Continue Learning Survey</a>
+          <a href="/2022/07/24/CLsurvey/" class="post-title-link" itemprop="url">A brief Introduction to Continue Learning / Life long learning</a>
         </h2>
 
         <div class="post-meta-container">
@@ -194,9 +194,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-07-24 21:30:58 / Modified: 21:48:55" itemprop="dateCreated datePublished" datetime="2022-07-24T21:30:58+08:00">2022-07-24</time>
+      <time title="Created: 2022-07-24 21:30:58" itemprop="dateCreated datePublished" datetime="2022-07-24T21:30:58+08:00">2022-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-27 20:11:06" itemprop="dateModified" datetime="2022-07-27T20:11:06+08:00">2022-07-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -204,11 +210,11 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Research-surveys/" itemprop="url" rel="index"><span itemprop="name">Research surveys</span></a>
+          <a href="/categories/Continue-Learning/" itemprop="url" rel="index"><span itemprop="name">Continue Learning</span></a>
         </span>
           , 
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Research-surveys/Technical-tutorials/" itemprop="url" rel="index"><span itemprop="name">Technical tutorials</span></a>
+          <a href="/categories/Continue-Learning/Technical-tutorials/" itemprop="url" rel="index"><span itemprop="name">Technical tutorials</span></a>
         </span>
     </span>
 
@@ -224,19 +230,87 @@
     <div class="post-body" itemprop="articleBody">
           <!-- toc -->
 <ul>
+<li><a href="#what-is-continual-learning-">What is Continual
+Learning?</a>
+<ul>
+<li><a href="#a-high-level-definition">A high level definition.</a></li>
+<li><a href="#a-low-level-definition">A low level definition.</a></li>
+</ul></li>
+<li><a href="#--">大纲</a></li>
+<li><a href="#quick-understand">Quick Understand</a></li>
+<li><a href="#summarize">Summarize</a></li>
 <li><a href="#plan">Plan</a>
 <ul>
-<li><a href="#some-tips-">Some tips：</a></li>
+<li><a href="#some-tips-">Some tips：</a>
+<ul>
+<li><a href="#-----">临时笔记：</a></li>
+</ul></li>
 </ul></li>
 </ul>
 <!-- tocstop -->
+<h1 id="what-is-continual-learning">What is Continual Learning?</h1>
+<h2 id="a-high-level-definition.">A high level definition.</h2>
+<p>“<em>Continual learning is the constant development of increasingly
+complex behaviors; the process of building more complicated skills on
+top of those already developed.</em>” --- <em>Ring(1997).CHILD: A First
+Step Towards Continual Learning</em></p>
+<figure>
+<img src="CLsurvey/CL1.png" alt="CL_1" />
+<figcaption aria-hidden="true">CL_1</figcaption>
+</figure>
+<p>In others words, Continual Learning tries to make machine like human
+keeping learning.</p>
+<h2 id="a-low-level-definition.">A low level definition.</h2>
+<p>Continual learning(CL) is an algorithm whose goal is to make machine
+learning models train on non-stationary data (different from I.I.D.
+data.) from sequential tasks.</p>
+<p>Take an example<span class="math inline">\(^{[2]}\)</span>, we define
+a sequence of tasks <span class="math inline">\(D = \{D_1, \ldots,
+D_T\}\)</span>, where the <em>t-th</em> task <span
+class="math inline">\(D_t=
+\{(\mathbf{x}_i^t,y_i^t)\}_{i=1}^{n_t}\)</span> contains tuples of the
+input sample <span class="math inline">\(\mathbf{x}_i^t \in
+\mathcal{X}\)</span> , and it's label <span class="math inline">\(y_i^t
+\in \mathcal{Y}\)</span>. The goal of the CL model is to train a single
+model <span class="math inline">\(f_\theta : \mathcal{X} \rightarrow
+\mathcal{Y}\)</span> parameterized by <span
+class="math inline">\(\theta\)</span>, and it can predicts the label
+<span class="math inline">\(y = f_\theta (\mathbf{x}) \in
+\mathcal{Y}\)</span>, where <span
+class="math inline">\(\mathbf{x}\)</span> is an unseen test sample from
+arbitrary tsaks. And data from the previous tasks may not be seen
+anymore when training future tasks.</p>
+<h1 id="大纲">大纲</h1>
+<p>大纲： 介绍一下什么是CL，给一个High level的定义。</p>
+<p>描述动机，人们为什么研究这玩意儿？</p>
+<p>现存问题，这玩意儿目前存在什么问题？</p>
+<p>一些解决方案，人们都做了哪些尝试？
+一般都是成功的尝试，失败的尝试不好找。</p>
+<p>这玩意儿的未来如何，前景如何？</p>
+<h1 id="quick-understand">Quick Understand</h1>
+<p>铺一个思维导图</p>
+<h1 id="summarize">Summarize</h1>
 <h1 id="plan">Plan</h1>
 <p>计划写一篇CL的Survey，记录近两年的发展动向，指明一下之后的研究方向。
-计划用时，一周。 每天腾出两小时来构思，写作。并作为第一篇Github blog
+计划用时，一周。 每天腾出一小时来构思，写作。并作为第一篇Github blog
 进行全英文写作的锻炼。</p>
 <h2 id="some-tips">Some tips：</h2>
 <p>可以找一些大牛的Blog进行学习
 找一些近期的CL的survey，之前那个PDF不错。 同时同步更新个思维导图。</p>
+<h3 id="临时笔记">临时笔记：</h3>
+<p>机器学习并不总是要求数据同分布。在不少问题中要求样本（数据）采样自同一个分布是因为希望用训练数据集训练得到的模型可以合理用于测试集，使用同分布假设能够使得这个做法解释得通。由于现在的机器学习方向的内容已经变得比较广，存在不少机器学习问题并不要求样本同分布，比如一些发表在机器学习方向上的online算法就对数据分布没啥要求，关心的性质也非泛化性。</p>
+<p>作者：li Eta
+链接：https://www.zhihu.com/question/41222495/answer/103004055
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+2022 7 25</p>
+<h2 id="如何构思呢">如何构思呢？</h2>
+<h1 id="reference-acknowledgements">Reference &amp;
+Acknowledgements</h1>
+<p>https://icml.cc/virtual/2021/tutorial/10833</p>
+<p>[2] Wang, Z., et al. (2022). Learning To Prompt for Continual
+Learning. Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition (CVPR).</p>
 
       
     </div>
@@ -294,7 +368,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yannqi.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="What is Continual Learning?  A high level definition. A low level definition.  大纲 Quick Understand Summarize Plan  Some tips：  临时笔记：     What is Continual Learning? A high level">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A brief Introduction to Continue Learning &#x2F; Life long learning">
+<meta property="og:url" content="https://yannqi.github.io/2022/07/24/CLsurvey/index.html">
+<meta property="og:site_name" content="Yang Qi&#39;s Blog">
+<meta property="og:description" content="What is Continual Learning?  A high level definition. A low level definition.  大纲 Quick Understand Summarize Plan  Some tips：  临时笔记：     What is Continual Learning? A high level">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CLsurvey/CL1.png">
+<meta property="article:published_time" content="2022-07-24T13:30:58.000Z">
+<meta property="article:modified_time" content="2022-07-27T12:11:06.036Z">
+<meta property="article:author" content="Yang Qi">
+<meta property="article:tag" content="Continue Learning &#x2F; Life long learning">
+<meta property="article:tag" content="Survey">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CLsurvey/CL1.png">
+
+
+<link rel="canonical" href="https://yannqi.github.io/2022/07/24/CLsurvey/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yannqi.github.io/2022/07/24/CLsurvey/","path":"2022/07/24/CLsurvey/","title":"A brief Introduction to Continue Learning / Life long learning"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>A brief Introduction to Continue Learning / Life long learning | Yang Qi's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yang Qi's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-continual-learning"><span class="nav-number">1.</span> <span class="nav-text">What is Continual Learning?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#a-high-level-definition."><span class="nav-number">1.1.</span> <span class="nav-text">A high level definition.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-low-level-definition."><span class="nav-number">1.2.</span> <span class="nav-text">A low level definition.</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E7%BA%B2"><span class="nav-number">2.</span> <span class="nav-text">大纲</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#quick-understand"><span class="nav-number">3.</span> <span class="nav-text">Quick Understand</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#summarize"><span class="nav-number">4.</span> <span class="nav-text">Summarize</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#plan"><span class="nav-number">5.</span> <span class="nav-text">Plan</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#some-tips"><span class="nav-number">5.1.</span> <span class="nav-text">Some tips：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E7%AC%94%E8%AE%B0"><span class="nav-number">5.1.1.</span> <span class="nav-text">临时笔记：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9E%84%E6%80%9D%E5%91%A2"><span class="nav-number">5.2.</span> <span class="nav-text">如何构思呢？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference-acknowledgements"><span class="nav-number">6.</span> <span class="nav-text">Reference &amp;
+Acknowledgements</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yang Qi</p>
+  <div class="site-description" itemprop="description">The blog about the artificial intelligence.(Almost in CV)</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yannqi.github.io/2022/07/24/CLsurvey/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yang Qi">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang Qi's Blog">
+      <meta itemprop="description" content="The blog about the artificial intelligence.(Almost in CV)">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="A brief Introduction to Continue Learning / Life long learning | Yang Qi's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          A brief Introduction to Continue Learning / Life long learning
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-24 21:30:58" itemprop="dateCreated datePublished" datetime="2022-07-24T21:30:58+08:00">2022-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-27 20:11:06" itemprop="dateModified" datetime="2022-07-27T20:11:06+08:00">2022-07-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Continue-Learning/" itemprop="url" rel="index"><span itemprop="name">Continue Learning</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Continue-Learning/Technical-tutorials/" itemprop="url" rel="index"><span itemprop="name">Technical tutorials</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <!-- toc -->
+<ul>
+<li><a href="#what-is-continual-learning-">What is Continual
+Learning?</a>
+<ul>
+<li><a href="#a-high-level-definition">A high level definition.</a></li>
+<li><a href="#a-low-level-definition">A low level definition.</a></li>
+</ul></li>
+<li><a href="#--">大纲</a></li>
+<li><a href="#quick-understand">Quick Understand</a></li>
+<li><a href="#summarize">Summarize</a></li>
+<li><a href="#plan">Plan</a>
+<ul>
+<li><a href="#some-tips-">Some tips：</a>
+<ul>
+<li><a href="#-----">临时笔记：</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<!-- tocstop -->
+<h1 id="what-is-continual-learning">What is Continual Learning?</h1>
+<h2 id="a-high-level-definition.">A high level definition.</h2>
+<p>“<em>Continual learning is the constant development of increasingly
+complex behaviors; the process of building more complicated skills on
+top of those already developed.</em>” --- <em>Ring(1997).CHILD: A First
+Step Towards Continual Learning</em></p>
+<figure>
+<img src="CLsurvey/CL1.png" alt="CL_1" />
+<figcaption aria-hidden="true">CL_1</figcaption>
+</figure>
+<p>In others words, Continual Learning tries to make machine like human
+keeping learning.</p>
+<h2 id="a-low-level-definition.">A low level definition.</h2>
+<p>Continual learning(CL) is an algorithm whose goal is to make machine
+learning models train on non-stationary data (different from I.I.D.
+data.) from sequential tasks.</p>
+<p>Take an example<span class="math inline">\(^{[2]}\)</span>, we define
+a sequence of tasks <span class="math inline">\(D = \{D_1, \ldots,
+D_T\}\)</span>, where the <em>t-th</em> task <span
+class="math inline">\(D_t=
+\{(\mathbf{x}_i^t,y_i^t)\}_{i=1}^{n_t}\)</span> contains tuples of the
+input sample <span class="math inline">\(\mathbf{x}_i^t \in
+\mathcal{X}\)</span> , and it's label <span class="math inline">\(y_i^t
+\in \mathcal{Y}\)</span>. The goal of the CL model is to train a single
+model <span class="math inline">\(f_\theta : \mathcal{X} \rightarrow
+\mathcal{Y}\)</span> parameterized by <span
+class="math inline">\(\theta\)</span>, and it can predicts the label
+<span class="math inline">\(y = f_\theta (\mathbf{x}) \in
+\mathcal{Y}\)</span>, where <span
+class="math inline">\(\mathbf{x}\)</span> is an unseen test sample from
+arbitrary tsaks. And data from the previous tasks may not be seen
+anymore when training future tasks.</p>
+<h1 id="大纲">大纲</h1>
+<p>大纲： 介绍一下什么是CL，给一个High level的定义。</p>
+<p>描述动机，人们为什么研究这玩意儿？</p>
+<p>现存问题，这玩意儿目前存在什么问题？</p>
+<p>一些解决方案，人们都做了哪些尝试？
+一般都是成功的尝试，失败的尝试不好找。</p>
+<p>这玩意儿的未来如何，前景如何？</p>
+<h1 id="quick-understand">Quick Understand</h1>
+<p>铺一个思维导图</p>
+<h1 id="summarize">Summarize</h1>
+<h1 id="plan">Plan</h1>
+<p>计划写一篇CL的Survey，记录近两年的发展动向，指明一下之后的研究方向。
+计划用时，一周。 每天腾出一小时来构思，写作。并作为第一篇Github blog
+进行全英文写作的锻炼。</p>
+<h2 id="some-tips">Some tips：</h2>
+<p>可以找一些大牛的Blog进行学习
+找一些近期的CL的survey，之前那个PDF不错。 同时同步更新个思维导图。</p>
+<h3 id="临时笔记">临时笔记：</h3>
+<p>机器学习并不总是要求数据同分布。在不少问题中要求样本（数据）采样自同一个分布是因为希望用训练数据集训练得到的模型可以合理用于测试集，使用同分布假设能够使得这个做法解释得通。由于现在的机器学习方向的内容已经变得比较广，存在不少机器学习问题并不要求样本同分布，比如一些发表在机器学习方向上的online算法就对数据分布没啥要求，关心的性质也非泛化性。</p>
+<p>作者：li Eta
+链接：https://www.zhihu.com/question/41222495/answer/103004055
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+2022 7 25</p>
+<h2 id="如何构思呢">如何构思呢？</h2>
+<h1 id="reference-acknowledgements">Reference &amp;
+Acknowledgements</h1>
+<p>https://icml.cc/virtual/2021/tutorial/10833</p>
+<p>[2] Wang, Z., et al. (2022). Learning To Prompt for Continual
+Learning. Proceedings of the IEEE/CVF Conference on Computer Vision and
+Pattern Recognition (CVPR).</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Continue-Learning-Life-long-learning/" rel="tag"># Continue Learning / Life long learning</a>
+              <a href="/tags/Survey/" rel="tag"># Survey</a>
+          </div>
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yang Qi</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
