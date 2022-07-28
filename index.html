@@ -184,7 +184,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/24/CLsurvey/" class="post-title-link" itemprop="url">A brief Introduction to Continue Learning / Life long learning</a>
+          <a href="/2022/07/24/CLsurvey/" class="post-title-link" itemprop="url">A brief Introduction to Continue Learning / Life long Learning</a>
         </h2>
 
         <div class="post-meta-container">
@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-27 20:16:45" itemprop="dateModified" datetime="2022-07-27T20:16:45+08:00">2022-07-27</time>
+      <time title="Modified: 2022-07-28 16:23:33" itemprop="dateModified" datetime="2022-07-28T16:23:33+08:00">2022-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -235,8 +235,15 @@ Learning?</a>
 <ul>
 <li><a href="#a-high-level-definition">A high level definition.</a></li>
 <li><a href="#a-low-level-definition">A low level definition.</a></li>
+<li><a href="#motivation---application-scenarios">Motivation &amp;
+Application scenarios</a></li>
+<li><a href="#the-challenge-of-continual-learing">The Challenge of
+Continual Learing</a></li>
+<li><a href="#four-assumptions-of-continual-learning">Four Assumptions
+of Continual Learning</a></li>
+<li><a href="#the-method-of-continual-learning">The method of Continual
+Learning</a></li>
 </ul></li>
-<li><a href="#--">大纲</a></li>
 <li><a href="#quick-understand">Quick Understand</a></li>
 <li><a href="#summarize">Summarize</a></li>
 <li><a href="#plan">Plan</a>
@@ -250,20 +257,31 @@ Learning?</a>
 <!-- tocstop -->
 <h1 id="what-is-continual-learning">What is Continual Learning?</h1>
 <h2 id="a-high-level-definition.">A high level definition.</h2>
-<p>“<em>Continual learning is the constant development of increasingly
+<p>“<em>Continual Learning is the constant development of increasingly
 complex behaviors; the process of building more complicated skills on
 top of those already developed.</em>” --- <em>Ring(1997).CHILD: A First
 Step Towards Continual Learning</em></p>
+<p>Continual Learning is also referred to as lifelong Learning,
+sequential learing or incremental Learning. They have the same
+define.</p>
+<p>“<em>Studies the problem of Learning froman infinite stream of data,
+with the goal of gradually extending acquired knowledge and using it for
+future Learning.</em>” --- <em>Z.Chen. Lifelong machine
+Learning</em></p>
 <figure>
-<img src="CL1.png" alt="CL_1" />
-<figcaption aria-hidden="true">CL_1</figcaption>
+<img src="CL1.png"
+alt="Adaptive continuous Learning in a dynamic environment to learn tasks sequentially." />
+<figcaption aria-hidden="true">Adaptive continuous Learning in a dynamic
+environment to learn tasks sequentially.</figcaption>
 </figure>
 <p>In others words, Continual Learning tries to make machine like human
-keeping learning.</p>
+to adaptive continuou Learning in a dynamic environment to learn tasks
+sequentially (from birth to death).</p>
 <h2 id="a-low-level-definition.">A low level definition.</h2>
-<p>Continual learning(CL) is an algorithm whose goal is to make machine
-learning models train on non-stationary data (different from I.I.D.
+<p>Continual Learning(CL) is an algorithm whose goal is to make machine
+Learning models train on non-stationary data (different from I.I.D.
 data.) from sequential tasks.</p>
+<p><a id="definition"></a> <!-- 上述用于标签索引 --></p>
 <p>Take an example<span class="math inline">\(^{[2]}\)</span>, we define
 a sequence of tasks <span class="math inline">\(D = \{D_1, \ldots,
 D_T\}\)</span>, where the <em>t-th</em> task <span
@@ -280,13 +298,165 @@ class="math inline">\(\theta\)</span>, and it can predicts the label
 class="math inline">\(\mathbf{x}\)</span> is an unseen test sample from
 arbitrary tsaks. And data from the previous tasks may not be seen
 anymore when training future tasks.</p>
-<h1 id="大纲">大纲</h1>
-<p>大纲： 介绍一下什么是CL，给一个High level的定义。</p>
-<p>描述动机，人们为什么研究这玩意儿？</p>
-<p>现存问题，这玩意儿目前存在什么问题？</p>
-<p>一些解决方案，人们都做了哪些尝试？
-一般都是成功的尝试，失败的尝试不好找。</p>
-<p>这玩意儿的未来如何，前景如何？</p>
+<h2 id="motivation-application-scenarios">Motivation &amp; Application
+scenarios</h2>
+<p>As we all know, Alpha-Go kills everyone in the Go world, however when
+it face to Chess, it is powerless. Similarly, YOLO(A
+<strong>model</strong> <em>you only look once</em>) can detect the dog
+easily, but it can only detect the specific object. Therefore, people
+look forward to a model that can resolve the aforementioned problems.
+This calls for systems that adapt Continually and keep on Learning over
+time.</p>
+<p>And talk about the application scenarious, Continual Learning can be
+used in many areas. Take some simple examples, a robot need to acquire
+new skills in different environment to complish new tasks, a
+self-driving car need to adapt to different environments (from a country
+road to a highway to a city), and the conversational agents should adapt
+to different users, situations, tasks.</p>
+<figure>
+<img src="CL2.png" alt="Application scenarios" />
+<figcaption aria-hidden="true">Application scenarios</figcaption>
+</figure>
+<h2 id="the-challenge-of-continual-learing">The Challenge of Continual
+Learing</h2>
+<p>Nowadays, methods of realizing Continual Learning almost use Neural
+Networks(CNN, TransFormer and so on). And due to the limitations of the
+Neural Networks, the Continual Learning faces two major challenges,
+<strong>Catastrophic Forgetting</strong> and <strong>Balance between
+Learning and Forgeting(Stability vs Plasticity)</strong>.</p>
+<ul>
+<li><p><strong>Catastrophic Forgetting</strong>. When the data is
+updated incrementally, the model will face catastrophic interference or
+forgetting, which leads to the model forgetting how to solve the old
+task after Learning the new task. For example: A vision model, which can
+classify images into two categories. First, we train the vision model by
+<code>Cat vs Dog Datasets</code>, and then we get a perfect Acc(maybe
+99.98%?) on current datasets. Second, we put the pre-trained model to
+another datset(e.g. <code>Car vs Ship Datasets</code>) to train, and can
+get a nice performance at the current datsets too. However, when we go
+back to the <code>Cat vs Dog Datasets</code>, we will find that the
+model forgets the previous data and can not divide them accurately. <img
+src="CL3.png" alt="Application scenarios" /></p></li>
+<li><p><strong>Stability vs Plasticity</strong>. For people, the faster
+you learn, the faster you forget. The same is true for machines. How to
+balance the relationship between them is also a challenge.</p>
+<ol type="1">
+<li>Stability &lt;=&gt; ability to retain the learned skills on the old
+tasks</li>
+<li>Plasticity &lt;=&gt; ability to adapt to a new task <img
+src="CL5.png" alt="Application scenarios" /></li>
+</ol></li>
+</ul>
+<p>Albeit a challenging problem, progress in Continual Learning has led
+to real-world applications starting to emerge.</p>
+<h2 id="four-assumptions-of-continual-learning">Four Assumptions of
+Continual Learning</h2>
+<p>Due to the general difficulty and variety of challenges in Continual
+Learning, many methods relax the general setting to an easier task
+incremental one.</p>
+<p>Before understand the assumptions of the Continual Learing, we should
+know some pre-settings. The same to <a href="#definition">A low level
+definition</a></p>
+<p>X - input vector Y - class label T - task. &gt; The concept
+’<em>task</em>’ refers to an isolated training phase with a new batch of
+data, belonging to a new group of classes, a new domain, or a different
+output space.</p>
+<p><span class="math inline">\((\mathcal{X}^t,\mathcal{Y}^t)\)</span> -
+Dataset for task t. <span
+class="math inline">\(\{\mathcal{Y}^t\}\)</span> - Class labels.
+e.g.:Dog Cat Bird ... <span
+class="math inline">\(P(\mathcal{X}^t)\)</span> - input distributions.
+For different task, <span class="math inline">\(P(\mathcal{X}^t) \neq
+P(\mathcal{X}^{t+1})\)</span> <span
+class="math inline">\(f_t(\mathcal{X^t};\theta)\)</span> -The predicted
+label of <span class="math inline">\(\mathcal{Y^t}\)</span>,model is
+pparameterized by <span class="math inline">\(\theta\)</span></p>
+<p>The four assumptions of Continual Learning : 1. <strong>Task
+incremental Learning.</strong> 2. <strong>Class incremental
+Learning.</strong> 3. <strong>Domain incremental Learning.</strong> 4.
+<strong>Data incremental Learning / Task-Agnostic Learning.</strong></p>
+<p>Task ID observed at training: - Task observed at test: Task
+incremental Learning - Task not observed at test : Class incremental
+Learning and Domain incremental Learning</p>
+<p>Task ID not observed at training: - Data incremental Learning /
+Task-Agnostic Learning</p>
+<p>Detail description of four setting:</p>
+<ol type="1">
+<li><strong>Task incremental Learning</strong>(the easiest scenario)
+Task incremental learning considers a sequence of tasks, receiving
+trainig data of just one task at a time to perform traing until
+convergence. During this setting, models are always informed about which
+task needs to be performed (both at train and test time). However, data
+is no longer available for old tasks, impeding evaluation of statistical
+risk for the new parameter values. Express it with formulas: &gt; Data
+<span class="math inline">\((\mathcal{X}^t,\mathcal{Y}^t)\)</span> is a
+training-data of task t, the current task is <span
+class="math inline">\(\mathcal{T}\)</span>. &gt; The goal is to control
+<strong>the statistical risk</strong> of all seen tasks given limited or
+no access to data from previous tasks <span class="math inline">\(t &lt;
+\mathcal{T}\)</span>. In others words, the research focals on optimizing
+the below formula parameterized by <span
+class="math inline">\(\theta\)</span>: &gt; <span
+class="math display">\[\sum\limits_{t=1}^{\mathcal{T}}\mathbb{E}_{(\mathcal{X}^t,\mathcal{Y}^t)}[\mathscr{L}(f_t(\mathcal{X^t};\theta),\mathcal{Y^t})],\]</span>
+&gt; For the current task <span
+class="math inline">\(\mathcal{T}\)</span>, <strong>the statistical
+risk</strong> can be approximated by <strong>the empirical
+risk</strong>: &gt; <span
+class="math display">\[\frac{1}{N_\mathcal{T}}\sum\limits_{t=1}^{N_\mathcal{T}}\mathscr{L}(f_t(x_i^{\mathcal{T}};\theta),y_i^{\mathcal{T}})],
+\]</span> &gt; where <span
+class="math inline">\(N_{\mathcal{T}}\)</span> is the number data of
+task <span class="math inline">\(\mathcal{T}\)</span>.</li>
+</ol>
+<figure>
+<img src="CL6.png" alt="Task incremental Learning" />
+<figcaption aria-hidden="true">Task incremental Learning</figcaption>
+</figure>
+<p>All in all, this setting assumptions are: <span
+class="math inline">\(P(\mathcal{X}^t) \neq
+P(\mathcal{X}^{t+1})\)</span> and <span
+class="math inline">\({\{\mathcal{Y}\}^t\neq
+\{\mathcal{Y}^{t+1}\}}\)</span>(different labels when in different
+task), <span class="math inline">\(P(\mathcal{Y}^t) \neq
+P(\mathcal{Y}^{t+1})\)</span>, but you know which task it is when in
+test.</p>
+<ol start="2" type="1">
+<li>Class incremental Learning Models must be able not only to solve
+each task seen so far, but also to infer which task they are presented
+with.(You don't know which task you are facing.) The new class labels
+may be added into the model in new task.</li>
+</ol>
+<figure>
+<img src="CL7.png" alt="Class incremental Learning" />
+<figcaption aria-hidden="true">Class incremental Learning</figcaption>
+</figure>
+<p>The setting assumptions are: <span
+class="math inline">\(P(\mathcal{X}^t) \neq
+P(\mathcal{X}^{t+1})\)</span> and <span
+class="math inline">\({\{\mathcal{Y}\}^t\subset
+\{\mathcal{Y}^{t+1}\}}\)</span>(Class incremental), <span
+class="math inline">\(P(\mathcal{Y}^t) \neq
+P(\mathcal{Y}^{t+1})\)</span>, and you don't know which task it is when
+in test. 1. Domain incremental Learning</p>
+<ol start="2" type="1">
+<li>Data incremental Learning / Task-Agnostic Learning</li>
+</ol>
+<h2 id="the-method-of-continual-learning">The method of Continual
+Learning</h2>
+<!-- # 大纲
+大纲： 
+介绍一下什么是CL，给一个High level的定义。(已完成)
+
+描述动机，人们为什么研究这玩意儿？(已完成)
+
+现存问题，这玩意儿目前存在什么问题？(已完成)
+
+一些解决方案，人们都做了哪些尝试？ 一般都是成功的尝试，失败的尝试不好找。
+需要做一个统计： 包含 最早的CL的文章出现的时间，CL逐步变得火爆起来的时间，当下CL的热点文章都有哪些。并对当下一些的热点方法进行简要讲解。
+
+这玩意儿的未来如何，前景如何？
+未来可扩展的那些方向。进行一点细致的讲解
+
+ -->
 <h1 id="quick-understand">Quick Understand</h1>
 <p>铺一个思维导图</p>
 <h1 id="summarize">Summarize</h1>
@@ -307,10 +477,14 @@ anymore when training future tasks.</p>
 <h2 id="如何构思呢">如何构思呢？</h2>
 <h1 id="reference-acknowledgements">Reference &amp;
 Acknowledgements</h1>
-<p>https://icml.cc/virtual/2021/tutorial/10833</p>
+<p>https://icml.cc/virtual/2021/tutorial/10833 Part of blog's pictures
+come from this link.</p>
 <p>[2] Wang, Z., et al. (2022). Learning To Prompt for Continual
 Learning. Proceedings of the IEEE/CVF Conference on Computer Vision and
 Pattern Recognition (CVPR).</p>
+<p>[3] Lange, M. D., et al. (2022). "A Continual Learning Survey:
+Defying Forgetting in Classification Tasks." Ieee Transactions on
+Pattern Analysis and Machine Intelligence 44(7): 3366-3385.</p>
 
       
     </div>
