@@ -28,17 +28,17 @@
 <meta property="og:site_name" content="Yang Qi&#39;s Blog">
 <meta property="og:description" content="What is Continual Learning?  A high level definition. A low level definition. Motivation &amp; Application scenarios The Challenge of Continual Learing Four Assumptions of Continual Lear">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL1.png">
-<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL2.png">
-<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL6.png">
-<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL7.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CLsurvey/CL1.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CLsurvey/CL2.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CLsurvey/CL6.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CLsurvey/CL7.png">
 <meta property="article:published_time" content="2022-07-24T13:30:58.000Z">
-<meta property="article:modified_time" content="2022-07-28T08:23:33.569Z">
+<meta property="article:modified_time" content="2022-07-28T08:48:57.324Z">
 <meta property="article:author" content="Yang Qi">
 <meta property="article:tag" content="Continue Learning &#x2F; Life long Learning">
 <meta property="article:tag" content="Survey">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL1.png">
+<meta name="twitter:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CLsurvey/CL1.png">
 
 
 <link rel="canonical" href="https://yannqi.github.io/2022/07/24/CLsurvey/">
@@ -218,7 +218,7 @@ Acknowledgements</span></a></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-28 16:23:33" itemprop="dateModified" datetime="2022-07-28T16:23:33+08:00">2022-07-28</time>
+      <time title="Modified: 2022-07-28 16:48:57" itemprop="dateModified" datetime="2022-07-28T16:48:57+08:00">2022-07-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,6 +273,10 @@ Learning</a></li>
 <!-- tocstop -->
 <h1 id="what-is-continual-learning">What is Continual Learning?</h1>
 <h2 id="a-high-level-definition.">A high level definition.</h2>
+<p>{ % blockquote 崔健
+https://y.qq.com/n/yqq/song/003ce6td37rQIU.html?ADTAG=baiduald&amp;play=1
+花房姑娘 %} 你要我留在这地方 你要我和它们一样 我看着你默默地说 噢
+不能这样 { % endblockquote %}</p>
 <p>“<em>Continual Learning is the constant development of increasingly
 complex behaviors; the process of building more complicated skills on
 top of those already developed.</em>” --- <em>Ring(1997).CHILD: A First
@@ -285,7 +289,7 @@ with the goal of gradually extending acquired knowledge and using it for
 future Learning.</em>” --- <em>Z.Chen. Lifelong machine
 Learning</em></p>
 <figure>
-<img src="CL1.png"
+<img src="CLsurvey/CL1.png"
 alt="Adaptive continuous Learning in a dynamic environment to learn tasks sequentially." />
 <figcaption aria-hidden="true">Adaptive continuous Learning in a dynamic
 environment to learn tasks sequentially.</figcaption>
@@ -330,7 +334,7 @@ self-driving car need to adapt to different environments (from a country
 road to a highway to a city), and the conversational agents should adapt
 to different users, situations, tasks.</p>
 <figure>
-<img src="CL2.png" alt="Application scenarios" />
+<img src="CLsurvey/CL2.png" alt="Application scenarios" />
 <figcaption aria-hidden="true">Application scenarios</figcaption>
 </figure>
 <h2 id="the-challenge-of-continual-learing">The Challenge of Continual
@@ -352,7 +356,7 @@ another datset(e.g. <code>Car vs Ship Datasets</code>) to train, and can
 get a nice performance at the current datsets too. However, when we go
 back to the <code>Cat vs Dog Datasets</code>, we will find that the
 model forgets the previous data and can not divide them accurately. <img
-src="CL3.png" alt="Application scenarios" /></p></li>
+src="CLsurvey/CL3.png" alt="Application scenarios" /></p></li>
 <li><p><strong>Stability vs Plasticity</strong>. For people, the faster
 you learn, the faster you forget. The same is true for machines. How to
 balance the relationship between them is also a challenge.</p>
@@ -360,7 +364,7 @@ balance the relationship between them is also a challenge.</p>
 <li>Stability &lt;=&gt; ability to retain the learned skills on the old
 tasks</li>
 <li>Plasticity &lt;=&gt; ability to adapt to a new task <img
-src="CL5.png" alt="Application scenarios" /></li>
+src="CLsurvey/CL5.png" alt="Application scenarios" /></li>
 </ol></li>
 </ul>
 <p>Albeit a challenging problem, progress in Continual Learning has led
@@ -373,20 +377,26 @@ incremental one.</p>
 <p>Before understand the assumptions of the Continual Learing, we should
 know some pre-settings. The same to <a href="#definition">A low level
 definition</a></p>
-<p>X - input vector Y - class label T - task. &gt; The concept
-’<em>task</em>’ refers to an isolated training phase with a new batch of
-data, belonging to a new group of classes, a new domain, or a different
-output space.</p>
+<p>X - input vector</p>
+<p>Y - class label</p>
+<p>T - task.</p>
+<blockquote>
+<p>The concept ’<em>task</em>’ refers to an isolated training phase with
+a new batch of data, belonging to a new group of classes, a new domain,
+or a different output space.</p>
+</blockquote>
 <p><span class="math inline">\((\mathcal{X}^t,\mathcal{Y}^t)\)</span> -
-Dataset for task t. <span
-class="math inline">\(\{\mathcal{Y}^t\}\)</span> - Class labels.
-e.g.:Dog Cat Bird ... <span
-class="math inline">\(P(\mathcal{X}^t)\)</span> - input distributions.
-For different task, <span class="math inline">\(P(\mathcal{X}^t) \neq
-P(\mathcal{X}^{t+1})\)</span> <span
-class="math inline">\(f_t(\mathcal{X^t};\theta)\)</span> -The predicted
-label of <span class="math inline">\(\mathcal{Y^t}\)</span>,model is
-pparameterized by <span class="math inline">\(\theta\)</span></p>
+Dataset for task t.</p>
+<p><span class="math inline">\(\{\mathcal{Y}^t\}\)</span> - Class
+labels. e.g.:Dog Cat Bird ...</p>
+<p><span class="math inline">\(P(\mathcal{X}^t)\)</span> - input
+distributions. For different task, <span
+class="math inline">\(P(\mathcal{X}^t) \neq
+P(\mathcal{X}^{t+1})\)</span></p>
+<p><span class="math inline">\(f_t(\mathcal{X^t};\theta)\)</span> -The
+predicted label of <span
+class="math inline">\(\mathcal{Y^t}\)</span>,model is pparameterized by
+<span class="math inline">\(\theta\)</span></p>
 <p>The four assumptions of Continual Learning : 1. <strong>Task
 incremental Learning.</strong> 2. <strong>Class incremental
 Learning.</strong> 3. <strong>Domain incremental Learning.</strong> 4.
@@ -404,27 +414,31 @@ trainig data of just one task at a time to perform traing until
 convergence. During this setting, models are always informed about which
 task needs to be performed (both at train and test time). However, data
 is no longer available for old tasks, impeding evaluation of statistical
-risk for the new parameter values. Express it with formulas: &gt; Data
-<span class="math inline">\((\mathcal{X}^t,\mathcal{Y}^t)\)</span> is a
-training-data of task t, the current task is <span
-class="math inline">\(\mathcal{T}\)</span>. &gt; The goal is to control
-<strong>the statistical risk</strong> of all seen tasks given limited or
-no access to data from previous tasks <span class="math inline">\(t &lt;
-\mathcal{T}\)</span>. In others words, the research focals on optimizing
-the below formula parameterized by <span
-class="math inline">\(\theta\)</span>: &gt; <span
-class="math display">\[\sum\limits_{t=1}^{\mathcal{T}}\mathbb{E}_{(\mathcal{X}^t,\mathcal{Y}^t)}[\mathscr{L}(f_t(\mathcal{X^t};\theta),\mathcal{Y^t})],\]</span>
-&gt; For the current task <span
-class="math inline">\(\mathcal{T}\)</span>, <strong>the statistical
-risk</strong> can be approximated by <strong>the empirical
-risk</strong>: &gt; <span
-class="math display">\[\frac{1}{N_\mathcal{T}}\sum\limits_{t=1}^{N_\mathcal{T}}\mathscr{L}(f_t(x_i^{\mathcal{T}};\theta),y_i^{\mathcal{T}})],
-\]</span> &gt; where <span
-class="math inline">\(N_{\mathcal{T}}\)</span> is the number data of
-task <span class="math inline">\(\mathcal{T}\)</span>.</li>
+risk for the new parameter values. Express it with formulas:</li>
 </ol>
+<blockquote>
+<p>Data <span
+class="math inline">\((\mathcal{X}^t,\mathcal{Y}^t)\)</span> is a
+training-data of task t, the current task is <span
+class="math inline">\(\mathcal{T}\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>The goal is to control <strong>the statistical risk</strong> of all
+seen tasks given limited or no access to data from previous tasks <span
+class="math inline">\(t &lt; \mathcal{T}\)</span>. In others words, the
+research focals on optimizing the below formula parameterized by <span
+class="math inline">\(\theta\)</span>: <span
+class="math display">\[\sum\limits_{t=1}^{\mathcal{T}}\mathbb{E}_{(\mathcal{X}^t,\mathcal{Y}^t)}[\mathscr{L}(f_t(\mathcal{X^t};\theta),\mathcal{Y^t})],\]</span>
+For the current task <span class="math inline">\(\mathcal{T}\)</span>,
+<strong>the statistical risk</strong> can be approximated by <strong>the
+empirical risk</strong>: <span
+class="math display">\[\frac{1}{N_\mathcal{T}}\sum\limits_{t=1}^{N_\mathcal{T}}\mathscr{L}(f_t(x_i^{\mathcal{T}};\theta),y_i^{\mathcal{T}})],
+\]</span> where <span class="math inline">\(N_{\mathcal{T}}\)</span> is
+the number data of task <span
+class="math inline">\(\mathcal{T}\)</span>.</p>
+</blockquote>
 <figure>
-<img src="CL6.png" alt="Task incremental Learning" />
+<img src="CLsurvey/CL6.png" alt="Task incremental Learning" />
 <figcaption aria-hidden="true">Task incremental Learning</figcaption>
 </figure>
 <p>All in all, this setting assumptions are: <span
@@ -442,7 +456,7 @@ with.(You don't know which task you are facing.) The new class labels
 may be added into the model in new task.</li>
 </ol>
 <figure>
-<img src="CL7.png" alt="Class incremental Learning" />
+<img src="CLsurvey/CL7.png" alt="Class incremental Learning" />
 <figcaption aria-hidden="true">Class incremental Learning</figcaption>
 </figure>
 <p>The setting assumptions are: <span
@@ -452,9 +466,10 @@ class="math inline">\({\{\mathcal{Y}\}^t\subset
 \{\mathcal{Y}^{t+1}\}}\)</span>(Class incremental), <span
 class="math inline">\(P(\mathcal{Y}^t) \neq
 P(\mathcal{Y}^{t+1})\)</span>, and you don't know which task it is when
-in test. 1. Domain incremental Learning</p>
-<ol start="2" type="1">
-<li>Data incremental Learning / Task-Agnostic Learning</li>
+in test.</p>
+<ol type="1">
+<li><p>Domain incremental Learning</p></li>
+<li><p>Data incremental Learning / Task-Agnostic Learning</p></li>
 </ol>
 <h2 id="the-method-of-continual-learning">The method of Continual
 Learning</h2>
