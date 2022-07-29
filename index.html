@@ -202,7 +202,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-28 16:48:57" itemprop="dateModified" datetime="2022-07-28T16:48:57+08:00">2022-07-28</time>
+      <time title="Modified: 2022-07-29 11:29:24" itemprop="dateModified" datetime="2022-07-29T11:29:24+08:00">2022-07-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,10 +257,6 @@ Learning</a></li>
 <!-- tocstop -->
 <h1 id="what-is-continual-learning">What is Continual Learning?</h1>
 <h2 id="a-high-level-definition.">A high level definition.</h2>
-<p>{ % blockquote 崔健
-https://y.qq.com/n/yqq/song/003ce6td37rQIU.html?ADTAG=baiduald&amp;play=1
-花房姑娘 %} 你要我留在这地方 你要我和它们一样 我看着你默默地说 噢
-不能这样 { % endblockquote %}</p>
 <p>“<em>Continual Learning is the constant development of increasingly
 complex behaviors; the process of building more complicated skills on
 top of those already developed.</em>” --- <em>Ring(1997).CHILD: A First
@@ -273,7 +269,7 @@ with the goal of gradually extending acquired knowledge and using it for
 future Learning.</em>” --- <em>Z.Chen. Lifelong machine
 Learning</em></p>
 <figure>
-<img src="CLsurvey/CL1.png"
+<img src="CL1.png"
 alt="Adaptive continuous Learning in a dynamic environment to learn tasks sequentially." />
 <figcaption aria-hidden="true">Adaptive continuous Learning in a dynamic
 environment to learn tasks sequentially.</figcaption>
@@ -318,7 +314,7 @@ self-driving car need to adapt to different environments (from a country
 road to a highway to a city), and the conversational agents should adapt
 to different users, situations, tasks.</p>
 <figure>
-<img src="CLsurvey/CL2.png" alt="Application scenarios" />
+<img src="CL2.png" alt="Application scenarios" />
 <figcaption aria-hidden="true">Application scenarios</figcaption>
 </figure>
 <h2 id="the-challenge-of-continual-learing">The Challenge of Continual
@@ -340,7 +336,7 @@ another datset(e.g. <code>Car vs Ship Datasets</code>) to train, and can
 get a nice performance at the current datsets too. However, when we go
 back to the <code>Cat vs Dog Datasets</code>, we will find that the
 model forgets the previous data and can not divide them accurately. <img
-src="CLsurvey/CL3.png" alt="Application scenarios" /></p></li>
+src="CL3.png" alt="Application scenarios" /></p></li>
 <li><p><strong>Stability vs Plasticity</strong>. For people, the faster
 you learn, the faster you forget. The same is true for machines. How to
 balance the relationship between them is also a challenge.</p>
@@ -348,7 +344,7 @@ balance the relationship between them is also a challenge.</p>
 <li>Stability &lt;=&gt; ability to retain the learned skills on the old
 tasks</li>
 <li>Plasticity &lt;=&gt; ability to adapt to a new task <img
-src="CLsurvey/CL5.png" alt="Application scenarios" /></li>
+src="CL5.png" alt="Application scenarios" /></li>
 </ol></li>
 </ul>
 <p>Albeit a challenging problem, progress in Continual Learning has led
@@ -422,7 +418,7 @@ the number data of task <span
 class="math inline">\(\mathcal{T}\)</span>.</p>
 </blockquote>
 <figure>
-<img src="CLsurvey/CL6.png" alt="Task incremental Learning" />
+<img src="CL6.png" alt="Task incremental Learning" />
 <figcaption aria-hidden="true">Task incremental Learning</figcaption>
 </figure>
 <p>All in all, this setting assumptions are: <span
@@ -440,7 +436,7 @@ with.(You don't know which task you are facing.) The new class labels
 may be added into the model in new task.</li>
 </ol>
 <figure>
-<img src="CLsurvey/CL7.png" alt="Class incremental Learning" />
+<img src="CL7.png" alt="Class incremental Learning" />
 <figcaption aria-hidden="true">Class incremental Learning</figcaption>
 </figure>
 <p>The setting assumptions are: <span
