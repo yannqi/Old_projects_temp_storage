@@ -120,16 +120,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -158,6 +158,252 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://yannqi.github.io/2022/08/26/The-Illustrated-Reservoir-sampling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yang Qi">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang Qi's Blog">
+      <meta itemprop="description" content="The blog about the artificial intelligence.(Almost in CV)">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yang Qi's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/26/The-Illustrated-Reservoir-sampling/" class="post-title-link" itemprop="url">连续学习中的蓄水池抽样算法(The Illustrated Reservoir sampling).</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-26 10:30:58 / Modified: 20:24:00" itemprop="dateCreated datePublished" datetime="2022-08-26T10:30:58+08:00">2022-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tutorial/" itemprop="url" rel="index"><span itemprop="name">Tutorial</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <!-- toc -->
+<ul>
+<li><a href="#--">前言</a></li>
+<li><a href="#---reservoir-sampling-">什么是Reservoir
+Sampling？</a></li>
+<li><a href="#--------reservoir-sampling------">蓄水池抽样算法(Reservoir
+sampling)具体实现：</a>
+<ul>
+<li><a href="#algorithm-r-">Algorithm R：</a>
+<ul>
+<li><a href="#--algorithm-r------------">证明Algorithm
+R每个样本被取到概率相同：</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<!-- tocstop -->
+<h1 id="前言">前言</h1>
+<p>技术性文章决定还是用中文来写，便于理解。近期在看连续学习中有关于Replay
+Method的文章时，在对数据流的采样中，reservoir sampling方法出现了很多次<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>。本文将对该方法进行梳理，并给出python实现的案例。特别感谢<strong>邱simple</strong><a
+href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a></p>
+<h1 id="什么是reservoir-sampling">什么是Reservoir Sampling？</h1>
+<p>Reservoir
+Sampling直白翻译过来就是“蓄水池抽样”，非常具象化。维基百科定义如下<a
+href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a>：</p>
+<blockquote>
+<p>Reservoir sampling is a family of randomized algorithms for choosing
+a simple random sample, without replacement, of k items from a
+population of unknown size n in a single pass over the items. The size
+of the population n is not known to the algorithm and is typically too
+large for all n items to fit into main memory. The population is
+revealed to the algorithm over time, and the algorithm cannot look back
+at previous items. At any point, the current state of the algorithm must
+permit extraction of a simple random sample without replacement of size
+k over the part of the population seen so far.</p>
+</blockquote>
+<p>直白翻译过来就是，我们的蓄水池抽样算法(Reservoir
+sampling)是随机抽样算法的一种，即我们要从一组长度为<strong>n</strong>的数据中抽样出<strong>k</strong>个样本出来。但是呢，它的不同之处在于，它抽样的数据是一组未知长度的数据流(<em>莫疑惑，在数据流完之前，你是不知道这个长度<strong>n</strong>的具体数值的</em>)，而且这个数据流只流通一次，无法再返回去抽样。也就是说，你必须在数据流通的过程中，去抽样出k个样本出来，且保证所有数据被抽中的概率都是等概率的，即<span
+class="math inline">\(k/n\)</span>。</p>
+<p>更进一步的理解， -
+<strong>平常的抽样方法</strong>：平常的抽样方式是假定有100个小球，你从100个小球里面抽10个小球出来，那么我们就从1-100取10个随机数就可以，且确保了每个小球被取到的概率都是<span
+class="math inline">\(1/10\)</span>。 -
+<strong>蓄水池抽样算法</strong>(Reservoir
+sampling)：与我们平常的抽样方式不同，蓄水池抽样算法(Reservoir
+sampling)则是假定有一个大黑盒子(你不知道里面有多少个)，小球慢慢从盒子里面一个一个滚出来，而你只需要抓取10个小球，随着时间的推移，大黑盒子里面的小球都滚完了(你此时才知道滚了100个球出来，且对于滚远的球，你不能再去抓取了)，同样你也完成了取样的10个球，且需要确保了每个小球被取到的概率都是<span
+class="math inline">\(1/10\)</span>。</p>
+<p>总结如下：
+给定一个数据流，数据流长度N很大，且N直到处理完所有数据之前都不可知，请问如何在只遍历一遍数据（O(N)）的情况下，能够随机选取出m个不重复的数据，且每个数被选中的概率为<span
+class="math inline">\(m/N\)</span>。</p>
+<p>如图所示： <img src="I1.png"
+alt="The illustrated Reservoir sampling." /></p>
+<h1
+id="蓄水池抽样算法reservoir-sampling具体实现">蓄水池抽样算法(Reservoir
+sampling)具体实现：</h1>
+<h2 id="algorithm-r">Algorithm R：</h2>
+<p>由Alan Waterman<a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a>最初提出的一种简单但慢的实现方式。算法伪代码图如下所示：</p>
+<figure>
+<img src="I2.png" alt="pseudo code." />
+<figcaption aria-hidden="true">pseudo code.</figcaption>
+</figure>
+<h3 id="证明algorithm-r每个样本被取到概率相同">证明Algorithm
+R每个样本被取到概率相同：</h3>
+<p>可以用数学归纳的方法来证明。</p>
+<table style="width:6%;">
+<colgroup>
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>数学归纳法原理：</td>
+</tr>
+<tr class="even">
+<td>例如：你有一列很长的直立着的多米诺骨牌，如果你可以： 1.
+证明第一张骨牌会倒。 2.
+假设只要任意一张骨牌倒了，证明与其相邻的下一张骨牌也会倒。</td>
+</tr>
+<tr class="odd">
+<td>那么便可以下结论：所有的骨牌都会倒下</td>
+</tr>
+</tbody>
+</table>
+<p>因此， 对于<span class="math inline">\(i \geq
+k\)</span>，我们需要假设在第<span
+class="math inline">\((i+1)\)</span>个数据来之前，reservoir中的数据被选中的概率是<span
+class="math inline">\(\frac{k}{i}\)</span>；在第<span
+class="math inline">\((i+1)\)</span>个数据来之后，证明reservoir中的数据被选中的概率是<span
+class="math inline">\(\frac{k}{i+1}\)</span>；这样根据数学归纳的方法，可以得到结论，当第<span
+class="math inline">\(N\)</span>个数据来之后，reservoir中的数据被选中的概率是<span
+class="math inline">\(\frac{k}{N}\)</span>。</p>
+<p><strong>证明：</strong> 首先假设，对于<span
+class="math inline">\(i&gt;k\)</span>，在<span
+class="math inline">\((i+1)\)</span>个数据来之前，reservoir中的被选中的数据的概率为<span
+class="math inline">\(\frac{k}{i}\)</span>。</p>
+<p>则当第<span class="math inline">\((i+1)\)</span>个数据来时，<span
+class="math inline">\(x_{i+1}\)</span>被选中的概率为<span
+class="math inline">\(\frac{k}{i+1}\)</span>，且<span
+class="math inline">\(x_{i+1}\)</span>会替代掉原有的k个候选数据中的一个，替代掉的概率为<span
+class="math inline">\(\frac{k}{i+1}
+\frac{1}{k}=\frac{1}{i+1}\)</span>。则原有保存在reservoir内的数据仍被保存在reservoir内的概率为<span
+class="math inline">\(\frac{k}{i}\times \left(1-\frac{1}{i+1} \right) =
+\frac{k}{i+1}\)</span>。则可得证。</p>
+<p>因此可得到结论，当第<span
+class="math inline">\(N\)</span>个数据来之后，reservoir中的数据被选中的概率是<span
+class="math inline">\(\frac{k}{N}\)</span>。</p>
+<h2
+id="distributedparallel-reservoir-sampling-并行蓄水池抽样算法3">Distributed/Parallel
+Reservoir Sampling (并行蓄水池抽样算法)<a href="#fn5"
+class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a></h2>
+<p>上述由Alan Waterman<a href="#fn6" class="footnote-ref" id="fnref6"
+role="doc-noteref"><sup>6</sup></a>等人提出的方法虽然实现了对数据流的抽样，但是对于超级庞大的数据流，即使时间复杂度为O(N)，整个抽样流程也相当耗时。因此，利用分布式的硬件进行并行化处理，才是高效率主流的应用方式。</p>
+<p>思考：如何才能并行化处理数据流呢？</p>
+<p>可以把数据流分成多部分，分别在不同的机器上运算，各自获取自己的reservoir。之后根据不同机器上获取的数据流的长度，再按照比例从不同的机器上的reservoir进行抽样。</p>
+<p>举例有3台机器，则把数据流<span
+class="math inline">\(N\)</span>给切为三部分，即<span
+class="math inline">\(N_1,N_2,N_3\)</span>分别流向不同的机器，<span
+class="math inline">\(N_1+N_2+N_3=N\)</span>，在不同的机器上抽样完后获得的reservoir分别为<span
+class="math inline">\(R_1,R_2,R_3\)</span>，因为我们事先不知道数据流的规模，只能对所有分支数据流都默认抽样<span
+class="math inline">\(k\)</span>个样本，即<span
+class="math inline">\(|R_1|=|R_2|=|R_3|\)</span>，之后按照<span
+class="math inline">\(N_1,N_2,N_3\)</span>的比例，从<span
+class="math inline">\(R_1,R_2,R_3\)</span>中再进行按比例抽样，组成最终的reservoir，<span
+class="math inline">\(R\)</span>。</p>
+<h1
+id="相关代码后面用到时会补充进去">相关代码(后面用到时会补充进去)</h1>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+挖坑 # 应用场景</li>
+</ul>
+<p>连续学习是个很好的应用场景，因为连续学习的数据流和蓄水池抽样算法的数据流的要求几乎完全一致！因此，在很多连续学习方法中，蓄水池抽样是一个必不可少的环节。</p>
+<h1 id="总结">总结</h1>
+<p>蓄水池抽样算法诞生于1985年，抽样方式的确很简单，也很巧妙，非常简单美。</p>
+<!-- <a id="definition"></a>
+上述用于标签索引 -->
+<p><!-- The same to [A low level definition](#definition) --></p>
+<h1 id="引用及感谢">引用及感谢</h1>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Jeffrey S Vitter. Random sampling
+with a reservoir. ACM Transactions on Mathematical Software (TOMS),
+11(1):37–57, 1985.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>蓄水池抽样算法（Reservoir Sampling）:
+https://www.jianshu.com/p/7a9ea6ece2af<a href="#fnref2"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Reservoir sampling :
+https://en.wikipedia.org/wiki/Reservoir_sampling<a href="#fnref3"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Jeffrey S Vitter. Random sampling
+with a reservoir. ACM Transactions on Mathematical Software (TOMS),
+11(1):37–57, 1985.<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Distributed/Parallel Reservoir
+Sampling:
+https://ballsandbins.wordpress.com/2014/04/13/distributedparallel-reservoir-sampling/<a
+href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Jeffrey S Vitter. Random sampling
+with a reservoir. ACM Transactions on Mathematical Software (TOMS),
+11(1):37–57, 1985.<a href="#fnref6" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
