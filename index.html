@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -129,7 +129,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -166,6 +166,189 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://yannqi.github.io/2022/09/21/Training%20Tricks%20for%20Semantic%20Segmentation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yang Qi">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang Qi's Blog">
+      <meta itemprop="description" content="The blog about the artificial intelligence.(Almost in CV)">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Yang Qi's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/21/Training%20Tricks%20for%20Semantic%20Segmentation/" class="post-title-link" itemprop="url">Training Tricks for Segmentation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-09-21 10:30:58 / Modified: 20:42:00" itemprop="dateCreated datePublished" datetime="2022-09-21T10:30:58+08:00">2022-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tutorial/" itemprop="url" rel="index"><span itemprop="name">Tutorial</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <!-- toc -->
+<ul>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#training-tricks">Training Tricks</a>
+<ul>
+<li><a
+href="#different-learning-rate-for-backbone-and-heads--1-">Different
+learning rate for Backbone and Heads<a href="#fn1" class="footnote-ref"
+id="fnref1" role="doc-noteref"><sup>1</sup></a></a></li>
+<li><a href="#online-hard-example-mining--ohem---1-">Online Hard Example
+Mining (OHEM)<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a></a></li>
+<li><a href="#class-balanced-loss--1-">Class Balanced Loss<a href="#fn3"
+class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a></a></li>
+<li><a href="#multiple-losses">Multiple Losses</a></li>
+</ul></li>
+<li><a href="#keep-updating">Keep updating</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+<!-- tocstop -->
+<h1 id="intro">Intro</h1>
+<p>This is a tutorial blog, which includes the common tricks for
+Segmentation models. Because this blog is a summary blog, any code will
+not be included. To realize it, you can refer to MMlab, Pytorch.org and
+so on.</p>
+<h1 id="training-tricks">Training Tricks</h1>
+<h2 id="different-learning-rate-for-backbone-and-heads1">Different
+learning rate for Backbone and Heads<a href="#fn4" class="footnote-ref"
+id="fnref4" role="doc-noteref"><sup>4</sup></a></h2>
+<p>In semantic segmentation, some methods make the learning rate of
+<strong>Head</strong> 10 times(10x) larger than
+<strong>Backbone</strong>, which can achieve better performance and
+afster convergence.</p>
+<p>lr_head = 10xlr_backbone</p>
+<h2 id="online-hard-example-mining-ohem1">Online Hard Example Mining
+(OHEM)<a href="#fn5" class="footnote-ref" id="fnref5"
+role="doc-noteref"><sup>5</sup></a></h2>
+<p>In this way, only pixels with confidence score under 0.7 are used to
+train. And we keep at least 100000 pixels during training. If thresh is
+not specified, pixels of top min_kept loss will be selected.</p>
+<p>The code can be found in MMlab<a href="#fn6" class="footnote-ref"
+id="fnref6" role="doc-noteref"><sup>6</sup></a>, but I don't know how to
+change it to mine code now.(Will learn it if I need.)</p>
+<h2 id="class-balanced-loss1">Class Balanced Loss<a href="#fn7"
+class="footnote-ref" id="fnref7"
+role="doc-noteref"><sup>7</sup></a></h2>
+<p>For dataset that is not balanced in classes distribution, you may
+change the loss weight of each class. Here is an example for cityscapes
+dataset.</p>
+<p><code>class_weight=[0.8373, 0.9180, 0.8660, 1.0345, 1.0166, 0.9969, 0.9754, 1.0489, 0.8786, 1.0023, 0.9539, 0.9843, 1.1116, 0.9037, 1.0865, 1.0955, 1.0865, 1.1529, 1.0507]</code></p>
+<p>class_weight will be passed into CrossEntropyLoss as weight argument.
+Please refer to PyTorch Doc<a href="#fn8" class="footnote-ref"
+id="fnref8" role="doc-noteref"><sup>8</sup></a>for details.</p>
+<!-- // ![The illustrated Reservoir sampling.](The_Illustrated_Reservoir_sampling/I1.png) -->
+<h2 id="multiple-losses">Multiple Losses</h2>
+<p>Only the cross entropy loss is not enough, For loss calculation,
+conbining more multiple losses could get better performence for
+training. For example, you can use loss function with 1:3 weighted sum
+of CrossEntropyLoss and DiceLoss.</p>
+<p>Different loss has differnt functions. - The Cross-Entropy Loss
+measures the distance between two distributions, so it can be used to
+characterize the difference between predicted and target values. (Base
+loss, Inevitable)</p>
+<ul>
+<li><p>Focal Loss, which is a variant of the Cross-Entropy Loss, is
+proposed for the imbalance of training samples, and the imbalance of the
+difficulty of samples.</p></li>
+<li><p>Dice Loss is proposed for the problem the the proportion of the
+foreground is too small. # Keep updating</p></li>
+</ul>
+<!-- <a id="definition"></a>
+上述用于标签索引 -->
+<p><!-- The same to [A low level definition](#definition) --></p>
+<h1 id="reference">Reference</h1>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>MMlab Segmentation:
+https://github.com/open-mmlab/mmsegmentation<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>MMlab Segmentation:
+https://github.com/open-mmlab/mmsegmentation<a href="#fnref2"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>MMlab Segmentation:
+https://github.com/open-mmlab/mmsegmentation<a href="#fnref3"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>MMlab Segmentation:
+https://github.com/open-mmlab/mmsegmentation<a href="#fnref4"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>MMlab Segmentation:
+https://github.com/open-mmlab/mmsegmentation<a href="#fnref5"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>MMlab Segmentation:
+https://github.com/open-mmlab/mmsegmentation<a href="#fnref6"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7" role="doc-endnote"><p>MMlab Segmentation:
+https://github.com/open-mmlab/mmsegmentation<a href="#fnref7"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p><a
+target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html?highlight=crossentropy#torch.nn.CrossEntropyLoss">Pytorch_Doc_CrossEntropy</a><a
+href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
