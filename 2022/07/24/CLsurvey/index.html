@@ -1,27 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"yannqi.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="What is Continual Learning?  A high level definition. A low level definition. Motivation &amp; Application scenarios The Challenge of Continual Learing Four Assumptions of Continual Lear">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A brief Introduction to Continue Learning &#x2F; Life long Learning">
@@ -54,226 +38,153 @@
 <meta property="article:tag" content="Survey">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL1.png">
-
-
-<link rel="canonical" href="https://yannqi.github.io/2022/07/24/CLsurvey/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://yannqi.github.io/2022/07/24/CLsurvey/","path":"2022/07/24/CLsurvey/","title":"A brief Introduction to Continue Learning / Life long Learning"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>A brief Introduction to Continue Learning / Life long Learning | Yang Qi's Blog</title>
-  
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">Yang Qi's Blog</p>
-      <i class="logo-line"></i>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-</div>
+    
+    
+      
         
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>A brief Introduction to Continue Learning / Life long Learning</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-  <aside class="sidebar">
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.2.0"></head>
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
       </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/08/26/The-Illustrated-Reservoir-sampling/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yannqi.github.io/2022/07/24/CLsurvey/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yannqi.github.io/2022/07/24/CLsurvey/&text=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yannqi.github.io/2022/07/24/CLsurvey/&is_video=false&description=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=A brief Introduction to Continue Learning / Life long Learning&body=Check out this article: https://yannqi.github.io/2022/07/24/CLsurvey/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yannqi.github.io/2022/07/24/CLsurvey/&name=A brief Introduction to Continue Learning / Life long Learning&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yannqi.github.io/2022/07/24/CLsurvey/&t=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-continual-learning"><span class="nav-number">1.</span> <span class="nav-text">What is Continual Learning?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#a-high-level-definition."><span class="nav-number">1.1.</span> <span class="nav-text">A high level definition.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-low-level-definition."><span class="nav-number">1.2.</span> <span class="nav-text">A low level definition.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#motivation-application-scenarios"><span class="nav-number">1.3.</span> <span class="nav-text">Motivation &amp; Application
-scenarios</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-challenge-of-continual-learing"><span class="nav-number">1.4.</span> <span class="nav-text">The Challenge of Continual
-Learing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#four-assumptions-of-continual-learning"><span class="nav-number">1.5.</span> <span class="nav-text">Four Assumptions of
-Continual Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#task-incremental-learningthe-easiest-scenario"><span class="nav-number">1.5.1.</span> <span class="nav-text">Task incremental
-Learning(the easiest scenario)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-incremental-learning"><span class="nav-number">1.5.2.</span> <span class="nav-text">Class incremental Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#domain-incremental-learning"><span class="nav-number">1.5.3.</span> <span class="nav-text">Domain incremental Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-incremental-learning-task-agnostic-learning-the-hardest-scenario"><span class="nav-number">1.5.4.</span> <span class="nav-text">Data
-incremental Learning &#x2F; Task-Agnostic Learning (the hardest
-scenario)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-difference-between-continuous-learning-and-multi-task"><span class="nav-number">1.5.5.</span> <span class="nav-text">The
-difference between Continuous Learning and Multi-Task</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#some-key-definitions"><span class="nav-number">1.6.</span> <span class="nav-text">Some key definitions！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#transfer-and-interference"><span class="nav-number">1.6.1.</span> <span class="nav-text">Transfer and Interference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#possible-scenarios-in-cl"><span class="nav-number">1.6.2.</span> <span class="nav-text">Possible Scenarios in CL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-method-of-continual-learning"><span class="nav-number">1.7.</span> <span class="nav-text">The method of Continual
-Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#regularization-based-methods"><span class="nav-number">1.7.1.</span> <span class="nav-text">Regularization-Based Methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parameter-isolation-methods"><span class="nav-number">1.7.2.</span> <span class="nav-text">Parameter Isolation Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conlusion"><span class="nav-number">1.8.</span> <span class="nav-text">Conlusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appendix"><span class="nav-number">1.9.</span> <span class="nav-text">Appendix:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mind-map"><span class="nav-number">1.9.1.</span> <span class="nav-text">Mind Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#some-representative-replay-methodskeep-updating"><span class="nav-number">1.9.2.</span> <span class="nav-text">Some
-representative Replay Methods(Keep updating):</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gem-gradient-episodic-memory-for-continual-learning6"><span class="nav-number">1.9.2.1.</span> <span class="nav-text">GEM:
-Gradient Episodic Memory for Continual Learning9</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for-more-blogs"><span class="nav-number">2.</span> <span class="nav-text">For More Blogs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference-acknowledgements"><span class="nav-number">3.</span> <span class="nav-text">Reference &amp;
-Acknowledgements</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Yang Qi</p>
-  <div class="site-description" itemprop="description">The blog about the artificial intelligence.(Almost in CV)</div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">3</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">categories</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author site-overview-item animated">
-      <span class="links-of-author-item">
-        <a href="https://github.com/yannqi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yannqi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yannqi@qq.com" title="E-Mail → mailto:yannqi@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-        </div>
-      </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
-
-    
-  <div class="back-to-top" role="button" aria-label="Back to top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yannqi.github.io/2022/07/24/CLsurvey/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yang Qi">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang Qi's Blog">
-      <meta itemprop="description" content="The blog about the artificial intelligence.(Almost in CV)">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="A brief Introduction to Continue Learning / Life long Learning | Yang Qi's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          A brief Introduction to Continue Learning / Life long Learning
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-07-24 21:30:58" itemprop="dateCreated datePublished" datetime="2022-07-24T21:30:58+08:00">2022-07-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-17 20:22:11" itemprop="dateModified" datetime="2022-08-17T20:22:11+08:00">2022-08-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Continue-Learning/" itemprop="url" rel="index"><span itemprop="name">Continue Learning</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Continue-Learning/Technical-tutorials/" itemprop="url" rel="index"><span itemprop="name">Technical tutorials</span></a>
-        </span>
-    </span>
-
-  
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-continual-learning"><span class="toc-number">1.</span> <span class="toc-text">What is Continual Learning?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-high-level-definition."><span class="toc-number">1.1.</span> <span class="toc-text">A high level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-low-level-definition."><span class="toc-number">1.2.</span> <span class="toc-text">A low level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#motivation-application-scenarios"><span class="toc-number">1.3.</span> <span class="toc-text">Motivation &amp; Application
+scenarios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-challenge-of-continual-learing"><span class="toc-number">1.4.</span> <span class="toc-text">The Challenge of Continual
+Learing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#four-assumptions-of-continual-learning"><span class="toc-number">1.5.</span> <span class="toc-text">Four Assumptions of
+Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#task-incremental-learningthe-easiest-scenario"><span class="toc-number">1.5.1.</span> <span class="toc-text">Task incremental
+Learning(the easiest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class-incremental-learning"><span class="toc-number">1.5.2.</span> <span class="toc-text">Class incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#domain-incremental-learning"><span class="toc-number">1.5.3.</span> <span class="toc-text">Domain incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-incremental-learning-task-agnostic-learning-the-hardest-scenario"><span class="toc-number">1.5.4.</span> <span class="toc-text">Data
+incremental Learning &#x2F; Task-Agnostic Learning (the hardest
+scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-difference-between-continuous-learning-and-multi-task"><span class="toc-number">1.5.5.</span> <span class="toc-text">The
+difference between Continuous Learning and Multi-Task</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#some-key-definitions"><span class="toc-number">1.6.</span> <span class="toc-text">Some key definitions！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#transfer-and-interference"><span class="toc-number">1.6.1.</span> <span class="toc-text">Transfer and Interference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#possible-scenarios-in-cl"><span class="toc-number">1.6.2.</span> <span class="toc-text">Possible Scenarios in CL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-method-of-continual-learning"><span class="toc-number">1.7.</span> <span class="toc-text">The method of Continual
+Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#regularization-based-methods"><span class="toc-number">1.7.1.</span> <span class="toc-text">Regularization-Based Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parameter-isolation-methods"><span class="toc-number">1.7.2.</span> <span class="toc-text">Parameter Isolation Methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conlusion"><span class="toc-number">1.8.</span> <span class="toc-text">Conlusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#appendix"><span class="toc-number">1.9.</span> <span class="toc-text">Appendix:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mind-map"><span class="toc-number">1.9.1.</span> <span class="toc-text">Mind Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#some-representative-replay-methodskeep-updating"><span class="toc-number">1.9.2.</span> <span class="toc-text">Some
+representative Replay Methods(Keep updating):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gem-gradient-episodic-memory-for-continual-learning6"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">GEM:
+Gradient Episodic Memory for Continual Learning9</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-more-blogs"><span class="toc-number">2.</span> <span class="toc-text">For More Blogs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference-acknowledgements"><span class="toc-number">3.</span> <span class="toc-text">Reference &amp;
+Acknowledgements</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
-        </div>
-      </header>
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        A brief Introduction to Continue Learning / Life long Learning
+    </h1>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <!-- toc -->
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Yang Qi</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-07-24T13:30:58.000Z" itemprop="datePublished">2022-07-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Continue-Learning/">Continue Learning</a> › <a class="category-link" href="/categories/Continue-Learning/Technical-tutorials/">Technical tutorials</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Continue-Learning-Life-long-Learning/" rel="tag">Continue Learning / Life long Learning</a>, <a class="tag-link-link" href="/tags/Survey/" rel="tag">Survey</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <!-- toc -->
 <ul>
 <li><a href="#what-is-continual-learning-">What is Continual
 Learning?</a>
@@ -806,83 +717,153 @@ href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
-    </div>
+  </div>
+</article>
 
-    
-    
-    
 
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Continue-Learning-Life-long-Learning/" rel="tag"><i class="fa fa-tag"></i> Continue Learning / Life long Learning</a>
-              <a href="/tags/Survey/" rel="tag"><i class="fa fa-tag"></i> Survey</a>
-          </div>
 
         
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-          <div class="post-nav">
-            <div class="post-nav-item">
-            </div>
-            <div class="post-nav-item">
-                <a href="/2022/08/26/The-Illustrated-Reservoir-sampling/" rel="next" title="连续学习中的蓄水池抽样算法(The Illustrated Reservoir sampling).">
-                  连续学习中的蓄水池抽样算法(The Illustrated Reservoir sampling). <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
 
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-continual-learning"><span class="toc-number">1.</span> <span class="toc-text">What is Continual Learning?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-high-level-definition."><span class="toc-number">1.1.</span> <span class="toc-text">A high level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-low-level-definition."><span class="toc-number">1.2.</span> <span class="toc-text">A low level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#motivation-application-scenarios"><span class="toc-number">1.3.</span> <span class="toc-text">Motivation &amp; Application
+scenarios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-challenge-of-continual-learing"><span class="toc-number">1.4.</span> <span class="toc-text">The Challenge of Continual
+Learing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#four-assumptions-of-continual-learning"><span class="toc-number">1.5.</span> <span class="toc-text">Four Assumptions of
+Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#task-incremental-learningthe-easiest-scenario"><span class="toc-number">1.5.1.</span> <span class="toc-text">Task incremental
+Learning(the easiest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class-incremental-learning"><span class="toc-number">1.5.2.</span> <span class="toc-text">Class incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#domain-incremental-learning"><span class="toc-number">1.5.3.</span> <span class="toc-text">Domain incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-incremental-learning-task-agnostic-learning-the-hardest-scenario"><span class="toc-number">1.5.4.</span> <span class="toc-text">Data
+incremental Learning &#x2F; Task-Agnostic Learning (the hardest
+scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-difference-between-continuous-learning-and-multi-task"><span class="toc-number">1.5.5.</span> <span class="toc-text">The
+difference between Continuous Learning and Multi-Task</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#some-key-definitions"><span class="toc-number">1.6.</span> <span class="toc-text">Some key definitions！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#transfer-and-interference"><span class="toc-number">1.6.1.</span> <span class="toc-text">Transfer and Interference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#possible-scenarios-in-cl"><span class="toc-number">1.6.2.</span> <span class="toc-text">Possible Scenarios in CL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-method-of-continual-learning"><span class="toc-number">1.7.</span> <span class="toc-text">The method of Continual
+Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#regularization-based-methods"><span class="toc-number">1.7.1.</span> <span class="toc-text">Regularization-Based Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parameter-isolation-methods"><span class="toc-number">1.7.2.</span> <span class="toc-text">Parameter Isolation Methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conlusion"><span class="toc-number">1.8.</span> <span class="toc-text">Conlusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#appendix"><span class="toc-number">1.9.</span> <span class="toc-text">Appendix:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mind-map"><span class="toc-number">1.9.1.</span> <span class="toc-text">Mind Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#some-representative-replay-methodskeep-updating"><span class="toc-number">1.9.2.</span> <span class="toc-text">Some
+representative Replay Methods(Keep updating):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gem-gradient-episodic-memory-for-continual-learning6"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">GEM:
+Gradient Episodic Memory for Continual Learning9</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-more-blogs"><span class="toc-number">2.</span> <span class="toc-text">For More Blogs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference-acknowledgements"><span class="toc-number">3.</span> <span class="toc-text">Reference &amp;
+Acknowledgements</span></a></li></ol>
+    </div>
 
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Yang Qi</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
-  </div>
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yannqi.github.io/2022/07/24/CLsurvey/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yannqi.github.io/2022/07/24/CLsurvey/&text=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yannqi.github.io/2022/07/24/CLsurvey/&is_video=false&description=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=A brief Introduction to Continue Learning / Life long Learning&body=Check out this article: https://yannqi.github.io/2022/07/24/CLsurvey/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yannqi.github.io/2022/07/24/CLsurvey/&title=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yannqi.github.io/2022/07/24/CLsurvey/&name=A brief Introduction to Continue Learning / Life long Learning&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yannqi.github.io/2022/07/24/CLsurvey/&t=A brief Introduction to Continue Learning / Life long Learning"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
-  </footer>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Yang Qi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
   
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
 
 
+<script src="/js/main.js"></script>
 
-  <script src="/js/third-party/fancybox.js"></script>
+<!-- search -->
 
+<!-- Google Analytics -->
 
-  
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Umami Analytics -->
 
+<!-- Disqus Comments -->
 
-  
-
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
-
-
+<!-- utterances Comments -->
 
 </body>
 </html>
