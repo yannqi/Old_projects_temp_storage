@@ -6,27 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="前言 APG(Accelerate Proximal Gradient)加速近端梯度算法 PGD (Proximal Gradient Descent)近端梯度下降法推导 Example of Proximal Gradient Descent       篇一 前言近期在阅读Data-Driven Sparse Structure Selection for Deep Neural Netw">
+    <meta name="description" content="前言 APG(Accelerate Proximal Gradient)加速近端梯度算法  PGD (Proximal Gradient Descent)近端梯度下降法推导  Example of Proximal Gradient Descent  APG(Accelerate Proximal Gradient)加速近端梯度算法推导  Back to lass">
 <meta property="og:type" content="article">
 <meta property="og:title" content="_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.">
 <meta property="og:url" content="https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/index.html">
 <meta property="og:site_name" content="Yang Qi&#39;s Blog">
-<meta property="og:description" content="前言 APG(Accelerate Proximal Gradient)加速近端梯度算法 PGD (Proximal Gradient Descent)近端梯度下降法推导 Example of Proximal Gradient Descent       篇一 前言近期在阅读Data-Driven Sparse Structure Selection for Deep Neural Netw">
+<meta property="og:description" content="前言 APG(Accelerate Proximal Gradient)加速近端梯度算法  PGD (Proximal Gradient Descent)近端梯度下降法推导  Example of Proximal Gradient Descent  APG(Accelerate Proximal Gradient)加速近端梯度算法推导  Back to lass">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/3230730b816343b4b2d1232e2a3c712f.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/749cc856675d434999e24f4aba3a3ef0.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/875f2624edfc43c6a5c92604712875a6.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/f08de5ce7ee04dad92ea0766edfad67b.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/452422862ea54d30911aa2833d81e21d.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/1c4cc1caf9864c6ab2d5bf68ddf7f749.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/04390b3c2cdf41b89a30e46a1a23ec13.png">
 <meta property="article:published_time" content="2022-10-22T02:30:58.000Z">
-<meta property="article:modified_time" content="2022-10-23T12:48:17.558Z">
+<meta property="article:modified_time" content="2022-10-23T13:39:07.174Z">
 <meta property="article:author" content="Yang Qi">
 <meta property="article:tag" content="APG-NAG Optimizer">
 <meta property="article:tag" content="Optimizer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/3230730b816343b4b2d1232e2a3c712f.png">
     
     
       
@@ -123,7 +115,11 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AF%87%E4%B8%80"><span class="toc-number">1.</span> <span class="toc-text">篇一</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#APG-Accelerate-Proximal-Gradient-%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">APG(Accelerate Proximal Gradient)加速近端梯度算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PGD-Proximal-Gradient-Descent-%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.1.</span> <span class="toc-text">PGD (Proximal Gradient Descent)近端梯度下降法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-of-Proximal-Gradient-Descent"><span class="toc-number">3.1.1.</span> <span class="toc-text">Example of Proximal Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#APG-Accelerate-Proximal-Gradient-%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.2.</span> <span class="toc-text">APG(Accelerate Proximal Gradient)加速近端梯度算法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Back-to-lasso-example"><span class="toc-number">3.2.1.</span> <span class="toc-text">Back to lasso example:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AF%87%E4%BA%8C%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">篇二：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80-1"><span class="toc-number">6.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NAG%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">7.</span> <span class="toc-text">NAG优化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#APG-%E4%B8%8E-NAG%E7%9A%84%E7%BB%93%E5%90%88"><span class="toc-number">8.</span> <span class="toc-text">APG 与 NAG的结合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pytorch-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.1.</span> <span class="toc-text">Pytorch 代码实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">9.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F-11-%E6%8E%A8%E5%AF%BC"><span class="toc-number">9.1.</span> <span class="toc-text">公式(11)推导</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">引用</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#apgaccelerate-proximal-gradient%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">APG(Accelerate
+Proximal Gradient)加速近端梯度算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pgd-proximal-gradient-descent%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">2.1.</span> <span class="toc-text">PGD (Proximal
+Gradient Descent)近端梯度下降法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#example-of-proximal-gradient-descent"><span class="toc-number">2.1.1.</span> <span class="toc-text">Example of Proximal
+Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#apgaccelerate-proximal-gradient%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">2.2.</span> <span class="toc-text">APG(Accelerate
+Proximal Gradient)加速近端梯度算法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#back-to-lasso-example"><span class="toc-number">2.2.1.</span> <span class="toc-text">Back to lasso example:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80-1"><span class="toc-number">4.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nag%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">NAG优化器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pytorch-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.1.</span> <span class="toc-text">Pytorch 代码实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">6.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F11%E6%8E%A8%E5%AF%BC"><span class="toc-number">6.1.</span> <span class="toc-text">公式(11)推导</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">引用</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -175,130 +171,343 @@
     <!-- toc -->
 <ul>
 <li><a href="#--">前言</a></li>
-<li><a href="#apg-accelerate-proximal-gradient---------">APG(Accelerate Proximal Gradient)加速近端梯度算法</a><ul>
-<li><a href="#pgd--proximal-gradient-descent----------">PGD (Proximal Gradient Descent)近端梯度下降法推导</a><ul>
-<li><a href="#example-of-proximal-gradient-descent">Example of Proximal Gradient Descent</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#apg-accelerate-proximal-gradient---------">APG(Accelerate
+Proximal Gradient)加速近端梯度算法</a>
+<ul>
+<li><a href="#pgd--proximal-gradient-descent----------">PGD (Proximal
+Gradient Descent)近端梯度下降法推导</a>
+<ul>
+<li><a href="#example-of-proximal-gradient-descent">Example of Proximal
+Gradient Descent</a></li>
+</ul></li>
+<li><a
+href="#apg-accelerate-proximal-gradient-----------">APG(Accelerate
+Proximal Gradient)加速近端梯度算法推导</a>
+<ul>
+<li><a href="#back-to-lasso-example-">Back to lasso example:</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#--">总结</a></li>
+<li><a href="#--">前言</a></li>
+<li><a href="#nag---">NAG优化器</a></li>
+<li><a href="#apg---nag---">APG 与 NAG的结合</a>
+<ul>
+<li><a href="#pytorch-----">Pytorch 代码实现</a></li>
+</ul></li>
+<li><a href="#--">附录</a>
+<ul>
+<li><a href="#---11---">公式(11)推导</a></li>
+</ul></li>
+<li><a href="#--">引用</a></li>
 </ul>
 <!-- tocstop -->
-<h1 id="篇一"><a href="#篇一" class="headerlink" title="篇一"></a>篇一</h1><hr>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期在阅读<strong>Data-Driven Sparse Structure Selection for Deep Neural Networks</strong>论文时，用到里面APG-NAG相关优化器的知识，原论文方法采用mxnet去实现的，在这里想迁移到pytorch中。因此手撕一下APG和NAG相关的知识。</p>
-<h1 id="APG-Accelerate-Proximal-Gradient-加速近端梯度算法"><a href="#APG-Accelerate-Proximal-Gradient-加速近端梯度算法" class="headerlink" title="APG(Accelerate Proximal Gradient)加速近端梯度算法"></a>APG(Accelerate Proximal Gradient)加速近端梯度算法</h1><p>该方法是近端梯度下降法(Proximal Gradient Descent)的一种扩展方法，溯源的话应该早于2008年。在了解APG方法之前，首先需要了解一下近端梯度下降法(Proximal Gradient Descent).</p>
-<h2 id="PGD-Proximal-Gradient-Descent-近端梯度下降法推导"><a href="#PGD-Proximal-Gradient-Descent-近端梯度下降法推导" class="headerlink" title="PGD (Proximal Gradient Descent)近端梯度下降法推导"></a>PGD (Proximal Gradient Descent)近端梯度下降法推导</h2><p>直接套用Chen Xin Yu<sup><a href="#fn_2" id="reffn_2">2</a></sup>的原话：”近端梯度下降法是众多梯度下降 (gradient descent) 方法中的一种，其英文名称为proximal gradident descent，其中，术语中的proximal一词比较耐人寻味，将proximal翻译成“近端”主要想表达”（物理上的）接近”。与经典的梯度下降法和随机梯度下降法相比，近端梯度下降法的适用范围相对狭窄。对于凸优化问题，当其目标函数存在不可微部分（例如目标函数中有  1-范数或迹范数）时，近端梯度下降法才会派上用场。”</p>
-<p>近端梯度下降法(Proximal Gradient Descent)主要用于解决目标函数中包含不可微的凸函数的问题。即，假定存在，</p>
-<script type="math/tex; mode=display">\begin{align} f(x)=g(x)+h(x) \end{align}</script><p>其中</p>
-<ul>
-<li>$g(x)$是可微分的凸函数，且$dom(g)=\mathbb{R}^n$</li>
-<li>$h(x)$不是必须可微的凸函数，即可以可微，也可以不可微，也可以局部可微。</li>
-</ul>
-<p>我们的目标是,</p>
-<script type="math/tex; mode=display">\begin{align} \min_{x}f(x)=g(x)+h(x) \end{align}</script><p>如果$f$可微的话，则非常简单，直接用梯度下降法就可以实现，即，</p>
-<script type="math/tex; mode=display">\begin{align} x^+=x- t \nabla f(x) \end{align}</script><p>此处$t$可等价为学习率。</p>
-<p>且可通过最小化函数$f$在$x$周围的二阶近似(Minimize quadratic approximation to $f$ around $x$)，来找到$x^+$，且可将其二阶导数$\nabla^2f(x)$替换为$\frac{1}{t}$，表示如下：</p>
-<script type="math/tex; mode=display">\begin{align} x^+=\argmin_{z} f(x)+\nabla f(x)^T (z-x) + \frac{1}{2t}||z-x||^2_2 = \argmin_{z} \bar{f}_t(z) \end{align}</script><p>(注意：这里不是很明确为什么可以这样替换，仅知道是泰勒展开的形式，有理解的可以告诉我一下。而且作者为什么能想到上一步也不是很明晰)</p>
-<p>然而，由于$h(x)$的存在，函数$f(x)$并不一定可微，但是注意$g(x)$是可微的。因此，我们可以将$h(x)$单独拿出来，并仅对$g(x)$进行二阶近似，即，</p>
-<script type="math/tex; mode=display">\begin{align} x^+ &= \argmin_z \bar{g_t}(z) + h(z) \nonumber \\ 
-~&=  \argmin_z g(x)+\nabla g(x)^T (z-x) + \frac{1}{2t}||z-x||^2_2 + h(z)  \nonumber \\
- ~&= \argmin_z \frac{1}{2t}||z-(x-t\nabla g(x))||^2_2+h(z) \\ \end{align}</script><p>上述具体详细推导可见：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38290475/article/details/81052206?spm=1001.2014.3001.5502">近端梯度下降算法(Proximal Gradient Algorithm)</a>，提示：z是变量，z之外的常数项可以去掉或添加，不影响z的改变。</p>
-<p>则为了最小化公式(5)，即一方面另$z$尽可能靠近$(x-t\nabla g(x))$ (对g(x)，尽可能靠近梯度下降方向)，另一方面另$h(z)$尽可能小。</p>
-<p>则可以定义Proximal operator（近端算子）如下，</p>
-<script type="math/tex; mode=display">\begin{align} prox_{h,t}(x) = \argmin_{z} \frac{1}{2t}||x-z||^2_2+ h(z)  \end{align}</script><p>因此近端梯度下降法(Proximal Gradient Descent)可表示为：  对于$f(x)=g(x)+h(x)$，给定任意初始化$x^(0)$，重复如下步骤即可得到近似最优$x^*$，</p>
-<script type="math/tex; mode=display">\begin{align} x^{(k)}=prox_{h,t_k}(x^{(k-1)}-t_k\nabla g(x^{(k-1)})) ,  \space k=1,2,3,\ldots \end{align}</script><p>至此，近端梯度下降法(Proximal Gradient Descent)推到完毕(收敛性分析略过，感兴趣同学可以参考cmu的PPT)。可能有读者有些许疑惑，为什么要做这么大一堆操作？不最后还是要最小化$h(z)$吗？并没有讲不可微函数$h(x)$是如何通过梯度下降来求解的哇。<br>然而，近端梯度下降法(Proximal Gradient Descent)主要亮点在如下方面：</p>
-<ul>
-<li>Proximal operator（近端算子）不再依赖$g(x)$，仅依赖于$h(x)$。也就是说，本来$f(x)=g(x)+h(x)$可以是一个非常复杂的可微分函数和一个不那么复杂的不可微分函数的组合，但使用该方法，我们无需考虑$g(x)$(因为其可微分，梯度很好计算)，仅需针对性考虑不可微分函数$h(x)$即可，极大的简化了我们的问题。</li>
-</ul>
-<p>总结+个人理解：这里原本想画图解释一下近端梯度下降法(Proximal Gradient Descent),但发现不是很好画，就简单用文字表述一下我对Proximal (近端)的理解, 理想情况下，梯度下降方向朝向是我们目标函数最优方向，但由于函数存在不可微分项，因此梯度下降的方向无法确定(虽然不可微分函数存在次梯度这一说(例如L1范数存在次梯度)，但f(x)整体梯度如果始终包含不可微分的函数的次微分的话，实际梯度与计算梯度将始终有一定偏差，随着迭代次数过多后，偏差更大。)。所以，我们将可微分项和不可微分项拿出来，首先确保我们的可微分项的梯度下降方向绝对正确，不可微分项再另想办法进行最小化，这种思想就是PGD的思想。个人认为Proximal(近端)主要有一种近似(接近)的含义在里面，而且表现在梯度的近端上，更进一步，主要表现在可微分项梯度和不可微分项的梯度与整体函数梯度的近端(接近程度)上。</p>
-<h3 id="Example-of-Proximal-Gradient-Descent"><a href="#Example-of-Proximal-Gradient-Descent" class="headerlink" title="Example of Proximal Gradient Descent"></a>Example of Proximal Gradient Descent</h3><p>参考CMU的PPT，也举一个例子，ISTA算法，便于更加直观的理解：<br><strong>Lasso criterion</strong> <a target="_blank" rel="noopener" href="https://www.lianxh.cn/news/c15e828b678e6.html">一篇对lasso的讲解，感觉非常不错</a><br>定义如下函数：</p>
-<script type="math/tex; mode=display">\begin{align} f(\beta)= \frac{1}{2} ||y-X\beta||^2_2 + \lambda ||\beta||_1\end{align}</script><p>即其$\min_{\beta} f(\beta)$如图所示，<br><img src="https://img-blog.csdnimg.cn/3230730b816343b4b2d1232e2a3c712f.png" alt="1"><br>上述公式就是一个典型的近端梯度下降算法(Proximal Gradient Algorithm)问题，可看作$g(\beta)= \frac{1}{2} ||y-X\beta||^2_2$,$h(\beta)=\lambda ||\beta||_1$。</p>
+<p><strong>篇一</strong></p>
+<hr />
+<h1 id="前言">前言</h1>
+<p>近期在阅读<strong>Data-Driven Sparse Structure Selection for Deep
+Neural
+Networks</strong>论文时，用到里面APG-NAG相关优化器的知识，原论文方法采用mxnet去实现的，在这里想迁移到pytorch中。因此手撕一下APG和NAG相关的知识。</p>
+<h1 id="apgaccelerate-proximal-gradient加速近端梯度算法">APG(Accelerate
+Proximal Gradient)加速近端梯度算法</h1>
+<p>该方法是近端梯度下降法(Proximal Gradient
+Descent)的一种扩展方法，溯源的话应该早于2008年。在了解APG方法之前，首先需要了解一下近端梯度下降法(Proximal
+Gradient Descent).</p>
+<h2 id="pgd-proximal-gradient-descent近端梯度下降法推导">PGD (Proximal
+Gradient Descent)近端梯度下降法推导</h2>
+<p>直接套用Chen Xin Yu<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>的原话："近端梯度下降法是众多梯度下降
+(gradient descent) 方法中的一种，其英文名称为proximal gradident
+descent，其中，术语中的proximal一词比较耐人寻味，将proximal翻译成“近端”主要想表达"（物理上的）接近"。与经典的梯度下降法和随机梯度下降法相比，近端梯度下降法的适用范围相对狭窄。对于凸优化问题，当其目标函数存在不可微部分（例如目标函数中有
+1-范数或迹范数）时，近端梯度下降法才会派上用场。"</p>
+<p>近端梯度下降法(Proximal Gradient
+Descent)主要用于解决目标函数中包含不可微的凸函数的问题。即，假定存在，
+<span class="math display">\[\begin{align} f(x)=g(x)+h(x)
+\end{align}\]</span> 其中 - <span
+class="math inline">\(g(x)\)</span>是可微分的凸函数，且<span
+class="math inline">\(dom(g)=\mathbb{R}^n\)</span> - <span
+class="math inline">\(h(x)\)</span>不是必须可微的凸函数，即可以可微，也可以不可微，也可以局部可微。</p>
+<p>我们的目标是, <span class="math display">\[\begin{align}
+\min_{x}f(x)=g(x)+h(x) \end{align}\]</span> 如果<span
+class="math inline">\(f\)</span>可微的话，则非常简单，直接用梯度下降法就可以实现，即，
+<span class="math display">\[\begin{align} x^+=x- t \nabla f(x)
+\end{align}\]</span> 此处<span
+class="math inline">\(t\)</span>可等价为学习率。</p>
+<p>且可通过最小化函数<span class="math inline">\(f\)</span>在<span
+class="math inline">\(x\)</span>周围的二阶近似(Minimize quadratic
+approximation to <span class="math inline">\(f\)</span> around <span
+class="math inline">\(x\)</span>)，来找到<span
+class="math inline">\(x^+\)</span>，且可将其二阶导数<span
+class="math inline">\(\nabla^2f(x)\)</span>替换为<span
+class="math inline">\(\frac{1}{t}\)</span>，表示如下： <span
+class="math display">\[\begin{align} x^+=\argmin_{z} f(x)+\nabla f(x)^T
+(z-x) + \frac{1}{2t}||z-x||^2_2 = \argmin_{z} \bar{f}_t(z)
+\end{align}\]</span>
+(注意：这里不是很明确为什么可以这样替换，仅知道是泰勒展开的形式，有理解的可以告诉我一下。而且作者为什么能想到上一步也不是很明晰)</p>
+<p>然而，由于<span class="math inline">\(h(x)\)</span>的存在，函数<span
+class="math inline">\(f(x)\)</span>并不一定可微，但是注意<span
+class="math inline">\(g(x)\)</span>是可微的。因此，我们可以将<span
+class="math inline">\(h(x)\)</span>单独拿出来，并仅对<span
+class="math inline">\(g(x)\)</span>进行二阶近似，即， <span
+class="math display">\[\begin{align} x^+ &amp;= \argmin_z \bar{g_t}(z) +
+h(z) \nonumber \\
+~&amp;=  \argmin_z g(x)+\nabla g(x)^T (z-x) + \frac{1}{2t}||z-x||^2_2 +
+h(z)  \nonumber \\
+~&amp;= \argmin_z \frac{1}{2t}||z-(x-t\nabla g(x))||^2_2+h(z) \\
+\end{align}\]</span></p>
+<p>上述具体详细推导可见：<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38290475/article/details/81052206?spm=1001.2014.3001.5502">近端梯度下降算法(Proximal
+Gradient
+Algorithm)</a>，提示：z是变量，z之外的常数项可以去掉或添加，不影响z的改变。</p>
+<p>则为了最小化公式(5)，即一方面另<span
+class="math inline">\(z\)</span>尽可能靠近<span
+class="math inline">\((x-t\nabla g(x))\)</span>
+(对g(x)，尽可能靠近梯度下降方向)，另一方面另<span
+class="math inline">\(h(z)\)</span>尽可能小。</p>
+<p>则可以定义Proximal operator（近端算子）如下， <span
+class="math display">\[\begin{align} prox_{h,t}(x) = \argmin_{z}
+\frac{1}{2t}||x-z||^2_2+ h(z)  \end{align}\]</span>
+因此近端梯度下降法(Proximal Gradient Descent)可表示为： 对于<span
+class="math inline">\(f(x)=g(x)+h(x)\)</span>，给定任意初始化<span
+class="math inline">\(x^(0)\)</span>，重复如下步骤即可得到近似最优<span
+class="math inline">\(x^*\)</span>， <span
+class="math display">\[\begin{align}
+x^{(k)}=prox_{h,t_k}(x^{(k-1)}-t_k\nabla g(x^{(k-1)})) ,  \space
+k=1,2,3,\ldots \end{align}\]</span></p>
+<p>至此，近端梯度下降法(Proximal Gradient
+Descent)推到完毕(收敛性分析略过，感兴趣同学可以参考cmu的PPT)。可能有读者有些许疑惑，为什么要做这么大一堆操作？不最后还是要最小化<span
+class="math inline">\(h(z)\)</span>吗？并没有讲不可微函数<span
+class="math inline">\(h(x)\)</span>是如何通过梯度下降来求解的哇。<br />
+然而，近端梯度下降法(Proximal Gradient Descent)主要亮点在如下方面： -
+Proximal operator（近端算子）不再依赖<span
+class="math inline">\(g(x)\)</span>，仅依赖于<span
+class="math inline">\(h(x)\)</span>。也就是说，本来<span
+class="math inline">\(f(x)=g(x)+h(x)\)</span>可以是一个非常复杂的可微分函数和一个不那么复杂的不可微分函数的组合，但使用该方法，我们无需考虑<span
+class="math inline">\(g(x)\)</span>(因为其可微分，梯度很好计算)，仅需针对性考虑不可微分函数<span
+class="math inline">\(h(x)\)</span>即可，极大的简化了我们的问题。</p>
+<p>总结+个人理解：这里原本想画图解释一下近端梯度下降法(Proximal Gradient
+Descent),但发现不是很好画，就简单用文字表述一下我对Proximal
+(近端)的理解,
+理想情况下，梯度下降方向朝向是我们目标函数最优方向，但由于函数存在不可微分项，因此梯度下降的方向无法确定(虽然不可微分函数存在次梯度这一说(例如L1范数存在次梯度)，但f(x)整体梯度如果始终包含不可微分的函数的次微分的话，实际梯度与计算梯度将始终有一定偏差，随着迭代次数过多后，偏差更大。)。所以，我们将可微分项和不可微分项拿出来，首先确保我们的可微分项的梯度下降方向绝对正确，不可微分项再另想办法进行最小化，这种思想就是PGD的思想。个人认为Proximal(近端)主要有一种近似(接近)的含义在里面，而且表现在梯度的近端上，更进一步，主要表现在可微分项梯度和不可微分项的梯度与整体函数梯度的近端(接近程度)上。</p>
+<h3 id="example-of-proximal-gradient-descent">Example of Proximal
+Gradient Descent</h3>
+<p>参考CMU的PPT，也举一个例子，ISTA算法，便于更加直观的理解：
+<strong>Lasso criterion</strong> <a
+target="_blank" rel="noopener" href="https://www.lianxh.cn/news/c15e828b678e6.html">一篇对lasso的讲解，感觉非常不错</a><br />
+定义如下函数： <span class="math display">\[\begin{align} f(\beta)=
+\frac{1}{2} ||y-X\beta||^2_2 + \lambda ||\beta||_1\end{align}\]</span>
+即其<span class="math inline">\(\min_{\beta} f(\beta)\)</span>如图所示，
+<img
+src="https://img-blog.csdnimg.cn/3230730b816343b4b2d1232e2a3c712f.png"
+alt="1" /> 上述公式就是一个典型的近端梯度下降算法(Proximal Gradient
+Algorithm)问题，可看作<span class="math inline">\(g(\beta)= \frac{1}{2}
+||y-X\beta||^2_2\)</span>,<span class="math inline">\(h(\beta)=\lambda
+||\beta||_1\)</span>。</p>
 <p>则引入我们的近端算子(Proximal operator),</p>
-<script type="math/tex; mode=display">\begin{align} prox_{t} &=\argmin_{z} \frac{1}{2t}||\beta-z||^2_2+ \lambda ||z||_1 \nonumber \\ 
-&=S_{\lambda t}(\beta)\end{align}</script><p>其中，$S_{\lambda t}(\beta)$也称为 soft-thresholding operator，具体如下：</p>
-<script type="math/tex; mode=display">\begin{equation}
-\left[S_\lambda(\beta)\right]_i= \begin{cases}\beta_i-\lambda & \text { if } \beta_i>\lambda \\ 0 & \text { if }-\lambda \leq \beta_i \leq \lambda, \quad i=1, \ldots, n \\ \beta_i+\lambda & \text { if } \beta_i<-\lambda\end{cases}
-\end{equation}</script><p>有关soft-thresholding operator如何这样设计可见<a target="_blank" rel="noopener" href="https://angms.science/doc/CVX/ISTA0.pdf">https://angms.science/doc/CVX/ISTA0.pdf</a>,参考自知乎，我也实在推不动了。</p>
-<p>则我们按照公式(7)的方法，已知$\nabla g(\beta)=-X^T(y-X\beta)$，则，给定初始化$\beta^0$</p>
-<script type="math/tex; mode=display">\begin{align} \beta^{(k)}&=prox_{h,t_k}(\beta^{(k-1)}-t_k\nabla g(\beta^{(k-1)})) ,  \space k=1,2,3,\ldots \\
-&=S_{\lambda t_k}(\beta^{(k-1)}+t_k X^T(y-X\beta^{(k-1)})) \end{align}</script><p>至此，随着k的迭代，可得到近似最优$\beta^*$</p>
-<p><del><em>12点半了，回宿舍，明天更</em></del> </p>
-<p>同时，该方法也被称为 iterative soft-thresholding algorithm (ISTA). </p>
-<p>如下图<sup><a href="#fn_1" id="reffn_1">1</a></sup>，与直接将$f(x)$求次梯度的方法相比，该方法可以有效收敛。<br><img src="https://img-blog.csdnimg.cn/749cc856675d434999e24f4aba3a3ef0.png" alt="1"></p>
-<h2 id="APG-Accelerate-Proximal-Gradient-加速近端梯度算法推导"><a href="#APG-Accelerate-Proximal-Gradient-加速近端梯度算法推导" class="headerlink" title="APG(Accelerate Proximal Gradient)加速近端梯度算法推导"></a>APG(Accelerate Proximal Gradient)加速近端梯度算法推导</h2><p>如果对PGD有一个清晰的认识后，那么APG的推导将变会变得无比清晰简单，再次重复一下我们的目标，</p>
-<script type="math/tex; mode=display">\begin{align} \min_{x}f(x)=g(x)+h(x) \end{align}</script><p>其中</p>
-<ul>
-<li>$g(x)$是可微分的凸函数，且$dom(g)=\mathbb{R}^n$</li>
-<li>$h(x)$不是必须可微的凸函数，即可以可微，也可以不可微，也可以局部可微。</li>
-</ul>
-<p>在之前PGD方法中，最重要的是公式(7),而APG方法也仅在公式(7)的输入上做了一个大家非常熟悉的改动，如下所示，给定初始化$x^{(0)}$，且另$x^{(-1)}=x^{(0)}$(这一步仅为了公式美观，无别的意义)，则：</p>
-<script type="math/tex; mode=display">
+<p><span class="math display">\[\begin{align} prox_{t} &amp;=\argmin_{z}
+\frac{1}{2t}||\beta-z||^2_2+ \lambda ||z||_1 \nonumber \\
+&amp;=S_{\lambda t}(\beta)\end{align}\]</span> 其中，<span
+class="math inline">\(S_{\lambda t}(\beta)\)</span>也称为
+soft-thresholding operator，具体如下： <span
+class="math display">\[\begin{equation}
+\left[S_\lambda(\beta)\right]_i= \begin{cases}\beta_i-\lambda &amp;
+\text { if } \beta_i&gt;\lambda \\ 0 &amp; \text { if }-\lambda \leq
+\beta_i \leq \lambda, \quad i=1, \ldots, n \\ \beta_i+\lambda &amp;
+\text { if } \beta_i&lt;-\lambda\end{cases}
+\end{equation}\]</span> 有关soft-thresholding operator如何这样设计可见<a
+target="_blank" rel="noopener" href="https://angms.science/doc/CVX/ISTA0.pdf">https://angms.science/doc/CVX/ISTA0.pdf</a>,参考自知乎，我也实在推不动了。</p>
+<p>则我们按照公式(7)的方法，已知<span class="math inline">\(\nabla
+g(\beta)=-X^T(y-X\beta)\)</span>，则，给定初始化<span
+class="math inline">\(\beta^0\)</span> <span
+class="math display">\[\begin{align}
+\beta^{(k)}&amp;=prox_{h,t_k}(\beta^{(k-1)}-t_k\nabla g(\beta^{(k-1)}))
+,  \space k=1,2,3,\ldots \\
+&amp;=S_{\lambda t_k}(\beta^{(k-1)}+t_k X^T(y-X\beta^{(k-1)}))
+\end{align}\]</span></p>
+<p>至此，随着k的迭代，可得到近似最优<span
+class="math inline">\(\beta^*\)</span></p>
+<p><del><em>12点半了，回宿舍，明天更</em></del></p>
+<p>同时，该方法也被称为 iterative soft-thresholding algorithm
+(ISTA).</p>
+<p>如下图<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>，与直接将<span
+class="math inline">\(f(x)\)</span>求次梯度的方法相比，该方法可以有效收敛。
+<img
+src="https://img-blog.csdnimg.cn/749cc856675d434999e24f4aba3a3ef0.png"
+alt="1" /></p>
+<h2
+id="apgaccelerate-proximal-gradient加速近端梯度算法推导">APG(Accelerate
+Proximal Gradient)加速近端梯度算法推导</h2>
+<p>如果对PGD有一个清晰的认识后，那么APG的推导将变会变得无比清晰简单，再次重复一下我们的目标，</p>
+<p><span class="math display">\[\begin{align} \min_{x}f(x)=g(x)+h(x)
+\end{align}\]</span> 其中 - <span
+class="math inline">\(g(x)\)</span>是可微分的凸函数，且<span
+class="math inline">\(dom(g)=\mathbb{R}^n\)</span> - <span
+class="math inline">\(h(x)\)</span>不是必须可微的凸函数，即可以可微，也可以不可微，也可以局部可微。</p>
+<p>在之前PGD方法中，最重要的是公式(7),而APG方法也仅在公式(7)的输入上做了一个大家非常熟悉的改动，如下所示，给定初始化<span
+class="math inline">\(x^{(0)}\)</span>，且另<span
+class="math inline">\(x^{(-1)}=x^{(0)}\)</span>(这一步仅为了公式美观，无别的意义)，则：
+<span class="math display">\[
 \begin{align}
-v &=x^{(k-1)}+\frac{k-2}{k+1}\left(x^{(k-1)}-x^{(k-2)}\right) \\
-x^{(k)} &=\operatorname{prox}_{t_k}\left(v-t_k \nabla g(v)\right) \\
+v &amp;=x^{(k-1)}+\frac{k-2}{k+1}\left(x^{(k-1)}-x^{(k-2)}\right) \\
+x^{(k)} &amp;=\operatorname{prox}_{t_k}\left(v-t_k \nabla g(v)\right) \\
 for \space k=1,2,3, \ldots  \nonumber
-\end{align}</script><ul>
+\end{align}
+\]</span></p>
+<ul>
 <li>对于k=1时，为PGD算法。</li>
-<li>对于k&gt;1时，相当于$x^{(k-1)}$加了一个动量，变成$v$。</li>
-<li>如果$h(x)$不存在，即$f(x)$可微，则相当于梯度下降算法。</li>
+<li>对于k&gt;1时，相当于<span
+class="math inline">\(x^{(k-1)}\)</span>加了一个动量，变成<span
+class="math inline">\(v\)</span>。</li>
+<li>如果<span class="math inline">\(h(x)\)</span>不存在，即<span
+class="math inline">\(f(x)\)</span>可微，则相当于梯度下降算法。</li>
 </ul>
-<p>公式(15)等同于公式(7)，公式(14)就是增加一个小的动量，以此达到加速的目的。如下图所示：<br><img src="https://img-blog.csdnimg.cn/875f2624edfc43c6a5c92604712875a6.png" alt="1"></p>
-<h3 id="Back-to-lasso-example"><a href="#Back-to-lasso-example" class="headerlink" title="Back to lasso example:"></a>Back to lasso example:</h3><p>回到刚才的例子，可以看到用APG方法，加速效果明显<br><img src="https://img-blog.csdnimg.cn/f08de5ce7ee04dad92ea0766edfad67b.png" alt="在这里插入图片描述"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>PGD和APG主要用于目标函数中存在不可微分项的情况，在实际的深度学习算法中，该情况最主要用于稀疏优化，例如损失函数增加架构参数的L1范数，可以使架构参数变得稀疏。当然，该方法也有许多其它应用，总之，当你的函数中出现不可微分问题的时候，就可以来参考一下PGD算法。</p>
-<p>后续NAG优化器原理将放在(二)中 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554428/article/details/127386220?spm=1001.2014.3001.5501">(二)的链接</a>，太长了，拆一拆。后续部分会讲解NAG优化器，以及论文中如何将APG和NAG结合到一起，并尝试给出pytorch自定义优化器的代码实现(原论文是Mxnet)。</p>
-<h1 id="篇二："><a href="#篇二：" class="headerlink" title="篇二："></a>篇二：</h1><hr>
-<h1 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h1><p>近期在阅读<strong>Data-Driven Sparse Structure Selection for Deep Neural Networks</strong>论文时，用到里面APG-NAG相关优化器的知识，原论文方法采用mxnet去实现的，在这里想迁移到pytorch中。因此手撕一下APG和NAG相关的知识。<br>在之前文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554428/article/details/127375349">APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理 (一)</a>中，详细描述了APG算法，本文将简略讲一下NAG优化器，并着重讲一下Data-Driven Sparse Structure Selection for Deep Neural Networks论文中APG-NAG优化器的实现。</p>
-<h1 id="NAG优化器"><a href="#NAG优化器" class="headerlink" title="NAG优化器"></a>NAG优化器</h1><p>NAG优化器主要可参考如下引用。讲解的非常细致，在这里引用<sup><a href="#fn_4" id="reffn_4">4</a></sup>其中的话，并再用三张图简单描述一下：</p>
-<p><em>Momentum是基于动量原理的，就是每次更新参数时，梯度的方向都会和上一次迭代的方向有关，当一个球向山下滚的时候，它会越滚越快，能够加快收敛，但是这样也会存在一个问题，每次梯度都是本次和上次之和，如果是同向，那么将导致梯度很大，当到达谷底的时候很容易动量过大导致小球冲过谷底，跳过当前局部最优位置。<br>我们希望有一个更智能的球，一个知道它要去哪里的球，这样它知道在山坡再次向上倾斜之前减速。<br>Nesterov accelerated gradient是一种使动量项具有这种预见性的方法</em>    ——参考自<sup><a href="#fn_3" id="reffn_3">3</a></sup></p>
-<p>1.Momentum 更新<br><img src="https://img-blog.csdnimg.cn/452422862ea54d30911aa2833d81e21d.png" alt="1"></p>
-<ol>
-<li><p>NAG 更新<br><img src="https://img-blog.csdnimg.cn/1c4cc1caf9864c6ab2d5bf68ddf7f749.png" alt="1"></p>
-</li>
-<li><p>两者对比(蓝色为动量，绿色为NAG)<br><img src="https://img-blog.csdnimg.cn/04390b3c2cdf41b89a30e46a1a23ec13.png" alt="1"></p>
-<h1 id="APG-与-NAG的结合"><a href="#APG-与-NAG的结合" class="headerlink" title="APG 与 NAG的结合"></a>APG 与 NAG的结合</h1></li>
+<p>公式(15)等同于公式(7)，公式(14)就是增加一个小的动量，以此达到加速的目的。如下图所示：
+<img
+src="https://img-blog.csdnimg.cn/875f2624edfc43c6a5c92604712875a6.png"
+alt="1" /></p>
+<h3 id="back-to-lasso-example">Back to lasso example:</h3>
+<p>回到刚才的例子，可以看到用APG方法，加速效果明显 <img
+src="https://img-blog.csdnimg.cn/f08de5ce7ee04dad92ea0766edfad67b.png"
+alt="在这里插入图片描述" /></p>
+<h1 id="总结">总结</h1>
+<p>PGD和APG主要用于目标函数中存在不可微分项的情况，在实际的深度学习算法中，该情况最主要用于稀疏优化，例如损失函数增加架构参数的L1范数，可以使架构参数变得稀疏。当然，该方法也有许多其它应用，总之，当你的函数中出现不可微分问题的时候，就可以来参考一下PGD算法。</p>
+<p>后续NAG优化器原理将放在(二)中 <a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554428/article/details/127386220?spm=1001.2014.3001.5501">(二)的链接</a>，太长了，拆一拆。后续部分会讲解NAG优化器，以及论文中如何将APG和NAG结合到一起，并尝试给出pytorch自定义优化器的代码实现(原论文是Mxnet)。</p>
+<p>篇二：</p>
+<h1 id="前言-1">前言</h1>
+<p>近期在阅读<strong>Data-Driven Sparse Structure Selection for Deep
+Neural
+Networks</strong>论文时，用到里面APG-NAG相关优化器的知识，原论文方法采用mxnet去实现的，在这里想迁移到pytorch中。因此手撕一下APG和NAG相关的知识。
+在之前文章<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554428/article/details/127375349">APG(Accelerate
+Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated
+gradient)优化器原理
+(一)</a>中，详细描述了APG算法，本文将简略讲一下NAG优化器，并着重讲一下Data-Driven
+Sparse Structure Selection for Deep Neural
+Networks论文中APG-NAG优化器的实现。</p>
+<h1 id="nag优化器">NAG优化器</h1>
+<p>NAG优化器主要可参考如下引用。讲解的非常细致，在这里引用<a href="#fn3"
+class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>和<a
+href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a>其中的话，并再用三张图简单描述一下：</p>
+<p><em>Momentum是基于动量原理的，就是每次更新参数时，梯度的方向都会和上一次迭代的方向有关，当一个球向山下滚的时候，它会越滚越快，能够加快收敛，但是这样也会存在一个问题，每次梯度都是本次和上次之和，如果是同向，那么将导致梯度很大，当到达谷底的时候很容易动量过大导致小球冲过谷底，跳过当前局部最优位置。
+我们希望有一个更智能的球，一个知道它要去哪里的球，这样它知道在山坡再次向上倾斜之前减速。
+Nesterov accelerated gradient是一种使动量项具有这种预见性的方法</em></p>
+<p>1.Momentum 更新 <img
+src="https://img-blog.csdnimg.cn/452422862ea54d30911aa2833d81e21d.png"
+alt="1" /> 1. NAG 更新 <img
+src="https://img-blog.csdnimg.cn/1c4cc1caf9864c6ab2d5bf68ddf7f749.png"
+alt="1" /></p>
+<ol start="3" type="1">
+<li>两者对比(蓝色为动量，绿色为NAG) <img
+src="https://img-blog.csdnimg.cn/04390b3c2cdf41b89a30e46a1a23ec13.png"
+alt="1" /> # APG 与 NAG的结合</li>
 </ol>
-<p>参考<strong>Data-Driven Sparse Structure Selection for Deep Neural Networks</strong>论文，其实也就是一个简单的上文提到的Lasso 问题的变种，定义如下目标函数，优化$\mathbf{x}$，</p>
-<script type="math/tex; mode=display">\begin{align} \min_{\bf{x}} g(\bf{x})+\gamma ||\bf{x}||_1 \end{align}</script><p>其中$g(\bf{x})$可微，则是一个典型的PGD优化问题，这里采用APG(加速近端梯度)进行优化。<br>根据APG算法，篇一公式(14)(15)，可得，</p>
-<script type="math/tex; mode=display">\begin{align} d^{(k)} &= x^{(k-1)} + \frac{k-2}{k+1}(x^{(k-1)}-x^{(k-2)}) \\
-x^{(k)}&=prox_{\eta_k}(d^{(k)}-\eta_k \nabla g(d^{(k)}))  \\
-for \space k&= 1,2,3,\ldots  \nonumber \end{align}</script><p>其中，$\eta_k$代表学习率。</p>
-<p>定义近端算子 / Soft-thresholding operator，参考篇一公式（9）,  令$prox_{\eta_k} (\cdot)= S_{\gamma\eta} ( \cdot )$，则</p>
-<script type="math/tex; mode=display">\begin{align} x^{(k)}&=S_{\gamma\eta_{(k)}}(d^{(k)}-\eta_k \nabla g(d^{(k)}))  \\
-for \space k&= 1,2,3,\ldots  \nonumber  \end{align}</script><p>然而，在深度学习中，这种操作是不友好的，计算$\nabla g(d^{(k)})$ 要额外对网络进行forward-backward运算。因此，作者他们想了个优化的方法，</p>
-<p>首先对公式(2)，公式(4)做了一个变形，</p>
-<script type="math/tex; mode=display">\begin{align} d^{(k)} &= x^{(k-1)} + \frac{k-2}{k+1}(x^{(k-1)}-x^{(k-2)}) \nonumber \\
-\longrightarrow d^{(k)}&=x^{(k-1)} +\mu^{(k-1)} v^{(k-1)} \end{align}</script><p>同时对公式(4)中的   $d^{(k)} -\eta_k \nabla g(d^{(k)})$ 作出如下变形，</p>
-<script type="math/tex; mode=display">\begin{align} z^{(k)} &= d^{(k)} -\eta_k \nabla g(d^{(k)}) \nonumber \\
-\longrightarrow z^{(k)}&=x^{(k-1)} +\mu^{(k-1)} v^{(k-1)}  -\eta_k \nabla g(x^{(k-1)} +\mu^{(k-1)} v^{(k-1)} ) \end{align}</script><p>则有，</p>
-<script type="math/tex; mode=display">\begin{align} v^{(k)} &=  S_{\gamma\eta_{(k)}}(z^{(k)}) - x^{(k-1)}   \\
-x^{(k)} &= x^{(k-1)}+v^{(k)}\end{align}</script><p>其中，另$\mu^{(k-1)}=\frac{k-2}{t+1}$ , 另$v^{(tk-1)} = x^{(k-1)}-x^{(k-2)}$。</p>
-<p>那么为了避免计算$\nabla g(x^{(k-1)} +\mu^{(k-1)} v^{(k-1)})$时造成的时长浪费，作者着重对$x^{(k-1)} +\mu^{(k-1)} v^{(k-1)}$进行了一个替代，即另$x’^{(k-1)}=x^{(k-1)} +\mu^{(k-1)} v^{(k-1)}$，可以得到，</p>
-<script type="math/tex; mode=display">\begin{align} 
-z^{(k)} &= x'^{(k-1)} -\eta_k \nabla g(x'^{(k-1)})  \\ 
-v^{(k)} &=  S_{\gamma\eta_{(k)}}(z^{(k)}) - x'^{(k-1)} +\mu^{(k-1)} v^{(k-1)} \\
-x'^{(k)} &= S_{\gamma\eta_{(k)}}(z^{(k)}) +\mu^{(k)}v^{(k)}  \end{align}</script><p>则计算$\nabla g(x’^{(k-1)})$将无需二次进行forward-backward运算。公式(11)的推导放在附录中。</p>
-<p>最后还有一个软阈值/近端算子$S_{\gamma\eta_{(k)}}$的定义，根据篇一，其定义如下：</p>
-<script type="math/tex; mode=display">\begin{align}  S_{\gamma\eta_{(k)}} (\mathbf{z})_i= sign(z_i)ReLU(|z_i|-\eta_{(k)}\gamma) \end{align}</script><p>等价于，</p>
-<script type="math/tex; mode=display">\begin{align}  S_{\gamma\eta_{(k)}} (\mathbf{z})_i= sign(z_i)Max(0,|z_i|-\eta_{(k)}\gamma) \end{align}</script><h2 id="Pytorch-代码实现"><a href="#Pytorch-代码实现" class="headerlink" title="Pytorch 代码实现"></a>Pytorch 代码实现</h2><p>原论文中给出了mxnet的代码实现，但是mxnet框架有点老了，没用过也，遂迁移到pytorch。</p>
+<p>参考<strong>Data-Driven Sparse Structure Selection for Deep Neural
+Networks</strong>论文，其实也就是一个简单的上文提到的Lasso
+问题的变种，定义如下目标函数，优化<span
+class="math inline">\(\mathbf{x}\)</span>， <span
+class="math display">\[\begin{align} \min_{\bf{x}} g(\bf{x})+\gamma
+||\bf{x}||_1 \end{align} \]</span> 其中<span
+class="math inline">\(g(\bf{x})\)</span>可微，则是一个典型的PGD优化问题，这里采用APG(加速近端梯度)进行优化。
+根据APG算法，篇一公式(14)(15)，可得， <span
+class="math display">\[\begin{align} d^{(k)} &amp;= x^{(k-1)} +
+\frac{k-2}{k+1}(x^{(k-1)}-x^{(k-2)}) \\
+x^{(k)}&amp;=prox_{\eta_k}(d^{(k)}-\eta_k \nabla g(d^{(k)}))  \\
+for \space k&amp;= 1,2,3,\ldots  \nonumber \end{align} \]</span>
+其中，<span class="math inline">\(\eta_k\)</span>代表学习率。</p>
+<p>定义近端算子 / Soft-thresholding operator，参考篇一公式（9）, 令<span
+class="math inline">\(prox_{\eta_k} (\cdot)= S_{\gamma\eta} ( \cdot
+)\)</span>，则 <span class="math display">\[\begin{align}
+x^{(k)}&amp;=S_{\gamma\eta_{(k)}}(d^{(k)}-\eta_k \nabla g(d^{(k)}))  \\
+for \space k&amp;= 1,2,3,\ldots  \nonumber  \end{align}\]</span></p>
+<p>然而，在深度学习中，这种操作是不友好的，计算<span
+class="math inline">\(\nabla g(d^{(k)})\)</span>
+要额外对网络进行forward-backward运算。因此，作者他们想了个优化的方法，</p>
+<p>首先对公式(2)，公式(4)做了一个变形， <span
+class="math display">\[\begin{align} d^{(k)} &amp;= x^{(k-1)} +
+\frac{k-2}{k+1}(x^{(k-1)}-x^{(k-2)}) \nonumber \\
+\longrightarrow d^{(k)}&amp;=x^{(k-1)} +\mu^{(k-1)} v^{(k-1)}
+\end{align}\]</span></p>
+<p>同时对公式(4)中的 <span class="math inline">\(d^{(k)} -\eta_k \nabla
+g(d^{(k)})\)</span> 作出如下变形， <span
+class="math display">\[\begin{align} z^{(k)} &amp;= d^{(k)} -\eta_k
+\nabla g(d^{(k)}) \nonumber \\
+\longrightarrow z^{(k)}&amp;=x^{(k-1)} +\mu^{(k-1)} v^{(k-1)}  -\eta_k
+\nabla g(x^{(k-1)} +\mu^{(k-1)} v^{(k-1)} ) \end{align}\]</span>
+则有，</p>
+<p><span class="math display">\[\begin{align} v^{(k)}
+&amp;=  S_{\gamma\eta_{(k)}}(z^{(k)}) - x^{(k-1)}   \\
+x^{(k)} &amp;= x^{(k-1)}+v^{(k)}\end{align}\]</span></p>
+<p>其中，另<span
+class="math inline">\(\mu^{(k-1)}=\frac{k-2}{t+1}\)</span> , 另<span
+class="math inline">\(v^{(tk-1)} = x^{(k-1)}-x^{(k-2)}\)</span>。</p>
+<p>那么为了避免计算<span class="math inline">\(\nabla g(x^{(k-1)}
++\mu^{(k-1)} v^{(k-1)})\)</span>时造成的时长浪费，作者着重对<span
+class="math inline">\(x^{(k-1)} +\mu^{(k-1)}
+v^{(k-1)}\)</span>进行了一个替代，即另<span
+class="math inline">\(x&#39;^{(k-1)}=x^{(k-1)} +\mu^{(k-1)}
+v^{(k-1)}\)</span>，可以得到，</p>
+<p><span class="math display">\[\begin{align}
+z^{(k)} &amp;= x&#39;^{(k-1)} -\eta_k \nabla g(x&#39;^{(k-1)})  \\
+v^{(k)} &amp;=  S_{\gamma\eta_{(k)}}(z^{(k)}) - x&#39;^{(k-1)}
++\mu^{(k-1)} v^{(k-1)} \\
+x&#39;^{(k)} &amp;= S_{\gamma\eta_{(k)}}(z^{(k)})
++\mu^{(k)}v^{(k)}  \end{align}\]</span></p>
+<p>则计算<span class="math inline">\(\nabla
+g(x&#39;^{(k-1)})\)</span>将无需二次进行forward-backward运算。公式(11)的推导放在附录中。</p>
+<p>最后还有一个软阈值/近端算子<span
+class="math inline">\(S_{\gamma\eta_{(k)}}\)</span>的定义，根据篇一，其定义如下：
+<span class="math display">\[\begin{align}  S_{\gamma\eta_{(k)}}
+(\mathbf{z})_i= sign(z_i)ReLU(|z_i|-\eta_{(k)}\gamma)
+\end{align}\]</span> 等价于， <span
+class="math display">\[\begin{align}  S_{\gamma\eta_{(k)}}
+(\mathbf{z})_i= sign(z_i)Max(0,|z_i|-\eta_{(k)}\gamma)
+\end{align}\]</span></p>
+<h2 id="pytorch-代码实现">Pytorch 代码实现</h2>
+<p>原论文中给出了mxnet的代码实现，但是mxnet框架有点老了，没用过也，遂迁移到pytorch。</p>
 <p>原始代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> mxnet <span class="keyword">as</span> mx</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">apg_updater</span>(<span class="params">weight, lr, grad, mom, gamma</span>):</span><br><span class="line">z = weight - lr * grad</span><br><span class="line">z = soft_thresholding(z, lr * gamma)</span><br><span class="line">mom[:] = z - weight + <span class="number">0.9</span> * mom</span><br><span class="line">weight[:] = z + <span class="number">0.9</span> * mom</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">soft_thresholding</span>(<span class="params">x, gamma</span>):</span><br><span class="line">y = mx.nd.maximum(<span class="number">0</span>, mx.nd.<span class="built_in">abs</span>(x) - gamma)</span><br><span class="line"><span class="keyword">return</span> mx.nd.sign(x) * y</span><br></pre></td></tr></table></figure>
 <p>迁移后代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.optim.optimizer <span class="keyword">import</span> Optimizer, required</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">APGNAG</span>(<span class="title class_ inherited__">Optimizer</span>):</span><br><span class="line">    <span class="string">r&quot;&quot;&quot;Implements nesterov accelerated gradient descent with APG(optionally with momentum).</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, params, lr=required, momentum=<span class="number">0</span>, dampening=<span class="number">0</span>,</span></span><br><span class="line"><span class="params">                 weight_decay=<span class="number">0</span>, nesterov=<span class="literal">False</span>, gamma=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">if</span> lr <span class="keyword">is</span> <span class="keyword">not</span> required <span class="keyword">and</span> lr &lt; <span class="number">0.0</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Invalid learning rate: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(lr))</span><br><span class="line">        <span class="keyword">if</span> momentum &lt; <span class="number">0.0</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Invalid momentum value: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(momentum))</span><br><span class="line">        <span class="keyword">if</span> weight_decay &lt; <span class="number">0.0</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Invalid weight_decay value: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(weight_decay))</span><br><span class="line"></span><br><span class="line">        defaults = <span class="built_in">dict</span>(lr=lr, momentum=momentum, dampening=dampening,</span><br><span class="line">                        weight_decay=weight_decay, nesterov=nesterov)</span><br><span class="line">        <span class="keyword">if</span> nesterov <span class="keyword">and</span> (momentum &lt;= <span class="number">0</span> <span class="keyword">or</span> dampening != <span class="number">0</span>):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;Nesterov momentum requires a momentum and zero dampening&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        self.gamma = gamma </span><br><span class="line">        <span class="built_in">super</span>(APGNAG, self).__init__(params, defaults)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__setstate__</span>(<span class="params">self, state</span>):</span><br><span class="line">        <span class="built_in">super</span>(APGNAG, self).__setstate__(state)</span><br><span class="line">        <span class="keyword">for</span> group <span class="keyword">in</span> self.param_groups:</span><br><span class="line">            group.setdefault(<span class="string">&#x27;nesterov&#x27;</span>, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">step</span>(<span class="params">self, closure=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Performs a single optimization step.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Arguments:</span></span><br><span class="line"><span class="string">            closure (callable, optional): A closure that reevaluates the model</span></span><br><span class="line"><span class="string">                and returns the loss.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        loss = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> closure <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            loss = closure()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> group <span class="keyword">in</span> self.param_groups:</span><br><span class="line">            weight_decay = group[<span class="string">&#x27;weight_decay&#x27;</span>]</span><br><span class="line">            momentum = group[<span class="string">&#x27;momentum&#x27;</span>]</span><br><span class="line">            dampening = group[<span class="string">&#x27;dampening&#x27;</span>]</span><br><span class="line">            nesterov = group[<span class="string">&#x27;nesterov&#x27;</span>]</span><br><span class="line">              </span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> group[<span class="string">&#x27;params&#x27;</span>]:</span><br><span class="line">                <span class="keyword">if</span> p.grad <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                d_p = p.grad.data <span class="comment">#* 参数的一阶梯度 </span></span><br><span class="line">                <span class="comment"># update weight_decay</span></span><br><span class="line">                <span class="keyword">if</span> weight_decay != <span class="number">0</span>: </span><br><span class="line">                    d_p.add_(p.data, alpha=weight_decay )   <span class="comment">#* d_p = d_p + weight_decay * p.data </span></span><br><span class="line">                <span class="comment"># update momentum</span></span><br><span class="line">                <span class="keyword">if</span> momentum != <span class="number">0</span>:</span><br><span class="line">                    </span><br><span class="line">                    param_state = self.state[p]</span><br><span class="line">                    <span class="keyword">if</span> <span class="string">&#x27;momentum_buffer&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> param_state:</span><br><span class="line">                        buf = param_state[<span class="string">&#x27;momentum_buffer&#x27;</span>] = torch.clone(d_p).detach()</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        buf = param_state[<span class="string">&#x27;momentum_buffer&#x27;</span>]</span><br><span class="line">                        z = p.data.add(d_p, alpha = -group[<span class="string">&#x27;lr&#x27;</span>]) <span class="comment">#* z = p.data - lr * d_p</span></span><br><span class="line">                        S = self.soft_thresholding(z, group[<span class="string">&#x27;lr&#x27;</span>] * self.gamma) <span class="comment">#* S = soft_thresholding(z, lr * gamma)</span></span><br><span class="line">                        v = S - p.data +buf.mul_(momentum) <span class="comment">#* v = S - p.data + momentum * buf     buf: v_&#123;t-1&#125;  momentum: \mu</span></span><br><span class="line">                        buf = torch.clone(v).detach() <span class="comment">#* buf = v</span></span><br><span class="line">                        p.data = S + buf.mul_(momentum) <span class="comment">#* p.data = S + momentum * buf</span></span><br><span class="line">                     <span class="comment">#no negtive</span></span><br><span class="line">                    p.data = torch.<span class="built_in">max</span>(p.data, torch.zeros_like(p.data).cuda())</span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">soft_thresholding</span>(<span class="params">x, gamma</span>):</span><br><span class="line">        <span class="keyword">return</span> torch.sign(x) * torch.<span class="built_in">max</span>(torch.<span class="built_in">abs</span>(x) - gamma, torch.zeros_like(x).cuda())</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><h2 id="公式-11-推导"><a href="#公式-11-推导" class="headerlink" title="公式(11)推导"></a>公式(11)推导</h2><p>根据公式(8)，已知，$x^{(k)} = x^{(k-1)}+v^{(k)}$，且$x’^{(k-1)}=x^{(k-1)} +\mu^{(k-1)} v^{(k-1)}$，则</p>
-<script type="math/tex; mode=display">\begin{aligned} x'(k) &= x(k)+\mu^{(k)} v^{(k)} \\
- &= x^{(k-1)}+v^{(k)}+ \mu^{(k)} v^{(k)} \\
- &= x'^{(k-1)} - \mu^{(k-1)} v^{(k-1)} +v^{(k)}+ \mu^{(k)} v^{(k)} \\
- &According \space to \space formula (10),  get： \\
- &= S_{\gamma\eta_{(k)}}(z^{(k)}) - v^{(k)}  +\mu^{(k-1)} v^{(k-1)} - \mu^{(k-1)} v^{(k-1)} +v^{(k)}+ \mu^{(k)} v^{(k)} \\
- &= S_{\gamma\eta_{(k)}}(z^{(k)}) +\mu^{(k)}v^{(k)}  \end{aligned}</script><h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><blockquote id="fn_1">
-<sup>1</sup>. Proximal Gradient Descent (and Acceleration)   link: <a target="_blank" rel="noopener" href="https://www.stat.cmu.edu/~ryantibs/convexopt/lectures/prox-grad.pdf">https://www.stat.cmu.edu/~ryantibs/convexopt/lectures/prox-grad.pdf</a>  （强推！）<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_2">
-<sup>2</sup>.  <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82622940">机器学习 | 近端梯度下降法 (proximal gradient descent)</a> (强推！)<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_4">
-<sup>4</sup>. <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_47256162/article/details/121576888">numpy实现NAG(Nesterov accelerated gradient)优化器</a><a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
-</blockquote>
+<h1 id="附录">附录</h1>
+<h2 id="公式11推导">公式(11)推导</h2>
+<p>根据公式(8)，已知，<span class="math inline">\(x^{(k)} =
+x^{(k-1)}+v^{(k)}\)</span>，且<span
+class="math inline">\(x&#39;^{(k-1)}=x^{(k-1)} +\mu^{(k-1)}
+v^{(k-1)}\)</span>，则 <span class="math display">\[\begin{aligned}
+x&#39;(k) &amp;= x(k)+\mu^{(k)} v^{(k)} \\
+&amp;= x^{(k-1)}+v^{(k)}+ \mu^{(k)} v^{(k)} \\
+&amp;= x&#39;^{(k-1)} - \mu^{(k-1)} v^{(k-1)} +v^{(k)}+ \mu^{(k)}
+v^{(k)} \\
+&amp;According \space to \space formula (10),  get： \\
+&amp;= S_{\gamma\eta_{(k)}}(z^{(k)}) - v^{(k)}  +\mu^{(k-1)} v^{(k-1)} -
+\mu^{(k-1)} v^{(k-1)} +v^{(k)}+ \mu^{(k)} v^{(k)} \\
+&amp;= S_{\gamma\eta_{(k)}}(z^{(k)})
++\mu^{(k)}v^{(k)}  \end{aligned}\]</span></p>
+<h1 id="引用">引用</h1>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/82622940">机器学习 | 近端梯度下降法
+(proximal gradient descent)</a> (强推！)<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Proximal Gradient Descent (and
+Acceleration) link: <a
+target="_blank" rel="noopener" href="https://www.stat.cmu.edu/~ryantibs/convexopt/lectures/prox-grad.pdf">https://www.stat.cmu.edu/~ryantibs/convexopt/lectures/prox-grad.pdf</a>
+（强推！）<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p><a
+target="_blank" rel="noopener" href="https://ruder.io/optimizing-gradient-descent/index.html#nadam">一个优化器的总结</a><a
+href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/m0_47256162/article/details/121576888">numpy实现NAG(Nesterov
+accelerated gradient)优化器</a><a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
   </div>
 </article>
@@ -324,7 +533,11 @@ x'^{(k)} &= S_{\gamma\eta_{(k)}}(z^{(k)}) +\mu^{(k)}v^{(k)}  \end{align}</script
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AF%87%E4%B8%80"><span class="toc-number">1.</span> <span class="toc-text">篇一</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#APG-Accelerate-Proximal-Gradient-%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">APG(Accelerate Proximal Gradient)加速近端梯度算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PGD-Proximal-Gradient-Descent-%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.1.</span> <span class="toc-text">PGD (Proximal Gradient Descent)近端梯度下降法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Example-of-Proximal-Gradient-Descent"><span class="toc-number">3.1.1.</span> <span class="toc-text">Example of Proximal Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#APG-Accelerate-Proximal-Gradient-%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">3.2.</span> <span class="toc-text">APG(Accelerate Proximal Gradient)加速近端梯度算法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Back-to-lasso-example"><span class="toc-number">3.2.1.</span> <span class="toc-text">Back to lasso example:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AF%87%E4%BA%8C%EF%BC%9A"><span class="toc-number">5.</span> <span class="toc-text">篇二：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80-1"><span class="toc-number">6.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NAG%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">7.</span> <span class="toc-text">NAG优化器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#APG-%E4%B8%8E-NAG%E7%9A%84%E7%BB%93%E5%90%88"><span class="toc-number">8.</span> <span class="toc-text">APG 与 NAG的结合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pytorch-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.1.</span> <span class="toc-text">Pytorch 代码实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">9.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F-11-%E6%8E%A8%E5%AF%BC"><span class="toc-number">9.1.</span> <span class="toc-text">公式(11)推导</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">引用</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#apgaccelerate-proximal-gradient%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">APG(Accelerate
+Proximal Gradient)加速近端梯度算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pgd-proximal-gradient-descent%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">2.1.</span> <span class="toc-text">PGD (Proximal
+Gradient Descent)近端梯度下降法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#example-of-proximal-gradient-descent"><span class="toc-number">2.1.1.</span> <span class="toc-text">Example of Proximal
+Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#apgaccelerate-proximal-gradient%E5%8A%A0%E9%80%9F%E8%BF%91%E7%AB%AF%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95%E6%8E%A8%E5%AF%BC"><span class="toc-number">2.2.</span> <span class="toc-text">APG(Accelerate
+Proximal Gradient)加速近端梯度算法推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#back-to-lasso-example"><span class="toc-number">2.2.1.</span> <span class="toc-text">Back to lasso example:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80-1"><span class="toc-number">4.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nag%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">NAG优化器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pytorch-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.1.</span> <span class="toc-text">Pytorch 代码实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">6.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F11%E6%8E%A8%E5%AF%BC"><span class="toc-number">6.1.</span> <span class="toc-text">公式(11)推导</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">7.</span> <span class="toc-text">引用</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
