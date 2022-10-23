@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="前言 什么是Reservoir Sampling？ 蓄水池抽样算法(Reservoir sampling)具体实现：  Algorithm R：  证明Algorithm R每个样本被取到概率相同：  Distributed&#x2F;Parallel Reservoir Sampling (并行蓄水池抽样算法)1  相关代码(后面用到时会补充进去) 应用场景 总结">
+    <meta name="description" content="前言 什么是Reservoir Sampling？ 蓄水池抽样算法(Reservoir sampling)具体实现： Algorithm R： 证明Algorithm R每个样本被取到概率相同：   Distributed&#x2F;Parallel Reservoir Sampling (并行蓄水池抽样算法)3   相关代码(后面用到时会补充进去) 应用场景 总结 引用及感谢   前言技术性文章决定还">
 <meta property="og:type" content="article">
 <meta property="og:title" content="_Tech. Blog_连续学习中的蓄水池抽样算法(The Illustrated Reservoir sampling).">
 <meta property="og:url" content="https://yannqi.github.io/2022/08/26/The-Illustrated-Reservoir-sampling/index.html">
 <meta property="og:site_name" content="Yang Qi&#39;s Blog">
-<meta property="og:description" content="前言 什么是Reservoir Sampling？ 蓄水池抽样算法(Reservoir sampling)具体实现：  Algorithm R：  证明Algorithm R每个样本被取到概率相同：  Distributed&#x2F;Parallel Reservoir Sampling (并行蓄水池抽样算法)1  相关代码(后面用到时会补充进去) 应用场景 总结">
+<meta property="og:description" content="前言 什么是Reservoir Sampling？ 蓄水池抽样算法(Reservoir sampling)具体实现： Algorithm R： 证明Algorithm R每个样本被取到概率相同：   Distributed&#x2F;Parallel Reservoir Sampling (并行蓄水池抽样算法)3   相关代码(后面用到时会补充进去) 应用场景 总结 引用及感谢   前言技术性文章决定还">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://yannqi.github.io/2022/08/26/The-Illustrated-Reservoir-sampling/I1.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/08/26/The-Illustrated-Reservoir-sampling/I2.png">
@@ -120,10 +120,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFreservoir-sampling"><span class="toc-number">2.</span> <span class="toc-text">什么是Reservoir Sampling？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95reservoir-sampling%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">蓄水池抽样算法(Reservoir
-sampling)具体实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#algorithm-r"><span class="toc-number">3.1.</span> <span class="toc-text">Algorithm R：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8Ealgorithm-r%E6%AF%8F%E4%B8%AA%E6%A0%B7%E6%9C%AC%E8%A2%AB%E5%8F%96%E5%88%B0%E6%A6%82%E7%8E%87%E7%9B%B8%E5%90%8C"><span class="toc-number">3.1.1.</span> <span class="toc-text">证明Algorithm
-R每个样本被取到概率相同：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#distributedparallel-reservoir-sampling-%E5%B9%B6%E8%A1%8C%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%953"><span class="toc-number">3.2.</span> <span class="toc-text">Distributed&#x2F;Parallel
-Reservoir Sampling (并行蓄水池抽样算法)5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81%E5%90%8E%E9%9D%A2%E7%94%A8%E5%88%B0%E6%97%B6%E4%BC%9A%E8%A1%A5%E5%85%85%E8%BF%9B%E5%8E%BB"><span class="toc-number">4.</span> <span class="toc-text">相关代码(后面用到时会补充进去)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E5%8F%8A%E6%84%9F%E8%B0%A2"><span class="toc-number">6.</span> <span class="toc-text">引用及感谢</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFReservoir-Sampling%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是Reservoir Sampling？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95-Reservoir-sampling-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">蓄水池抽样算法(Reservoir sampling)具体实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithm-R%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">Algorithm R：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8EAlgorithm-R%E6%AF%8F%E4%B8%AA%E6%A0%B7%E6%9C%AC%E8%A2%AB%E5%8F%96%E5%88%B0%E6%A6%82%E7%8E%87%E7%9B%B8%E5%90%8C%EF%BC%9A"><span class="toc-number">3.1.1.</span> <span class="toc-text">证明Algorithm R每个样本被取到概率相同：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Distributed-Parallel-Reservoir-Sampling-%E5%B9%B6%E8%A1%8C%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95-3"><span class="toc-number">3.2.</span> <span class="toc-text">Distributed&#x2F;Parallel Reservoir Sampling (并行蓄水池抽样算法)3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81-%E5%90%8E%E9%9D%A2%E7%94%A8%E5%88%B0%E6%97%B6%E4%BC%9A%E8%A1%A5%E5%85%85%E8%BF%9B%E5%8E%BB"><span class="toc-number">4.</span> <span class="toc-text">相关代码(后面用到时会补充进去)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">5.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E5%8F%8A%E6%84%9F%E8%B0%A2"><span class="toc-number">7.</span> <span class="toc-text">引用及感谢</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -175,163 +172,73 @@ Reservoir Sampling (并行蓄水池抽样算法)5</span></a></li></ol></li><li c
     <!-- toc -->
 <ul>
 <li><a href="#--">前言</a></li>
-<li><a href="#---reservoir-sampling-">什么是Reservoir
-Sampling？</a></li>
-<li><a href="#--------reservoir-sampling------">蓄水池抽样算法(Reservoir
-sampling)具体实现：</a>
-<ul>
-<li><a href="#algorithm-r-">Algorithm R：</a>
-<ul>
-<li><a href="#--algorithm-r------------">证明Algorithm
-R每个样本被取到概率相同：</a></li>
-</ul></li>
-<li><a
-href="#distributed-parallel-reservoir-sampling--------------3-">Distributed/Parallel
-Reservoir Sampling (并行蓄水池抽样算法)<a href="#fn1"
-class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a></a></li>
-</ul></li>
+<li><a href="#---reservoir-sampling-">什么是Reservoir Sampling？</a></li>
+<li><a href="#--------reservoir-sampling------">蓄水池抽样算法(Reservoir sampling)具体实现：</a><ul>
+<li><a href="#algorithm-r-">Algorithm R：</a><ul>
+<li><a href="#--algorithm-r------------">证明Algorithm R每个样本被取到概率相同：</a></li>
+</ul>
+</li>
+<li><a href="#distributed-parallel-reservoir-sampling--------------3-">Distributed/Parallel Reservoir Sampling (并行蓄水池抽样算法)<sup><a href="#fn_3" id="reffn_3">3</a></sup></a></li>
+</ul>
+</li>
 <li><a href="#----------------">相关代码(后面用到时会补充进去)</a></li>
 <li><a href="#----">应用场景</a></li>
 <li><a href="#--">总结</a></li>
 <li><a href="#-----">引用及感谢</a></li>
 </ul>
 <!-- tocstop -->
-<h1 id="前言">前言</h1>
-<p>技术性文章决定还是用中文来写，便于理解。近期在看连续学习中有关于Replay
-Method的文章时，在对数据流的采样中，reservoir sampling方法出现了很多次<a
-href="#fn2" class="footnote-ref" id="fnref2"
-role="doc-noteref"><sup>2</sup></a>。本文将对该方法进行梳理，并给出python实现的案例。特别感谢<strong>邱simple</strong><a
-href="#fn3" class="footnote-ref" id="fnref3"
-role="doc-noteref"><sup>3</sup></a></p>
-<h1 id="什么是reservoir-sampling">什么是Reservoir Sampling？</h1>
-<p>Reservoir
-Sampling直白翻译过来就是“蓄水池抽样”，非常具象化。维基百科定义如下<a
-href="#fn4" class="footnote-ref" id="fnref4"
-role="doc-noteref"><sup>4</sup></a>：</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>技术性文章决定还是用中文来写，便于理解。近期在看连续学习中有关于Replay Method的文章时，在对数据流的采样中，reservoir sampling方法出现了很多次<sup><a href="#fn_1" id="reffn_1">1</a></sup>。本文将对该方法进行梳理，并给出python实现的案例。特别感谢<strong>邱simple</strong><sup><a href="#fn_4" id="reffn_4">4</a></sup></p>
+<h1 id="什么是Reservoir-Sampling？"><a href="#什么是Reservoir-Sampling？" class="headerlink" title="什么是Reservoir Sampling？"></a>什么是Reservoir Sampling？</h1><p>Reservoir Sampling直白翻译过来就是“蓄水池抽样”，非常具象化。维基百科定义如下<sup><a href="#fn_2" id="reffn_2">2</a></sup>：</p>
 <blockquote>
-<p>Reservoir sampling is a family of randomized algorithms for choosing
-a simple random sample, without replacement, of k items from a
-population of unknown size n in a single pass over the items. The size
-of the population n is not known to the algorithm and is typically too
-large for all n items to fit into main memory. The population is
-revealed to the algorithm over time, and the algorithm cannot look back
-at previous items. At any point, the current state of the algorithm must
-permit extraction of a simple random sample without replacement of size
-k over the part of the population seen so far.</p>
+<p>Reservoir sampling is a family of randomized algorithms for choosing a simple random sample, without replacement, of k items from a population of unknown size n in a single pass over the items. The size of the population n is not known to the algorithm and is typically too large for all n items to fit into main memory. The population is revealed to the algorithm over time, and the algorithm cannot look back at previous items. At any point, the current state of the algorithm must permit extraction of a simple random sample without replacement of size k over the part of the population seen so far.</p>
 </blockquote>
-<p>直白翻译过来就是，我们的蓄水池抽样算法(Reservoir
-sampling)是随机抽样算法的一种，即我们要从一组长度为<strong>n</strong>的数据中抽样出<strong>k</strong>个样本出来。但是呢，它的不同之处在于，它抽样的数据是一组未知长度的数据流(<em>莫疑惑，在数据流完之前，你是不知道这个长度<strong>n</strong>的具体数值的</em>)，而且这个数据流只流通一次，无法再返回去抽样。也就是说，你必须在数据流通的过程中，去抽样出k个样本出来，且保证所有数据被抽中的概率都是等概率的，即<span
-class="math inline">\(k/n\)</span>。</p>
-<p>更进一步的理解， -
-<strong>平常的抽样方法</strong>：平常的抽样方式是假定有100个小球，你从100个小球里面抽10个小球出来，那么我们就从1-100取10个随机数就可以，且确保了每个小球被取到的概率都是<span
-class="math inline">\(1/10\)</span>。 -
-<strong>蓄水池抽样算法</strong>(Reservoir
-sampling)：与我们平常的抽样方式不同，蓄水池抽样算法(Reservoir
-sampling)则是假定有一个大黑盒子(你不知道里面有多少个)，小球慢慢从盒子里面一个一个滚出来，而你只需要抓取10个小球，随着时间的推移，大黑盒子里面的小球都滚完了(你此时才知道滚了100个球出来，且对于滚远的球，你不能再去抓取了)，同样你也完成了取样的10个球，且需要确保了每个小球被取到的概率都是<span
-class="math inline">\(1/10\)</span>。</p>
-<p>总结如下：
-给定一个数据流，数据流长度N很大，且N直到处理完所有数据之前都不可知，请问如何在只遍历一遍数据（O(N)）的情况下，能够随机选取出m个不重复的数据，且每个数被选中的概率为<span
-class="math inline">\(m/N\)</span>。</p>
-<p>如图所示： <img src="I1.png"
-alt="The illustrated Reservoir sampling." /></p>
-<h1
-id="蓄水池抽样算法reservoir-sampling具体实现">蓄水池抽样算法(Reservoir
-sampling)具体实现：</h1>
-<h2 id="algorithm-r">Algorithm R：</h2>
-<p>由Alan
-Waterman最初提出的一种简单但慢的实现方式。算法伪代码图如下所示：</p>
-<figure>
-<img src="I2.png" alt="pseudo code." />
-<figcaption aria-hidden="true">pseudo code.</figcaption>
-</figure>
-<h3 id="证明algorithm-r每个样本被取到概率相同">证明Algorithm
-R每个样本被取到概率相同：</h3>
-<p>可以用数学归纳的方法来证明。</p>
+<p>直白翻译过来就是，我们的蓄水池抽样算法(Reservoir sampling)是随机抽样算法的一种，即我们要从一组长度为<strong>n</strong>的数据中抽样出<strong>k</strong>个样本出来。但是呢，它的不同之处在于，它抽样的数据是一组未知长度的数据流(<em>莫疑惑，在数据流完之前，你是不知道这个长度<strong>n</strong>的具体数值的</em>)，而且这个数据流只流通一次，无法再返回去抽样。也就是说，你必须在数据流通的过程中，去抽样出k个样本出来，且保证所有数据被抽中的概率都是等概率的，即$k/n$。</p>
+<p>更进一步的理解，</p>
+<ul>
+<li><strong>平常的抽样方法</strong>：平常的抽样方式是假定有100个小球，你从100个小球里面抽10个小球出来，那么我们就从1-100取10个随机数就可以，且确保了每个小球被取到的概率都是$1/10$。</li>
+<li><strong>蓄水池抽样算法</strong>(Reservoir sampling)：与我们平常的抽样方式不同，蓄水池抽样算法(Reservoir sampling)则是假定有一个大黑盒子(你不知道里面有多少个)，小球慢慢从盒子里面一个一个滚出来，而你只需要抓取10个小球，随着时间的推移，大黑盒子里面的小球都滚完了(你此时才知道滚了100个球出来，且对于滚远的球，你不能再去抓取了)，同样你也完成了取样的10个球，且需要确保了每个小球被取到的概率都是$1/10$。</li>
+</ul>
+<p>总结如下：<br>给定一个数据流，数据流长度N很大，且N直到处理完所有数据之前都不可知，请问如何在只遍历一遍数据（O(N)）的情况下，能够随机选取出m个不重复的数据，且每个数被选中的概率为$m/N$。</p>
+<p>如图所示：<br><img src="I1.png" alt="The illustrated Reservoir sampling."></p>
+<h1 id="蓄水池抽样算法-Reservoir-sampling-具体实现："><a href="#蓄水池抽样算法-Reservoir-sampling-具体实现：" class="headerlink" title="蓄水池抽样算法(Reservoir sampling)具体实现："></a>蓄水池抽样算法(Reservoir sampling)具体实现：</h1><h2 id="Algorithm-R："><a href="#Algorithm-R：" class="headerlink" title="Algorithm R："></a>Algorithm R：</h2><p>由Alan Waterman最初提出的一种简单但慢的实现方式。算法伪代码图如下所示：</p>
+<p><img src="I2.png" alt="pseudo code."></p>
+<h3 id="证明Algorithm-R每个样本被取到概率相同："><a href="#证明Algorithm-R每个样本被取到概率相同：" class="headerlink" title="证明Algorithm R每个样本被取到概率相同："></a>证明Algorithm R每个样本被取到概率相同：</h3><p>可以用数学归纳的方法来证明。</p>
 <p><strong>数学归纳法原理</strong>：</p>
-<p>例如：你有一列很长的直立着的多米诺骨牌，如果你可以： 1.
-证明第一张骨牌会倒。 2.
-假设只要任意一张骨牌倒了，证明与其相邻的下一张骨牌也会倒。</p>
+<p>例如：你有一列很长的直立着的多米诺骨牌，如果你可以：</p>
+<ol>
+<li>证明第一张骨牌会倒。</li>
+<li>假设只要任意一张骨牌倒了，证明与其相邻的下一张骨牌也会倒。</li>
+</ol>
 <p>那么便可以下结论：所有的骨牌都会倒下</p>
-<p><strong>证明过程：</strong> 因此， 对于<span class="math inline">\(i
-\geq k\)</span>，我们需要假设在第<span
-class="math inline">\((i+1)\)</span>个数据来之前，reservoir中的数据被选中的概率是<span
-class="math inline">\(\frac{k}{i}\)</span>；在第<span
-class="math inline">\((i+1)\)</span>个数据来之后，证明reservoir中的数据被选中的概率是<span
-class="math inline">\(\frac{k}{i+1}\)</span>；这样根据数学归纳的方法，可以得到结论，当第<span
-class="math inline">\(N\)</span>个数据来之后，reservoir中的数据被选中的概率是<span
-class="math inline">\(\frac{k}{N}\)</span>。</p>
-<p><strong>证明：</strong> 首先假设，对于<span
-class="math inline">\(i&gt;k\)</span>，在<span
-class="math inline">\((i+1)\)</span>个数据来之前，reservoir中的被选中的数据的概率为<span
-class="math inline">\(\frac{k}{i}\)</span>。</p>
-<p>则当第<span class="math inline">\((i+1)\)</span>个数据来时，<span
-class="math inline">\(x_{i+1}\)</span>被选中的概率为<span
-class="math inline">\(\frac{k}{i+1}\)</span>，且<span
-class="math inline">\(x_{i+1}\)</span>会替代掉原有的k个候选数据中的一个，替代掉的概率为<span
-class="math inline">\(\frac{k}{i+1}
-\frac{1}{k}=\frac{1}{i+1}\)</span>。则原有保存在reservoir内的数据仍被保存在reservoir内的概率为<span
-class="math inline">\(\frac{k}{i}\times \left(1-\frac{1}{i+1} \right) =
-\frac{k}{i+1}\)</span>。则可得证。</p>
-<p>因此可得到结论，当第<span
-class="math inline">\(N\)</span>个数据来之后，reservoir中的数据被选中的概率是<span
-class="math inline">\(\frac{k}{N}\)</span>。</p>
-<h2
-id="distributedparallel-reservoir-sampling-并行蓄水池抽样算法3">Distributed/Parallel
-Reservoir Sampling (并行蓄水池抽样算法)<a href="#fn5"
-class="footnote-ref" id="fnref5"
-role="doc-noteref"><sup>5</sup></a></h2>
-<p>上述由Alan
-Waterman等人提出的方法虽然实现了对数据流的抽样，但是对于超级庞大的数据流，即使时间复杂度为O(N)，整个抽样流程也相当耗时。因此，利用分布式的硬件进行并行化处理，才是高效率主流的应用方式。</p>
+<p><strong>证明过程：</strong><br>因此， 对于$i \geq k$，我们需要假设在第$(i+1)$个数据来之前，reservoir中的数据被选中的概率是$\frac{k}{i}$；在第$(i+1)$个数据来之后，证明reservoir中的数据被选中的概率是$\frac{k}{i+1}$；这样根据数学归纳的方法，可以得到结论，当第$N$个数据来之后，reservoir中的数据被选中的概率是$\frac{k}{N}$。</p>
+<p><strong>证明：</strong><br>首先假设，对于$i&gt;k$，在$(i+1)$个数据来之前，reservoir中的被选中的数据的概率为$\frac{k}{i}$。</p>
+<p>则当第$(i+1)$个数据来时，$x_{i+1}$被选中的概率为$\frac{k}{i+1}$，且$x_{i+1}$会替代掉原有的k个候选数据中的一个，替代掉的概率为$\frac{k}{i+1} \frac{1}{k}=\frac{1}{i+1}$。则原有保存在reservoir内的数据仍被保存在reservoir内的概率为$\frac{k}{i}\times \left(1-\frac{1}{i+1} \right) = \frac{k}{i+1}$。则可得证。</p>
+<p>因此可得到结论，当第$N$个数据来之后，reservoir中的数据被选中的概率是$\frac{k}{N}$。</p>
+<h2 id="Distributed-Parallel-Reservoir-Sampling-并行蓄水池抽样算法-3"><a href="#Distributed-Parallel-Reservoir-Sampling-并行蓄水池抽样算法-3" class="headerlink" title="Distributed/Parallel Reservoir Sampling (并行蓄水池抽样算法)3"></a>Distributed/Parallel Reservoir Sampling (并行蓄水池抽样算法)<sup><a href="#fn_3" id="reffn_3">3</a></sup></h2><p>上述由Alan Waterman等人提出的方法虽然实现了对数据流的抽样，但是对于超级庞大的数据流，即使时间复杂度为O(N)，整个抽样流程也相当耗时。因此，利用分布式的硬件进行并行化处理，才是高效率主流的应用方式。</p>
 <p>思考：如何才能并行化处理数据流呢？</p>
 <p>可以把数据流分成多部分，分别在不同的机器上运算，各自获取自己的reservoir。之后根据不同机器上获取的数据流的长度，再按照比例从不同的机器上的reservoir进行抽样。</p>
-<p>举例有3台机器，则把数据流<span
-class="math inline">\(N\)</span>给切为三部分，即<span
-class="math inline">\(N_1,N_2,N_3\)</span>分别流向不同的机器，<span
-class="math inline">\(N_1+N_2+N_3=N\)</span>，在不同的机器上抽样完后获得的reservoir分别为<span
-class="math inline">\(R_1,R_2,R_3\)</span>，因为我们事先不知道数据流的规模，只能对所有分支数据流都默认抽样<span
-class="math inline">\(k\)</span>个样本，即<span
-class="math inline">\(|R_1|=|R_2|=|R_3|\)</span>，之后按照<span
-class="math inline">\(N_1,N_2,N_3\)</span>的比例，从<span
-class="math inline">\(R_1,R_2,R_3\)</span>中再进行按比例抽样，组成最终的reservoir，<span
-class="math inline">\(R\)</span>。</p>
-<h1
-id="相关代码后面用到时会补充进去">相关代码(后面用到时会补充进去)</h1>
-<ul class="task-list">
-<li><input type="checkbox" disabled="" checked="" />
-挖坑 # 应用场景</li>
+<p>举例有3台机器，则把数据流$N$给切为三部分，即$N_1,N_2,N_3$分别流向不同的机器，$N_1+N_2+N_3=N$，在不同的机器上抽样完后获得的reservoir分别为$R_1,R_2,R_3$，因为我们事先不知道数据流的规模，只能对所有分支数据流都默认抽样$k$个样本，即$|R_1|=|R_2|=|R_3|$，之后按照$N_1,N_2,N_3$的比例，从$R_1,R_2,R_3$中再进行按比例抽样，组成最终的reservoir，$R$。</p>
+<h1 id="相关代码-后面用到时会补充进去"><a href="#相关代码-后面用到时会补充进去" class="headerlink" title="相关代码(后面用到时会补充进去)"></a>相关代码(后面用到时会补充进去)</h1><ul>
+<li>[x] 挖坑<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1></li>
 </ul>
 <p>连续学习是个很好的应用场景，因为连续学习的数据流和蓄水池抽样算法的数据流的要求几乎完全一致！因此，在很多连续学习方法中，蓄水池抽样是一个必不可少的环节。</p>
-<h1 id="总结">总结</h1>
-<p>蓄水池抽样算法诞生于1985年，抽样方式的确很简单，也很巧妙，非常简单美。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>蓄水池抽样算法诞生于1985年，抽样方式的确很简单，也很巧妙，非常简单美。</p>
 <!-- <a id="definition"></a>
 上述用于标签索引 -->
-<p><!-- The same to [A low level definition](#definition) --></p>
-<h1 id="引用及感谢">引用及感谢</h1>
-<section class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>Distributed/Parallel Reservoir
-Sampling:
-https://ballsandbins.wordpress.com/2014/04/13/distributedparallel-reservoir-sampling/<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>Jeffrey S Vitter. Random sampling
-with a reservoir. ACM Transactions on Mathematical Software (TOMS),
-11(1):37–57, 1985.<a href="#fnref2" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>蓄水池抽样算法（Reservoir Sampling）:
-https://www.jianshu.com/p/7a9ea6ece2af<a href="#fnref3"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>Reservoir sampling :
-https://en.wikipedia.org/wiki/Reservoir_sampling<a href="#fnref4"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>Distributed/Parallel Reservoir
-Sampling:
-https://ballsandbins.wordpress.com/2014/04/13/distributedparallel-reservoir-sampling/<a
-href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+ <!-- The same to [A low level definition](#definition) -->
+<h1 id="引用及感谢"><a href="#引用及感谢" class="headerlink" title="引用及感谢"></a>引用及感谢</h1><blockquote id="fn_1">
+<sup>1</sup>. Jeffrey S Vitter. Random sampling with a reservoir. ACM Transactions on Mathematical Software (TOMS),<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<p>11(1):37–57, 1985.</p>
+<blockquote id="fn_2">
+<sup>2</sup>. Reservoir sampling : <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Reservoir_sampling">https://en.wikipedia.org/wiki/Reservoir_sampling</a> <a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. Distributed/Parallel Reservoir Sampling: <a target="_blank" rel="noopener" href="https://ballsandbins.wordpress.com/2014/04/13/distributedparallel-reservoir-sampling/">https://ballsandbins.wordpress.com/2014/04/13/distributedparallel-reservoir-sampling/</a><a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. 蓄水池抽样算法（Reservoir Sampling）: <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7a9ea6ece2af">https://www.jianshu.com/p/7a9ea6ece2af</a><a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
 
   </div>
 </article>
@@ -357,10 +264,7 @@ href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFreservoir-sampling"><span class="toc-number">2.</span> <span class="toc-text">什么是Reservoir Sampling？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95reservoir-sampling%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">蓄水池抽样算法(Reservoir
-sampling)具体实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#algorithm-r"><span class="toc-number">3.1.</span> <span class="toc-text">Algorithm R：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8Ealgorithm-r%E6%AF%8F%E4%B8%AA%E6%A0%B7%E6%9C%AC%E8%A2%AB%E5%8F%96%E5%88%B0%E6%A6%82%E7%8E%87%E7%9B%B8%E5%90%8C"><span class="toc-number">3.1.1.</span> <span class="toc-text">证明Algorithm
-R每个样本被取到概率相同：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#distributedparallel-reservoir-sampling-%E5%B9%B6%E8%A1%8C%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%953"><span class="toc-number">3.2.</span> <span class="toc-text">Distributed&#x2F;Parallel
-Reservoir Sampling (并行蓄水池抽样算法)5</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81%E5%90%8E%E9%9D%A2%E7%94%A8%E5%88%B0%E6%97%B6%E4%BC%9A%E8%A1%A5%E5%85%85%E8%BF%9B%E5%8E%BB"><span class="toc-number">4.</span> <span class="toc-text">相关代码(后面用到时会补充进去)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E5%8F%8A%E6%84%9F%E8%B0%A2"><span class="toc-number">6.</span> <span class="toc-text">引用及感谢</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFReservoir-Sampling%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是Reservoir Sampling？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95-Reservoir-sampling-%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">蓄水池抽样算法(Reservoir sampling)具体实现：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Algorithm-R%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">Algorithm R：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%81%E6%98%8EAlgorithm-R%E6%AF%8F%E4%B8%AA%E6%A0%B7%E6%9C%AC%E8%A2%AB%E5%8F%96%E5%88%B0%E6%A6%82%E7%8E%87%E7%9B%B8%E5%90%8C%EF%BC%9A"><span class="toc-number">3.1.1.</span> <span class="toc-text">证明Algorithm R每个样本被取到概率相同：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Distributed-Parallel-Reservoir-Sampling-%E5%B9%B6%E8%A1%8C%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7%E7%AE%97%E6%B3%95-3"><span class="toc-number">3.2.</span> <span class="toc-text">Distributed&#x2F;Parallel Reservoir Sampling (并行蓄水池抽样算法)3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81-%E5%90%8E%E9%9D%A2%E7%94%A8%E5%88%B0%E6%97%B6%E4%BC%9A%E8%A1%A5%E5%85%85%E8%BF%9B%E5%8E%BB"><span class="toc-number">4.</span> <span class="toc-text">相关代码(后面用到时会补充进去)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">5.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E5%8F%8A%E6%84%9F%E8%B0%A2"><span class="toc-number">7.</span> <span class="toc-text">引用及感谢</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

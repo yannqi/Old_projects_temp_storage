@@ -6,21 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="What is Continual Learning?  A high level definition. A low level definition. Motivation &amp; Application scenarios The Challenge of Continual Learing Four Assumptions of Continual Lear">
+    <meta name="description" content="What is Continual Learning? A high level definition. A low level definition. Motivation &amp; Application scenarios The Challenge of Continual Learing Four Assumptions of Continual Learning Task inc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="_Survey Blog_A brief Introduction to Continue Learning &#x2F; Life long Learning">
 <meta property="og:url" content="https://yannqi.github.io/2022/07/24/CLsurvey/index.html">
 <meta property="og:site_name" content="Yang Qi&#39;s Blog">
-<meta property="og:description" content="What is Continual Learning?  A high level definition. A low level definition. Motivation &amp; Application scenarios The Challenge of Continual Learing Four Assumptions of Continual Lear">
+<meta property="og:description" content="What is Continual Learning? A high level definition. A low level definition. Motivation &amp; Application scenarios The Challenge of Continual Learing Four Assumptions of Continual Learning Task inc">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL1.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL2.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL3.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL5.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL6.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL11.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL7.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL10.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL8.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL9.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL19.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL20.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL21.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL22.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL23.png">
@@ -134,18 +138,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-continual-learning"><span class="toc-number">1.</span> <span class="toc-text">What is Continual Learning?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-high-level-definition."><span class="toc-number">1.1.</span> <span class="toc-text">A high level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-low-level-definition."><span class="toc-number">1.2.</span> <span class="toc-text">A low level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#motivation-application-scenarios"><span class="toc-number">1.3.</span> <span class="toc-text">Motivation &amp; Application
-scenarios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-challenge-of-continual-learing"><span class="toc-number">1.4.</span> <span class="toc-text">The Challenge of Continual
-Learing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#four-assumptions-of-continual-learning"><span class="toc-number">1.5.</span> <span class="toc-text">Four Assumptions of
-Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#task-incremental-learningthe-easiest-scenario"><span class="toc-number">1.5.1.</span> <span class="toc-text">Task incremental
-Learning(the easiest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class-incremental-learning"><span class="toc-number">1.5.2.</span> <span class="toc-text">Class incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#domain-incremental-learning"><span class="toc-number">1.5.3.</span> <span class="toc-text">Domain incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-incremental-learning-task-agnostic-learning-the-hardest-scenario"><span class="toc-number">1.5.4.</span> <span class="toc-text">Data
-incremental Learning &#x2F; Task-Agnostic Learning (the hardest
-scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-difference-between-continuous-learning-and-multi-task"><span class="toc-number">1.5.5.</span> <span class="toc-text">The
-difference between Continuous Learning and Multi-Task</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#some-key-definitions"><span class="toc-number">1.6.</span> <span class="toc-text">Some key definitions！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#transfer-and-interference"><span class="toc-number">1.6.1.</span> <span class="toc-text">Transfer and Interference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#possible-scenarios-in-cl"><span class="toc-number">1.6.2.</span> <span class="toc-text">Possible Scenarios in CL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-method-of-continual-learning"><span class="toc-number">1.7.</span> <span class="toc-text">The method of Continual
-Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#regularization-based-methods"><span class="toc-number">1.7.1.</span> <span class="toc-text">Regularization-Based Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parameter-isolation-methods"><span class="toc-number">1.7.2.</span> <span class="toc-text">Parameter Isolation Methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conlusion"><span class="toc-number">1.8.</span> <span class="toc-text">Conlusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#appendix"><span class="toc-number">1.9.</span> <span class="toc-text">Appendix:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mind-map"><span class="toc-number">1.9.1.</span> <span class="toc-text">Mind Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#some-representative-replay-methodskeep-updating"><span class="toc-number">1.9.2.</span> <span class="toc-text">Some
-representative Replay Methods(Keep updating):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gem-gradient-episodic-memory-for-continual-learning6"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">GEM:
-Gradient Episodic Memory for Continual Learning8</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-more-blogs"><span class="toc-number">2.</span> <span class="toc-text">For More Blogs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference-acknowledgements"><span class="toc-number">3.</span> <span class="toc-text">Reference &amp;
-Acknowledgements</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-Continual-Learning"><span class="toc-number">1.</span> <span class="toc-text">What is Continual Learning?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-high-level-definition"><span class="toc-number">1.1.</span> <span class="toc-text">A high level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-low-level-definition"><span class="toc-number">1.2.</span> <span class="toc-text">A low level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Motivation-amp-Application-scenarios"><span class="toc-number">1.3.</span> <span class="toc-text">Motivation &amp; Application scenarios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Challenge-of-Continual-Learing"><span class="toc-number">1.4.</span> <span class="toc-text">The Challenge of Continual Learing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Four-Assumptions-of-Continual-Learning"><span class="toc-number">1.5.</span> <span class="toc-text">Four Assumptions of Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-incremental-Learning-the-easiest-scenario"><span class="toc-number">1.5.1.</span> <span class="toc-text">Task incremental Learning(the easiest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-incremental-Learning"><span class="toc-number">1.5.2.</span> <span class="toc-text">Class incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-incremental-Learning"><span class="toc-number">1.5.3.</span> <span class="toc-text">Domain incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-incremental-Learning-Task-Agnostic-Learning-the-hardest-scenario"><span class="toc-number">1.5.4.</span> <span class="toc-text">Data incremental Learning &#x2F; Task-Agnostic Learning (the hardest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-difference-between-Continuous-Learning-and-Multi-Task"><span class="toc-number">1.5.5.</span> <span class="toc-text">The difference between Continuous Learning and Multi-Task</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-key-definitions%EF%BC%81"><span class="toc-number">1.6.</span> <span class="toc-text">Some key definitions！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transfer-and-Interference"><span class="toc-number">1.6.1.</span> <span class="toc-text">Transfer and Interference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Possible-Scenarios-in-CL"><span class="toc-number">1.6.2.</span> <span class="toc-text">Possible Scenarios in CL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-method-of-Continual-Learning"><span class="toc-number">1.7.</span> <span class="toc-text">The method of Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Replay-Methods"><span class="toc-number">1.7.1.</span> <span class="toc-text">Replay Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization-Based-Methods"><span class="toc-number">1.7.2.</span> <span class="toc-text">Regularization-Based Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parameter-Isolation-Methods"><span class="toc-number">1.7.3.</span> <span class="toc-text">Parameter Isolation Methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conlusion"><span class="toc-number">1.8.</span> <span class="toc-text">Conlusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Appendix"><span class="toc-number">1.9.</span> <span class="toc-text">Appendix:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mind-Map"><span class="toc-number">1.9.1.</span> <span class="toc-text">Mind Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Some-representative-Replay-Methods-Keep-updating"><span class="toc-number">1.9.2.</span> <span class="toc-text">Some representative Replay Methods(Keep updating):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#iCaRL-incremental-classifier-and-representation-learning"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">iCaRL (incremental classifier and representation learning)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GEM-Gradient-Episodic-Memory-for-Continual-Learning6"><span class="toc-number">1.9.2.2.</span> <span class="toc-text">GEM: Gradient Episodic Memory for Continual Learning6</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#For-More-Blogs"><span class="toc-number">2.</span> <span class="toc-text">For More Blogs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference-amp-Acknowledgements"><span class="toc-number">3.</span> <span class="toc-text">Reference &amp; Acknowledgements</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -196,563 +189,235 @@ Acknowledgements</span></a></li></ol>
   <div class="content" itemprop="articleBody">
     <!-- toc -->
 <ul>
-<li><a href="#what-is-continual-learning-">What is Continual
-Learning?</a>
-<ul>
+<li><a href="#what-is-continual-learning-">What is Continual Learning?</a><ul>
 <li><a href="#a-high-level-definition">A high level definition.</a></li>
 <li><a href="#a-low-level-definition">A low level definition.</a></li>
-<li><a href="#motivation---application-scenarios">Motivation &amp;
-Application scenarios</a></li>
-<li><a href="#the-challenge-of-continual-learing">The Challenge of
-Continual Learing</a></li>
-<li><a href="#four-assumptions-of-continual-learning">Four Assumptions
-of Continual Learning</a>
-<ul>
-<li><a href="#task-incremental-learning-the-easiest-scenario-">Task
-incremental Learning(the easiest scenario)</a></li>
-<li><a href="#class-incremental-learning">Class incremental
-Learning</a></li>
-<li><a href="#domain-incremental-learning">Domain incremental
-Learning</a></li>
-<li><a
-href="#data-incremental-learning---task-agnostic-learning--the-hardest-scenario-">Data
-incremental Learning / Task-Agnostic Learning (the hardest
-scenario)</a></li>
-<li><a
-href="#the-difference-between-continuous-learning-and-multi-task">The
-difference between Continuous Learning and Multi-Task</a></li>
-</ul></li>
-<li><a href="#some-key-definitions-">Some key definitions！</a>
-<ul>
-<li><a href="#transfer-and-interference">Transfer and
-Interference</a></li>
-<li><a href="#possible-scenarios-in-cl">Possible Scenarios in
-CL</a></li>
-</ul></li>
-<li><a href="#the-method-of-continual-learning">The method of Continual
-Learning</a>
-<ul>
+<li><a href="#motivation---application-scenarios">Motivation &amp; Application scenarios</a></li>
+<li><a href="#the-challenge-of-continual-learing">The Challenge of Continual Learing</a></li>
+<li><a href="#four-assumptions-of-continual-learning">Four Assumptions of Continual Learning</a><ul>
+<li><a href="#task-incremental-learning-the-easiest-scenario-">Task incremental Learning(the easiest scenario)</a></li>
+<li><a href="#class-incremental-learning">Class incremental Learning</a></li>
+<li><a href="#domain-incremental-learning">Domain incremental Learning</a></li>
+<li><a href="#data-incremental-learning---task-agnostic-learning--the-hardest-scenario-">Data incremental Learning / Task-Agnostic Learning (the hardest scenario)</a></li>
+<li><a href="#the-difference-between-continuous-learning-and-multi-task">The difference between Continuous Learning and Multi-Task</a></li>
+</ul>
+</li>
+<li><a href="#some-key-definitions-">Some key definitions！</a><ul>
+<li><a href="#transfer-and-interference">Transfer and Interference</a></li>
+<li><a href="#possible-scenarios-in-cl">Possible Scenarios in CL</a></li>
+</ul>
+</li>
+<li><a href="#the-method-of-continual-learning">The method of Continual Learning</a><ul>
 <li><a href="#replay-methods">Replay Methods</a></li>
-<li><a href="#regularization-based-methods">Regularization-Based
-Methods</a></li>
-<li><a href="#parameter-isolation-methods">Parameter Isolation
-Methods</a></li>
-</ul></li>
+<li><a href="#regularization-based-methods">Regularization-Based Methods</a></li>
+<li><a href="#parameter-isolation-methods">Parameter Isolation Methods</a></li>
+</ul>
+</li>
 <li><a href="#conlusion">Conlusion</a></li>
-<li><a href="#appendix-">Appendix:</a>
-<ul>
+<li><a href="#appendix-">Appendix:</a><ul>
 <li><a href="#mind-map">Mind Map</a></li>
-<li><dl>
-<dt><a href="#some-representative-replay-methods-keep-updating--">Some
-representative Replay Methods(Keep updating):</a></dt>
-<dd>
-<a
-href="#icarl--incremental-classifier-and-representation-learning-">iCaRL
-(incremental classifier and representation learning)</a>
-</dd>
-<dd>
-<a href="#gem--gradient-episodic-memory-for-continual-learning--6-">GEM:
-Gradient Episodic Memory for Continual Learning<a href="#fn1"
-class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></a>
-</dd>
-</dl></li>
-</ul></li>
-</ul></li>
+<li><a href="#some-representative-replay-methods-keep-updating--">Some representative Replay Methods(Keep updating):</a><br>~ <a href="#icarl--incremental-classifier-and-representation-learning-">iCaRL (incremental classifier and representation learning)</a><br>~ <a href="#gem--gradient-episodic-memory-for-continual-learning--6-">GEM: Gradient Episodic Memory for Continual Learning<sup><a href="#fn_6" id="reffn_6">6</a></sup></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#for-more-blogs">For More Blogs</a></li>
-<li><a href="#reference---acknowledgements">Reference &amp;
-Acknowledgements</a></li>
+<li><a href="#reference---acknowledgements">Reference &amp; Acknowledgements</a></li>
 </ul>
 <!-- tocstop -->
-<h1 id="what-is-continual-learning">What is Continual Learning?</h1>
-<h2 id="a-high-level-definition.">A high level definition.</h2>
-<p>“<em>Continual Learning is the constant development of increasingly
-complex behaviors; the process of building more complicated skills on
-top of those already developed.</em>” --- <em>Ring(1997).CHILD: A First
-Step Towards Continual Learning</em></p>
-<p>Continual Learning is also referred to as lifelong Learning,
-sequential learing or incremental Learning. They have the same
-define.</p>
-<p>“<em>Studies the problem of Learning froman infinite stream of data,
-with the goal of gradually extending acquired knowledge and using it for
-future Learning.</em>” --- <em>Z.Chen. Lifelong machine
-Learning</em></p>
-<figure>
-<img src="CL1.png"
-alt="Adaptive continuous Learning in a dynamic environment to learn tasks sequentially." />
-<figcaption aria-hidden="true">Adaptive continuous Learning in a dynamic
-environment to learn tasks sequentially.</figcaption>
-</figure>
-<p>In others words, Continual Learning tries to make machine like human
-to adaptive continuou Learning in a dynamic environment to learn tasks
-sequentially (from birth to death).</p>
-<h2 id="a-low-level-definition.">A low level definition.</h2>
-<p>Continual Learning(CL) is an algorithm whose goal is to make machine
-Learning models train on non-stationary data (different from I.I.D.
-data.) from sequential tasks.</p>
-<p><a id="definition"></a> <!-- 上述用于标签索引 --></p>
-<p>Take an example<a href="#fn2" class="footnote-ref" id="fnref2"
-role="doc-noteref"><sup>2</sup></a>, we define a sequence of tasks <span
-class="math inline">\(D = \{D_1, \ldots, D_T\}\)</span>, where the
-<em>t-th</em> task <span class="math inline">\(D_t=
-\{(\mathbf{x}_i^t,y_i^t)\}_{i=1}^{n_t}\)</span> contains tuples of the
-input sample <span class="math inline">\(\mathbf{x}_i^t \in
-\mathcal{X}\)</span> , and it's label <span class="math inline">\(y_i^t
-\in \mathcal{Y}\)</span>. The goal of the CL model is to train a single
-model <span class="math inline">\(f_\theta : \mathcal{X} \rightarrow
-\mathcal{Y}\)</span> parameterized by <span
-class="math inline">\(\theta\)</span>, and it can predicts the label
-<span class="math inline">\(y = f_\theta (\mathbf{x}) \in
-\mathcal{Y}\)</span>, where <span
-class="math inline">\(\mathbf{x}\)</span> is an unseen test sample from
-arbitrary tsaks. And data from the previous tasks may not be seen
-anymore when training future tasks.</p>
-<h2 id="motivation-application-scenarios">Motivation &amp; Application
-scenarios</h2>
-<p>As we all know, Alpha-Go kills everyone in the Go world, however when
-it face to Chess, it is powerless. Similarly, YOLO(A
-<strong>model</strong> <em>you only look once</em>) can detect the dog
-easily, but it can only detect the specific object. Therefore, people
-look forward to a model that can resolve the aforementioned problems.
-This calls for systems that adapt Continually and keep on Learning over
-time.</p>
-<p>And talk about the application scenarious, Continual Learning can be
-used in many areas. Take some simple examples, a robot need to acquire
-new skills in different environment to complish new tasks, a
-self-driving car need to adapt to different environments (from a country
-road to a highway to a city), and the conversational agents should adapt
-to different users, situations, tasks.</p>
-<figure>
-<img src="CL2.png" alt="Application scenarios" />
-<figcaption aria-hidden="true">Application scenarios</figcaption>
-</figure>
-<h2 id="the-challenge-of-continual-learing">The Challenge of Continual
-Learing</h2>
-<p>Nowadays, methods of realizing Continual Learning almost use Neural
-Networks(CNN, TransFormer and so on). And due to the limitations of the
-Neural Networks, the Continual Learning faces two major challenges,
-<strong>Catastrophic Forgetting</strong> and <strong>Balance between
-Learning and Forgeting(Stability vs Plasticity)</strong>.</p>
+<h1 id="What-is-Continual-Learning"><a href="#What-is-Continual-Learning" class="headerlink" title="What is Continual Learning?"></a>What is Continual Learning?</h1><h2 id="A-high-level-definition"><a href="#A-high-level-definition" class="headerlink" title="A high level definition."></a>A high level definition.</h2><p>“<em>Continual Learning is the constant development of  increasingly complex behaviors; the process of building more complicated skills on top of those already developed.</em>”              —- <em>Ring(1997).CHILD: A First Step Towards Continual Learning</em></p>
+<p>Continual Learning is also referred to as lifelong Learning, sequential learing or incremental Learning. They have the same define.</p>
+<p>“<em>Studies the problem of Learning froman infinite stream of data, with the goal of gradually extending acquired knowledge and using it for future Learning.</em>”  —- <em>Z.Chen. Lifelong machine Learning</em></p>
+<p><img src="CL1.png" alt="Adaptive continuous Learning in a dynamic environment to learn tasks sequentially."></p>
+<p>In others words, Continual Learning tries to make machine like human to adaptive continuou Learning in a dynamic environment to learn tasks sequentially (from birth to death).</p>
+<h2 id="A-low-level-definition"><a href="#A-low-level-definition" class="headerlink" title="A low level definition."></a>A low level definition.</h2><p>Continual Learning(CL) is an algorithm whose goal is to make machine Learning models train on non-stationary data  (different from I.I.D. data.) from sequential tasks.</p>
+<p><a id="definition"></a><br><!-- 上述用于标签索引 --></p>
+<p>Take an example<sup><a href="#fn_2" id="reffn_2">2</a></sup>, we define a sequence of tasks $D = \{D_1, \ldots, D_T\}$, where the <em>t-th</em> task $D_t= \{(\mathbf{x}_i^t,y_i^t)\}_{i=1}^{n_t}$ contains tuples of the input sample $\mathbf{x}_i^t \in \mathcal{X}$ , and it’s label $y_i^t \in \mathcal{Y}$. The goal of the CL model is to train a single model $f_\theta : \mathcal{X} \rightarrow \mathcal{Y}$ parameterized by $\theta$, and it can predicts the label $y = f_\theta (\mathbf{x}) \in \mathcal{Y}$, where $\mathbf{x}$ is an unseen test sample from arbitrary tsaks. And data from the previous tasks may not be seen anymore when training future tasks.</p>
+<h2 id="Motivation-amp-Application-scenarios"><a href="#Motivation-amp-Application-scenarios" class="headerlink" title="Motivation &amp; Application scenarios"></a>Motivation &amp; Application scenarios</h2><p>As we all know, Alpha-Go kills everyone in the Go world, however when it face to Chess, it is powerless.  Similarly, YOLO(A <strong>model</strong> <em>you only look once</em>) can detect the dog easily, but it can only detect the specific object.  Therefore, people look forward to a model that can resolve the aforementioned problems.  This calls for systems that adapt Continually and keep on Learning over time.</p>
+<p>And talk about the application scenarious, Continual Learning can be used in many areas. Take some simple examples, a robot need to acquire new skills in different environment to complish new tasks, a self-driving car need to adapt to different environments (from a country road to a highway to a city), and the conversational agents should adapt to different users, situations, tasks. </p>
+<p><img src="CL2.png" alt="Application scenarios"></p>
+<h2 id="The-Challenge-of-Continual-Learing"><a href="#The-Challenge-of-Continual-Learing" class="headerlink" title="The Challenge of Continual Learing"></a>The Challenge of Continual Learing</h2><p>Nowadays, methods of realizing Continual Learning almost use Neural Networks(CNN, TransFormer and so on). And due to the limitations of the Neural Networks, the Continual Learning faces two major challenges, <strong>Catastrophic Forgetting</strong> and <strong>Balance between Learning and Forgeting(Stability vs Plasticity)</strong>.</p>
 <ul>
-<li><p><strong>Catastrophic Forgetting</strong>. When the data is
-updated incrementally, the model will face catastrophic interference or
-forgetting, which leads to the model forgetting how to solve the old
-task after Learning the new task.</p>
-<p>For example: A vision model, which can classify images into two
-categories. First, we train the vision model by
-<code>Cat vs Dog Datasets</code>, and then we get a perfect Acc(maybe
-99.98%?) on current datasets. Second, we put the pre-trained model to
-another datset(e.g. <code>Car vs Ship Datasets</code>) to train, and can
-get a nice performance at the current datsets too. However, when we go
-back to the <code>Cat vs Dog Datasets</code>, we will find that the
-model forgets the previous data and can not divide them accurately. <img
-src="CL3.png" alt="Application scenarios" /></p></li>
-<li><p><strong>Stability vs Plasticity</strong>. For people, the faster
-you learn, the faster you forget. The same is true for machines. How to
-balance the relationship between them is also a challenge.</p>
-<ol type="1">
-<li>Stability &lt;=&gt; ability to retain the learned skills on the old
-tasks</li>
-<li>Plasticity &lt;=&gt; ability to adapt to a new task <img
-src="CL5.png" alt="Application scenarios" /></li>
-</ol></li>
+<li><p><strong>Catastrophic Forgetting</strong>. When the data is updated incrementally, the model will face catastrophic interference or forgetting, which leads to the model forgetting how to solve the old task after Learning the new task.</p>
+<p> For example: A vision model, which can classify images into two categories. First, we train the vision model by <code>Cat vs Dog Datasets</code>, and then we get a perfect Acc(maybe 99.98%?) on current datasets. Second, we put the pre-trained model to another datset(e.g. <code>Car vs Ship Datasets</code>) to train, and can get a nice performance at the current datsets too. However, when we go back to the <code>Cat vs Dog Datasets</code>, we will find that the model forgets the previous data and can not divide them accurately.<br><img src="CL3.png" alt="Application scenarios"></p>
+</li>
+<li><p><strong>Stability vs Plasticity</strong>.<br>For people, the faster you learn, the faster you forget. The same is true for machines. How to balance the relationship between them is also a challenge.</p>
+<ol>
+<li>Stability &lt;=&gt; ability to retain the learned skills on the old tasks</li>
+<li>Plasticity &lt;=&gt; ability to adapt to a new task<br><img src="CL5.png" alt="Application scenarios"></li>
+</ol>
+</li>
 </ul>
-<p>Albeit a challenging problem, progress in Continual Learning has led
-to real-world applications starting to emerge.</p>
-<h2 id="four-assumptions-of-continual-learning">Four Assumptions of
-Continual Learning</h2>
-<p>Due to the general difficulty and variety of challenges in Continual
-Learning, many methods relax the general setting to an easier task
-incremental one.</p>
-<p>Before understand the assumptions of the Continual Learing, we should
-know some pre-settings. The same to <a href="#definition">A low level
-definition</a></p>
+<p>Albeit a challenging problem, progress in Continual Learning has led to real-world applications starting to emerge.</p>
+<h2 id="Four-Assumptions-of-Continual-Learning"><a href="#Four-Assumptions-of-Continual-Learning" class="headerlink" title="Four Assumptions of Continual Learning"></a>Four Assumptions of Continual Learning</h2><p>Due to the general difficulty and variety of challenges in Continual Learning, many methods relax the general setting to an easier task incremental one.</p>
+<p>Before understand the assumptions of the Continual Learing, we should know some pre-settings. The same to <a href="#definition">A low level definition</a></p>
 <p>X - input vector</p>
 <p>Y - class label</p>
-<p>T - task.</p>
+<p>T - task. </p>
 <blockquote>
-<p>The concept '<em>task</em>' refers to an isolated training phase with
-a new batch of data, belonging to a new group of classes, a new domain,
-or a different output space.</p>
+<p>The concept ‘<em>task</em>‘ refers to an isolated training phase with a new batch of data, belonging to a new group of classes, a new domain, or a different output space.</p>
 </blockquote>
-<p><span class="math inline">\((\mathcal{X}^t,\mathcal{Y}^t)\)</span> -
-Dataset for task t.</p>
-<p><span class="math inline">\(\{\mathcal{Y}^t\}\)</span> - Class
-labels. e.g.:Dog Cat Bird ...</p>
-<p><span class="math inline">\(P(\mathcal{X}^t)\)</span> - input
-distributions. For different task, <span
-class="math inline">\(P(\mathcal{X}^t) \neq
-P(\mathcal{X}^{t+1})\)</span></p>
-<p><span class="math inline">\(f_t(\mathcal{X^t};\theta)\)</span> -The
-predicted label of <span
-class="math inline">\(\mathcal{Y^t}\)</span>,model is parameterized by
-<span class="math inline">\(\theta\)</span></p>
-<p>The four assumptions of Continual Learning : 1. <strong>Task
-incremental Learning.</strong> 2. <strong>Class incremental
-Learning.</strong> 3. <strong>Domain incremental Learning.</strong> 4.
-<strong>Data incremental Learning / Task-Agnostic Learning.</strong></p>
+<p>$(\mathcal{X}^t,\mathcal{Y}^t)$ - Dataset for task t.</p>
+<p>$\{\mathcal{Y}^t\}$ - Class labels. e.g.:Dog Cat Bird …</p>
+<p>$P(\mathcal{X}^t)$ - input distributions. For different task, $P(\mathcal{X}^t) \neq P(\mathcal{X}^{t+1})$</p>
+<p>$f_t(\mathcal{X^t};\theta)$ -The predicted label of $\mathcal{Y^t}$,model is parameterized by $\theta$</p>
+<p>The four assumptions of Continual Learning : </p>
+<ol>
+<li><strong>Task incremental Learning.</strong> </li>
+<li><strong>Class incremental Learning.</strong> </li>
+<li><strong>Domain incremental Learning.</strong> </li>
+<li><strong>Data incremental Learning / Task-Agnostic Learning.</strong></li>
+</ol>
 <p>Task ID observed at training:</p>
 <ul>
-<li>Task observed at test: Task incremental Learning</li>
-<li>Task not observed at test : Class incremental Learning and Domain
-incremental Learning</li>
+<li>Task observed at test:  Task incremental Learning</li>
+<li>Task not observed at test : Class incremental Learning and Domain incremental Learning</li>
 </ul>
 <p>Task ID not observed at training:</p>
 <ul>
 <li>Data incremental Learning / Task-Agnostic Learning</li>
 </ul>
 <p>Detail description of four setting:</p>
-<h3 id="task-incremental-learningthe-easiest-scenario">Task incremental
-Learning(the easiest scenario)</h3>
-<p>Task incremental learning considers a sequence of tasks, receiving
-trainig data of just one task at a time to perform traing until
-convergence. During this setting, models are always informed about which
-task needs to be performed (both at train and test time). However, data
-is no longer available for old tasks, impeding evaluation of statistical
-risk for the new parameter values.</p>
-<p>Express it with formulas:</p>
+<h3 id="Task-incremental-Learning-the-easiest-scenario"><a href="#Task-incremental-Learning-the-easiest-scenario" class="headerlink" title="Task incremental Learning(the easiest scenario)"></a>Task incremental Learning(the easiest scenario)</h3><p>Task incremental learning considers a sequence of tasks, receiving trainig data of just one task at a time to perform traing until convergence. During this setting, models are always informed about which task needs to be performed (both at train and test time). However, data is no longer available for old tasks, impeding evaluation of statistical risk for the new parameter values.</p>
+<p>Express it with formulas: </p>
 <blockquote>
-<p>Data <span
-class="math inline">\((\mathcal{X}^t,\mathcal{Y}^t)\)</span> is a
-training-data of task t, the current task is <span
-class="math inline">\(\mathcal{T}\)</span>.</p>
+<p>Data $(\mathcal{X}^t,\mathcal{Y}^t)$ is a training-data of task t, the current task is $\mathcal{T}$.</p>
+<p>The goal is to control <strong>the statistical risk</strong> of all seen tasks given limited or no access to data from previous tasks $t &lt; \mathcal{T}$. In others words, the research focals on optimizing the below formula parameterized by $\theta$:</p>
+<script type="math/tex; mode=display">\sum\limits_{t=1}^{\mathcal{T}}\mathbb{E}_{(\mathcal{X}^t,\mathcal{Y}^t)}[\mathscr{L}(f_t(\mathcal{X^t};\theta),\mathcal{Y^t})],</script><p>For the current task $\mathcal{T}$, <strong>the statistical risk</strong> can be approximated by <strong>the empirical risk</strong>:</p>
+<script type="math/tex; mode=display">\frac{1}{N_\mathcal{T}}\sum\limits_{t=1}^{N_\mathcal{T}}\mathscr{L}(f_t(x_i^{\mathcal{T}};\theta),y_i^{\mathcal{T}})],</script><p>where $N_{\mathcal{T}}$ is the number data of task $\mathcal{T}$.</p>
 </blockquote>
-<blockquote>
-<p>The goal is to control <strong>the statistical risk</strong> of all
-seen tasks given limited or no access to data from previous tasks <span
-class="math inline">\(t &lt; \mathcal{T}\)</span>. In others words, the
-research focals on optimizing the below formula parameterized by <span
-class="math inline">\(\theta\)</span>: <span
-class="math display">\[\sum\limits_{t=1}^{\mathcal{T}}\mathbb{E}_{(\mathcal{X}^t,\mathcal{Y}^t)}[\mathscr{L}(f_t(\mathcal{X^t};\theta),\mathcal{Y^t})],\]</span>
-For the current task <span class="math inline">\(\mathcal{T}\)</span>,
-<strong>the statistical risk</strong> can be approximated by <strong>the
-empirical risk</strong>: <span
-class="math display">\[\frac{1}{N_\mathcal{T}}\sum\limits_{t=1}^{N_\mathcal{T}}\mathscr{L}(f_t(x_i^{\mathcal{T}};\theta),y_i^{\mathcal{T}})],
-\]</span> where <span class="math inline">\(N_{\mathcal{T}}\)</span> is
-the number data of task <span
-class="math inline">\(\mathcal{T}\)</span>.</p>
-</blockquote>
-<figure>
-<img src="CL6.png" alt="Task incremental Learning" />
-<figcaption aria-hidden="true">Task incremental Learning</figcaption>
-</figure>
-<p>All in all, this setting assumptions are: <span
-class="math inline">\(P(\mathcal{X}^t) \neq
-P(\mathcal{X}^{t+1})\)</span> and <span
-class="math inline">\({\{\mathcal{Y}\}^t\neq
-\{\mathcal{Y}^{t+1}\}}\)</span>(different labels when in different
-task), <span class="math inline">\(P(\mathcal{Y}^t) \neq
-P(\mathcal{Y}^{t+1})\)</span>, but you know which task it is when in
-test.(each task has it's specific <code>task-label t</code>).</p>
-<h3 id="class-incremental-learning">Class incremental Learning</h3>
-<p><em>'An algorithm learns continuously from a sequential data stream
-in which new classes occur. At any time, the learner is able to perform
-multi-class classification for all classes observed so far.<a
-href="#fn3" class="footnote-ref" id="fnref3"
-role="doc-noteref"><sup>3</sup></a>'</em></p>
-<figure>
-<img src="CL11.png" alt="class-incremental Learning" />
-<figcaption aria-hidden="true">class-incremental Learning</figcaption>
-</figure>
-<p>Models must be able not only to solve each task seen so far, but also
-to infer which task they are presented with.(You don't know which task
-you are facing) The new class labels may be added into the model in new
-task.</p>
-<figure>
-<img src="CL7.png" alt="Class incremental Learning" />
-<figcaption aria-hidden="true">Class incremental Learning</figcaption>
-</figure>
-<p>The setting assumptions are: <span
-class="math inline">\(P(\mathcal{X}^t) \neq
-P(\mathcal{X}^{t+1})\)</span> and <span
-class="math inline">\({\{\mathcal{Y}\}^t\subset
-\{\mathcal{Y}^{t+1}\}}\)</span>(Class incremental), <span
-class="math inline">\(P(\mathcal{Y}^t) \neq
-P(\mathcal{Y}^{t+1})\)</span>, and you don't know which task it is when
-in test.</p>
-<h3 id="domain-incremental-learning">Domain incremental Learning</h3>
-<p>It defines a more general continual learning setting for any data
-stream without notion of task, class or domain.</p>
-<p>Models only need to solve the task at hand; they are not required to
-infer which task it is. In other words, task concept is not specific
-now, but it also have the task.</p>
-<p>The setting assumptions are: <span
-class="math inline">\({\{\mathcal{Y}\}^t=
-\{\mathcal{Y}^{t+1}\}}\)</span>, <span
-class="math inline">\(P(\mathcal{Y}^t) =
-P(\mathcal{Y}^{t+1})\)</span>.</p>
-<h3
-id="data-incremental-learning-task-agnostic-learning-the-hardest-scenario">Data
-incremental Learning / Task-Agnostic Learning (the hardest
-scenario)</h3>
-<p>Task identity is not available even at training time! Task-Agnostic
-Learning has no task concept at all, and it is the ideal condition of
-Continual Learning. <img src="CL10.png"
-alt="Task-Agnostic Learning" /></p>
-<p>For a clearer understanding <strong>Task incremental
-Learning</strong>,<strong>Class incremental Learning</strong> and
-<strong>Domain incremental Learning</strong>, you can see the following
-images<a href="#fn4" class="footnote-ref" id="fnref4"
-role="doc-noteref"><sup>4</sup></a>:</p>
+<p><img src="CL6.png" alt="Task incremental Learning"></p>
+<p>All in all, this setting assumptions are: $P(\mathcal{X}^t) \neq P(\mathcal{X}^{t+1})$ and ${\{\mathcal{Y}\}^t\neq \{\mathcal{Y}^{t+1}\}}$(different labels when in different task), $P(\mathcal{Y}^t) \neq P(\mathcal{Y}^{t+1})$, but you know which task it is when in test.(each task has it’s specific <code>task-label t</code>).</p>
+<h3 id="Class-incremental-Learning"><a href="#Class-incremental-Learning" class="headerlink" title="Class incremental Learning"></a>Class incremental Learning</h3><p><em>‘An algorithm learns continuously from a sequential data stream in which new classes occur. At any time, the learner is able to perform multi-class classification for all classes observed so far.<sup><a href="#fn_5" id="reffn_5">5</a></sup>‘</em></p>
+<p><img src="CL11.png" alt="class-incremental Learning"></p>
+<p>Models must be able not only to solve each task seen so far, but also to infer which task they are presented with.(You don’t know which task you are facing)  The new class labels may be added into the model in new task.</p>
+<p><img src="CL7.png" alt="Class incremental Learning"></p>
+<p>The setting assumptions are: $P(\mathcal{X}^t) \neq P(\mathcal{X}^{t+1})$ and ${\{\mathcal{Y}\}^t\subset \{\mathcal{Y}^{t+1}\}}$(Class incremental), $P(\mathcal{Y}^t) \neq P(\mathcal{Y}^{t+1})$, and you don’t know which task it is when in test.</p>
+<h3 id="Domain-incremental-Learning"><a href="#Domain-incremental-Learning" class="headerlink" title="Domain incremental Learning"></a>Domain incremental Learning</h3><p>It defines a more general continual learning setting for any data stream without notion of task, class or domain.</p>
+<p>Models only need to solve the task at hand; they are not required to infer which task it is. In other words, task concept is not specific now, but it also have the task. </p>
+<p>The setting assumptions are:   ${\{\mathcal{Y}\}^t= \{\mathcal{Y}^{t+1}\}}$, $P(\mathcal{Y}^t) = P(\mathcal{Y}^{t+1})$. </p>
+<h3 id="Data-incremental-Learning-Task-Agnostic-Learning-the-hardest-scenario"><a href="#Data-incremental-Learning-Task-Agnostic-Learning-the-hardest-scenario" class="headerlink" title="Data incremental Learning / Task-Agnostic Learning (the hardest scenario)"></a>Data incremental Learning / Task-Agnostic Learning (the hardest scenario)</h3><p>Task identity is not available even at training time! Task-Agnostic Learning has no task concept at all, and it is the ideal condition of Continual Learning.<br><img src="CL10.png" alt="Task-Agnostic Learning"></p>
+<p>For a clearer understanding <strong>Task incremental Learning</strong>,<strong>Class incremental Learning</strong> and <strong>Domain incremental Learning</strong>, you can see the following images<sup><a href="#fn_4" id="reffn_4">4</a></sup>:</p>
 <ul>
-<li><p>Split Mnist Task: Split the number into different task. <img
-src="CL8.png" alt="Split Mnist Task" /></p></li>
-<li><p>Permuted Mnist Task: Permute each image in MNIST after
-vectorization. Actually use a group of random indexes to disrupt the
-position of each element in the vector(image). Different random indexes
-will generate different tasks after being disrupted. <img src="CL9.png"
-alt="Split Mnist Task" /></p></li>
+<li><p>Split Mnist Task: Split the number into different task.<br><img src="CL8.png" alt="Split Mnist Task"></p>
+</li>
+<li><p>Permuted Mnist Task: Permute each image in MNIST after vectorization.  Actually use a group of random indexes to disrupt the position of each element in the vector(image). Different random indexes will generate different tasks after being disrupted.<br><img src="CL9.png" alt="Split Mnist Task"></p>
+</li>
 </ul>
-<h3 id="the-difference-between-continuous-learning-and-multi-task">The
-difference between Continuous Learning and Multi-Task</h3>
-<p><strong>Multi-Task Gradient Dynamics: Tug-of-War(拔河拉锯)</strong>
-<img src="CL19.png" alt="Multi Task" /></p>
-<p>However, the tasks are not available simultaneously in CL! Need to
-use some form of memory, or to modify the gradients, to still take into
-account what solutions are good for previous tasks</p>
-<h2 id="some-key-definitions">Some key definitions！</h2>
-<h3 id="transfer-and-interference">Transfer and Interference</h3>
-<p>Note: We need to maximize Transfer and minimize Interference. <img
-src="CL20.png" alt="Transfer and interference" /></p>
-<h3 id="possible-scenarios-in-cl">Possible Scenarios in CL</h3>
-<figure>
-<img src="CL21.png" alt="Possible Scenarios" />
-<figcaption aria-hidden="true">Possible Scenarios</figcaption>
-</figure>
-<h2 id="the-method-of-continual-learning">The method of Continual
-Learning</h2>
-<p>Refer to Lange, M. D., et al.<a href="#fn5" class="footnote-ref"
-id="fnref5" role="doc-noteref"><sup>5</sup></a>, I try to draw a mind
-mapping for better understand the current mainstream methods of
-Continual Learning.</p>
-<p>The define of each method: ### Replay Methods As you see,
-<strong>replay</strong> is the key. To realize <strong>replay</strong>,
-this line of work should store samples in raw format or generate
-pseudo-samples with a generative model (e.g. GAN/diffusion model)
-because of privacy policy. Then, these previous task samples are
-replayed while learning a new task to alleviate forgetting. According to
-different ways of use, replay methods can be divided into the following
-three categories:</p>
-<p><strong>Rehearsal</strong> (Easy to implement, but poor performence
-)</p>
-<p>It is the esaiest way to understand. Just combine a limited subset of
-stored samples(old tasks) into new task, and retrain the model.</p>
+<h3 id="The-difference-between-Continuous-Learning-and-Multi-Task"><a href="#The-difference-between-Continuous-Learning-and-Multi-Task" class="headerlink" title="The difference between Continuous Learning and Multi-Task"></a>The difference between Continuous Learning and Multi-Task</h3><p><strong>Multi-Task Gradient Dynamics: Tug-of-War(拔河拉锯)</strong><br><img src="CL19.png" alt="Multi Task"></p>
+<p>However, the tasks are not available simultaneously in CL!<br>Need to use some form of memory, or to modify the gradients, to still take into account what solutions are good for previous tasks</p>
+<h2 id="Some-key-definitions！"><a href="#Some-key-definitions！" class="headerlink" title="Some key definitions！"></a>Some key definitions！</h2><h3 id="Transfer-and-Interference"><a href="#Transfer-and-Interference" class="headerlink" title="Transfer and Interference"></a>Transfer and Interference</h3><p>Note: We need to maximize Transfer and minimize Interference.<br><img src="CL20.png" alt="Transfer and interference"></p>
+<h3 id="Possible-Scenarios-in-CL"><a href="#Possible-Scenarios-in-CL" class="headerlink" title="Possible Scenarios in CL"></a>Possible Scenarios in CL</h3><p><img src="CL21.png" alt="Possible Scenarios"></p>
+<h2 id="The-method-of-Continual-Learning"><a href="#The-method-of-Continual-Learning" class="headerlink" title="The method of Continual Learning"></a>The method of Continual Learning</h2><p>Refer to Lange, M. D., et al.<sup><a href="#fn_3" id="reffn_3">3</a></sup>, I try to draw a mind mapping for better understand the current mainstream methods of Continual Learning. </p>
+<p>The define of each method:</p>
+<h3 id="Replay-Methods"><a href="#Replay-Methods" class="headerlink" title="Replay Methods"></a>Replay Methods</h3><p>As you see, <strong>replay</strong> is the key. To realize <strong>replay</strong>, this line of work should store samples in raw format or generate pseudo-samples with a generative model (e.g. GAN/diffusion model) because of privacy policy. Then, these previous task samples are replayed while learning a new task to alleviate forgetting. According to different ways of use, replay methods can be divided into the following three categories:</p>
+<p><strong>Rehearsal</strong> (Easy to implement, but poor performence )</p>
+<p>It is the esaiest way to understand. Just combine a limited subset of stored samples(old tasks) into new task, and retrain the model.</p>
 <ul>
-<li>Advantage:
-<ol type="1">
+<li><p>Advantage: </p>
+<ol>
 <li>Easy to implement</li>
-</ol></li>
-<li>Disadvantage:
-<ol type="1">
-<li>Be prone to overfitting the subset of stored samples.</li>
+</ol>
+</li>
+<li><p>Disadvantage: </p>
+<ol>
+<li>Be prone to overfitting the subset of stored samples. </li>
 <li>Be bounded by joint training.</li>
-</ol></li>
+</ol>
+</li>
 </ul>
 <p><strong>Pseudo Rehearsal</strong></p>
-<p>Feed random input to previous models, use the output as a
-pseudo-sample. (Generative models are also used nowadays but add
-training complexity.)<a href="#fn6" class="footnote-ref" id="fnref6"
-role="doc-noteref"><sup>6</sup></a></p>
-<figure>
-<img src="CL22.png" alt="Pseudo Rehearsal" />
-<figcaption aria-hidden="true">Pseudo Rehearsal</figcaption>
-</figure>
-<p>Novel GR method<a href="#fn7" class="footnote-ref" id="fnref7"
-role="doc-noteref"><sup>7</sup></a>: internal or hidden representations
-are replayed that are generated by the network's own, context-modulated
-feedback connections.</p>
+<p>Feed random input to previous models, use the output as a pseudo-sample. (Generative models are also used nowadays but add training complexity.)<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
+<p><img src="CL22.png" alt="Pseudo Rehearsal"></p>
+<p>Novel GR method<sup><a href="#fn_7" id="reffn_7">7</a></sup>: internal or hidden representations are replayed that are generated by the network’s own, context-modulated feedback connections.</p>
 <p><strong>Constrained Optimization</strong></p>
-<p>Minimize interference with old tasks by constraining updates on the
-new task. The goal is to optimize the loss on the current examples(s)
-without increasing the losses on the previously learned examples.</p>
-<p>Assume the examples are observed one at a time. Formulate the goal as
-the following constrained optimization problem. <span
-class="math display">\[\theta^{t}=\argmin_\theta \ell\left(f\left(x_{t}
-; \theta\right), y_{t}\right)
-\]</span> <span class="math display">\[s.t. \ell\left(f\left(x_{i} ;
-\theta\right), y_{i}\right) \leq \ell\left(f\left(x_{i} ;
-\theta^{t-1}\right), y_{i}\right) ; \forall i \in[0 \ldots
-t-1]\]</span></p>
-<p><span class="math inline">\(f(. ; \theta)\)</span> is a model
-parameterized by <span class="math inline">\(\theta\)</span>, <span
-class="math inline">\(\ell\)</span> is the loss function. <span
-class="math inline">\(t\)</span> is the index of the current example and
-<span class="math inline">\(i\)</span> indexes the previous
-examples.</p>
-<p>The original constraints can be rephrased to the constraints in the
-gradient space:</p>
-<p><span class="math display">\[
-\left\langle g, g_{i}\right\rangle=\left\langle\frac{\partial
-\ell\left(f\left(x_{t} ; \theta\right), y_{t}\right)}{\partial \theta},
-\frac{\partial \ell\left(f\left(x_{i} ; \theta\right),
-y_{i}\right)}{\partial \theta}\right\rangle \geq 0
-\]</span></p>
-<h3 id="regularization-based-methods">Regularization-Based Methods</h3>
-<p>These method avoids storing raw inputs, prioritizing privacy, and
-alleviating memory requirements. In these methods, an extra
-regularization term is introduced in the loss function, to consolidate
-previous knowledge when learning on new data. We can further divide
-these methods into datafocused and prior-focused methods.</p>
-<p><strong>Data-Focused Methods</strong></p>
-<p>The basic building block in data-focused methods is <strong>knowledge
-distillation</strong> from a previous model (trained on a previous task)
-to the model being trained on the new data.</p>
+<p>Minimize interference with old tasks by constraining updates on the new task. The goal is to optimize the loss on the current examples(s) without increasing the losses on the previously learned examples.</p>
+<p>Assume the examples are observed one at a time. Formulate the goal as the following constrained optimization problem. </p>
+<script type="math/tex; mode=display">\theta^{t}=\argmin_\theta \ell\left(f\left(x_{t} ; \theta\right), y_{t}\right)
+$$ $$s.t. \ell\left(f\left(x_{i} ; \theta\right), y_{i}\right) \leq \ell\left(f\left(x_{i} ; \theta^{t-1}\right), y_{i}\right) ; \forall i \in[0 \ldots t-1]</script><p>$f(. ; \theta)$ is a model parameterized by $\theta$, $\ell$ is the loss function. $t$ is the index of the current example and $i$ indexes the previous examples.</p>
+<p>The original constraints can be rephrased to the constraints in the gradient space:</p>
+<script type="math/tex; mode=display">
+\left\langle g, g_{i}\right\rangle=\left\langle\frac{\partial \ell\left(f\left(x_{t} ; \theta\right), y_{t}\right)}{\partial \theta}, \frac{\partial \ell\left(f\left(x_{i} ; \theta\right), y_{i}\right)}{\partial \theta}\right\rangle \geq 0</script><h3 id="Regularization-Based-Methods"><a href="#Regularization-Based-Methods" class="headerlink" title="Regularization-Based Methods"></a>Regularization-Based Methods</h3><p>These method avoids storing raw inputs, prioritizing privacy, and alleviating memory requirements.<br>In these methods, an extra regularization term is introduced in the loss function, to consolidate previous knowledge when learning on new data. We can further divide these methods into datafocused and prior-focused methods.</p>
+<p><strong>Data-Focused Methods</strong> </p>
+<p>The basic building block in data-focused methods is <strong>knowledge distillation</strong> from a previous model (trained on a previous task) to the model being trained on the new data.</p>
 <p><strong>Prior-Focused Methods</strong></p>
-<p>To mitigate forgetting, prior-focused methods estimate a distribution
-over the model parameters, used as prior when learning from new data.
-Typically, importance of all neural network parameters is estimated,
-with parameters assumed independent to ensure feasibility. During
-training of later tasks, changes to important parameters are
-penalized.</p>
-<h3 id="parameter-isolation-methods">Parameter Isolation Methods</h3>
-<p>This family dedicates different model parameters to each task, to
-prevent any possible forgetting. These mehods avoid forgetting by using
-different parameters for each task.</p>
-<p>Best-suited for: task-incremental setting, unconstrained model
-capacity, performance is the priority.</p>
-<p><strong>Fixed Network Methods</strong> Network parts used for
-previous tasks are masked out when learning new tasks (e.g., at neuronal
-level (HAT) or at parameter level (PackNet, PathNet)</p>
+<p>To mitigate forgetting, prior-focused methods estimate a distribution over the model parameters, used as prior when learning from new data. Typically, importance of all neural network parameters is estimated, with parameters assumed independent to ensure feasibility. During training of later tasks, changes to important parameters are penalized.</p>
+<h3 id="Parameter-Isolation-Methods"><a href="#Parameter-Isolation-Methods" class="headerlink" title="Parameter Isolation Methods"></a>Parameter Isolation Methods</h3><p>This family dedicates different model parameters to each task, to prevent any possible forgetting. These mehods avoid forgetting by using different parameters for each task.</p>
+<p>Best-suited for: task-incremental setting, unconstrained model capacity, performance is the priority.</p>
+<p><strong>Fixed Network Methods</strong><br>Network parts used for previous tasks are masked out when learning new tasks (e.g., at neuronal level (HAT) or at parameter level (PackNet, PathNet)</p>
 <p><strong>Dynamic Architecture Methods</strong></p>
-<p>When model size is not constrained: grow new branches for new tasks,
-while freezing previous task parameters (RCL), or dedicate a model copy
-to each task (Expert Gate), etc.</p>
-<h2 id="conlusion">Conlusion</h2>
-<p>TODO! Summaries will be added when i am familiar enough with this
-field.</p>
-<h2 id="appendix">Appendix:</h2>
-<h3 id="mind-map">Mind Map</h3>
-<figure>
-<img src="CL23.png" alt="Mind Map" />
-<figcaption aria-hidden="true">Mind Map</figcaption>
-</figure>
-<h3 id="some-representative-replay-methodskeep-updating">Some
-representative Replay Methods(Keep updating):</h3>
-<p>Only brief introduction, read the origional paper for more
-information. #### iCaRL (incremental classifier and representation
-learning)</p>
-<p>iCaRL belongs to <strong>Rehearsal</strong> and <strong>Class
-incremental Learning</strong>.</p>
-<p>iCaRL, that allows learning in such a classincremental way: only the
-training data for <strong>a small number of classes</strong>(NOT ALL
-DATA! new data + some old data) has to be present at the same time and
-<strong>new classes can be added progressively</strong>.</p>
-<p>The author introduces three main components that in combination allow
-iCaRL to fulfill all criteria put forth above.</p>
+<p>When model size is not constrained: grow new branches for new tasks, while freezing previous task parameters (RCL), or dedicate a model copy to each task (Expert Gate), etc.</p>
+<h2 id="Conlusion"><a href="#Conlusion" class="headerlink" title="Conlusion"></a>Conlusion</h2><p>TODO! Summaries will be added when i am familiar enough with this field.</p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix:"></a>Appendix:</h2><h3 id="Mind-Map"><a href="#Mind-Map" class="headerlink" title="Mind Map"></a>Mind Map</h3><p><img src="CL23.png" alt="Mind Map"></p>
+<h3 id="Some-representative-Replay-Methods-Keep-updating"><a href="#Some-representative-Replay-Methods-Keep-updating" class="headerlink" title="Some representative Replay Methods(Keep updating):"></a>Some representative Replay Methods(Keep updating):</h3><p>Only brief introduction, read the origional paper for more information. </p>
+<h4 id="iCaRL-incremental-classifier-and-representation-learning"><a href="#iCaRL-incremental-classifier-and-representation-learning" class="headerlink" title="iCaRL (incremental classifier and representation learning)"></a>iCaRL (incremental classifier and representation learning)</h4><p>iCaRL belongs to <strong>Rehearsal</strong> and <strong>Class incremental Learning</strong>.  </p>
+<p>iCaRL, that allows learning in such a classincremental way: only the training data for <strong>a small number of classes</strong>(NOT ALL DATA! new data + some old data) has to be present at the same time and <strong>new classes can be added progressively</strong>.</p>
+<p>The author introduces three main components that in combination allow iCaRL to fulfill all criteria put forth above. </p>
 <ul>
-<li><p>classification by a nearest-mean-of-exemplars rule</p></li>
-<li><p>prioritized exemplar selection based on herding</p></li>
-<li><p>representation learning using knowledge distillation and
-prototype rehearsal.</p></li>
+<li><p>classification by a nearest-mean-of-exemplars rule</p>
+</li>
+<li><p>prioritized exemplar selection based on herding</p>
+</li>
+<li><p>representation learning using knowledge distillation and prototype rehearsal.</p>
+</li>
 </ul>
-<ol type="1">
-<li><p>Classification (nearest-mean-of-exemplars)</p>
-<p>Algorithm 1 describes the mean-of-exemplars classifier that is used
-to classify images into the set of classes observed so far.</p>
-<figure>
-<img src="CL12.png" alt="Split Mnist Task" />
-<figcaption aria-hidden="true">Split Mnist Task</figcaption>
-</figure>
-<p>where <span class="math inline">\(\mathcal{P} =
-(P_1,\ldots,P_t)\)</span> is <strong>exemplar images</strong> that it
-selects dynamically out of the data stream.</p>
-<p>And <span class="math inline">\(t\)</span> denotes the number of
-classes that have been observed so far(<span
-class="math inline">\(t\)</span> increases with time).</p>
-<p><span class="math inline">\(\varphi:\mathcal{X}\rightarrow
-\mathbb{R}^d\)</span>, a trainable feature extractor, followed by a
-single classification layer with as many sigmoid output nodes as classes
-observed so far.</p>
-<p>Class label <span class="math inline">\(y\in
-\{1,\ldots,t\}\)</span>.</p></li>
-<li><p>Training</p>
-<p>For training, iCaRL processes batches of classes at a time using an
-incremental learning strategy. Every time data for new classes is
-available iCaRL calls an update routine (Algorithm 2)</p>
-<figure>
-<img src="CL13.png" alt="Split Mnist Task" />
-<figcaption aria-hidden="true">Split Mnist Task</figcaption>
-</figure></li>
-<li><p>Other algorithm (For more detail, you can visit
-10.1109/CVPR.2017.587) <img src="CL14.png" alt="Split Mnist Task" />
-<img src="CL15.png" alt="Split Mnist Task" /></p></li>
-</ol>
-<h4 id="gem-gradient-episodic-memory-for-continual-learning6">GEM:
-Gradient Episodic Memory for Continual Learning<a href="#fn8"
-class="footnote-ref" id="fnref8"
-role="doc-noteref"><sup>8</sup></a></h4>
-<p>Some important definition:</p>
-<p>Note: Analogous to <strong>Transfer</strong> and
-<strong>Interference</strong>. 1. <strong>Backward
-transfer(BWT)</strong>, which is the influence that learning a current
-task <span class="math inline">\(t\)</span> has on the performance on a
-previous task <span class="math inline">\(k\)</span> (<span
-class="math inline">\(k&lt;t\)</span>). - Positive Backward transfer:
-There exists positive backward transfer when learning about some task t
-increases the performance on some preceding task k. - Negative Backward
-transfer: There also exists negative backward transfer when learning
-about some task t decreases the performance on some preceding task k.
-Large negative backward transfer is also known as <strong>catastrophic
-forgetting</strong>. 2. <strong>Forward transfer(FWT)</strong>, which is
-the influence that learning a current task t has on the performance on a
-future task k (<span class="math inline">\(k&gt;t\)</span>). (Rarely
-discussed because it is unpredictable) - Positive Forward transfer: In
-particular, positive forward transfer is possible when the model is able
-to perform “zero-shot” learning, perhaps by exploiting the structure
-available in the task descriptors.</p>
-<p>Evaluation:</p>
-<figure>
-<img src="CL16.png" alt="Evaluation" />
-<figcaption aria-hidden="true">Evaluation</figcaption>
-</figure>
-<p>GEM:</p>
-<figure>
-<img src="CL17.png" alt="GEM" />
-<figcaption aria-hidden="true">GEM</figcaption>
-</figure>
-<p>Experiments: <img src="CL18.png" alt="Experiments" /></p>
-<h1 id="for-more-blogs">For More Blogs</h1>
-<p><strong>TODO</strong> : The future of Continue Learning.</p>
-<p><strong>TODO</strong> : Details of some papers。</p>
-<h1 id="reference-acknowledgements">Reference &amp;
-Acknowledgements</h1>
-<section class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
 <ol>
-<li id="fn1" role="doc-endnote"><p>Lopez-Paz, D. and M. t. A. Ranzato
-(2017). Gradient Episodic Memory for Continual Learning. Advances in
-Neural Information Processing Systems, Curran Associates, Inc.<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>Wang, Z., et al. (2022). Learning To
-Prompt for Continual Learning. Proceedings of the IEEE/CVF Conference on
-Computer Vision and Pattern Recognition (CVPR).<a href="#fnref2"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>Rebuffi, S., et al. (2017). iCaRL:
-Incremental Classifier and Representation Learning. 2017 IEEE Conference
-on Computer Vision and Pattern Recognition (CVPR).<a href="#fnref3"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>Gido van de Ven and Andreas S.
-Tolias.(2019) Three scenarios for continual learning. arXiv:1904.07734<a
-href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>Lange, M. D., et al. (2022). "A
-Continual Learning Survey: Defying Forgetting in Classification Tasks."
-Ieee Transactions on Pattern Analysis and Machine Intelligence 44(7):
-3366-3385.<a href="#fnref5" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"
-role="doc-endnote"><p>https://icml.cc/virtual/2021/tutorial/10833 Part
-of blog's pictures come from this link. Thanks :)<a href="#fnref6"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7" role="doc-endnote"><p>van de Ven, G. M., et al. (2020).
-"Brain-inspired replay for continual learning with artificial neural
-networks." Nature Communications 11(1): 4069.<a href="#fnref7"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8" role="doc-endnote"><p>Lopez-Paz, D. and M. t. A. Ranzato
-(2017). Gradient Episodic Memory for Continual Learning. Advances in
-Neural Information Processing Systems, Curran Associates, Inc.<a
-href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li><p>Classification (nearest-mean-of-exemplars)</p>
+<p> Algorithm 1 describes the mean-of-exemplars classifier that is used to classify images into the set of classes observed so far.</p>
+<p> <img src="CL12.png" alt="Split Mnist Task"></p>
+<p> where $\mathcal{P} = (P_1,\ldots,P_t)$ is <strong>exemplar images</strong> that it selects dynamically out of the data stream. </p>
+<p> And $t$ denotes the number of classes that have been observed so far($t$ increases with time). </p>
+<p> $\varphi:\mathcal{X}\rightarrow \mathbb{R}^d$, a trainable feature extractor, followed by a single classification layer with as many sigmoid output nodes as classes observed so far.</p>
+<p> Class label $y\in \{1,\ldots,t\}$. </p>
+</li>
+<li><p>Training</p>
+<p> For training, iCaRL processes batches of classes at a time using an incremental learning strategy. Every time data for new classes is available iCaRL calls an update routine (Algorithm 2)</p>
+<p> <img src="CL13.png" alt="Split Mnist Task"></p>
+</li>
+<li><p>Other algorithm (For more detail, you can visit 10.1109/CVPR.2017.587)<br> <img src="CL14.png" alt="Split Mnist Task"><br> <img src="CL15.png" alt="Split Mnist Task"></p>
+</li>
 </ol>
-</section>
+<h4 id="GEM-Gradient-Episodic-Memory-for-Continual-Learning6"><a href="#GEM-Gradient-Episodic-Memory-for-Continual-Learning6" class="headerlink" title="GEM: Gradient Episodic Memory for Continual Learning6"></a>GEM: Gradient Episodic Memory for Continual Learning<sup><a href="#fn_6" id="reffn_6">6</a></sup></h4><p>Some important definition:</p>
+<p>Note: Analogous to <strong>Transfer</strong> and <strong>Interference</strong>.</p>
+<ol>
+<li><strong>Backward transfer(BWT)</strong>, which is the influence that learning a current task $t$ has on the performance on a previous task $k$ ($k&lt;t$). <ul>
+<li>Positive Backward transfer: There exists positive backward transfer when learning about some task t increases the performance on some preceding task k.</li>
+<li>Negative Backward transfer: There also exists negative backward transfer when learning about some task t decreases the performance on some preceding task k.  Large negative backward transfer is also known as <strong>catastrophic forgetting</strong>.</li>
+</ul>
+</li>
+<li><strong>Forward transfer(FWT)</strong>, which is the influence that learning a current task t has on the performance on a future task k ($k&gt;t$).  (Rarely discussed because it is unpredictable)<ul>
+<li>Positive Forward transfer:  In particular, positive forward transfer is possible when the model is able to perform “zero-shot” learning, perhaps by exploiting the structure available in the task descriptors.</li>
+</ul>
+</li>
+</ol>
+<p>Evaluation:</p>
+<p><img src="CL16.png" alt="Evaluation"></p>
+<p>GEM:</p>
+<p><img src="CL17.png" alt="GEM"></p>
+<p>Experiments:<br><img src="CL18.png" alt="Experiments"></p>
+<h1 id="For-More-Blogs"><a href="#For-More-Blogs" class="headerlink" title="For More Blogs"></a>For More Blogs</h1><p><strong>TODO</strong> : The future of Continue Learning.</p>
+<p><strong>TODO</strong> : Details of some papers。</p>
+<h1 id="Reference-amp-Acknowledgements"><a href="#Reference-amp-Acknowledgements" class="headerlink" title="Reference &amp; Acknowledgements"></a>Reference &amp; Acknowledgements</h1><blockquote id="fn_1">
+<sup>1</sup>. <a target="_blank" rel="noopener" href="https://icml.cc/virtual/2021/tutorial/10833">https://icml.cc/virtual/2021/tutorial/10833</a>  Part of blog’s pictures come from this link. Thanks :)<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. Wang, Z., et al. (2022). Learning To Prompt for Continual Learning. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR).<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. Lange, M. D., et al. (2022). “A Continual Learning Survey: Defying Forgetting in Classification Tasks.” Ieee Transactions on Pattern Analysis and Machine Intelligence 44(7): 3366-3385.<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. Gido van de Ven and Andreas S. Tolias.(2019) Three scenarios for continual learning. arXiv:1904.07734<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_5">
+<sup>5</sup>. Rebuffi, S., et al. (2017). iCaRL: Incremental Classifier and Representation Learning. 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR).<a href="#reffn_5" title="Jump back to footnote [5] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_6">
+<sup>6</sup>. Lopez-Paz, D. and M. t. A. Ranzato (2017). Gradient Episodic Memory for Continual Learning. Advances in Neural Information Processing Systems, Curran Associates, Inc.<a href="#reffn_6" title="Jump back to footnote [6] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_7">
+<sup>7</sup>. van de Ven, G. M., et al. (2020). “Brain-inspired replay for continual learning with artificial neural networks.” Nature Communications 11(1): 4069.<a href="#reffn_7" title="Jump back to footnote [7] in the text."> &#8617;</a>
+</blockquote>
 
   </div>
 </article>
@@ -778,18 +443,7 @@ href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#what-is-continual-learning"><span class="toc-number">1.</span> <span class="toc-text">What is Continual Learning?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-high-level-definition."><span class="toc-number">1.1.</span> <span class="toc-text">A high level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-low-level-definition."><span class="toc-number">1.2.</span> <span class="toc-text">A low level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#motivation-application-scenarios"><span class="toc-number">1.3.</span> <span class="toc-text">Motivation &amp; Application
-scenarios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-challenge-of-continual-learing"><span class="toc-number">1.4.</span> <span class="toc-text">The Challenge of Continual
-Learing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#four-assumptions-of-continual-learning"><span class="toc-number">1.5.</span> <span class="toc-text">Four Assumptions of
-Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#task-incremental-learningthe-easiest-scenario"><span class="toc-number">1.5.1.</span> <span class="toc-text">Task incremental
-Learning(the easiest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class-incremental-learning"><span class="toc-number">1.5.2.</span> <span class="toc-text">Class incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#domain-incremental-learning"><span class="toc-number">1.5.3.</span> <span class="toc-text">Domain incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-incremental-learning-task-agnostic-learning-the-hardest-scenario"><span class="toc-number">1.5.4.</span> <span class="toc-text">Data
-incremental Learning &#x2F; Task-Agnostic Learning (the hardest
-scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-difference-between-continuous-learning-and-multi-task"><span class="toc-number">1.5.5.</span> <span class="toc-text">The
-difference between Continuous Learning and Multi-Task</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#some-key-definitions"><span class="toc-number">1.6.</span> <span class="toc-text">Some key definitions！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#transfer-and-interference"><span class="toc-number">1.6.1.</span> <span class="toc-text">Transfer and Interference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#possible-scenarios-in-cl"><span class="toc-number">1.6.2.</span> <span class="toc-text">Possible Scenarios in CL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-method-of-continual-learning"><span class="toc-number">1.7.</span> <span class="toc-text">The method of Continual
-Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#regularization-based-methods"><span class="toc-number">1.7.1.</span> <span class="toc-text">Regularization-Based Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parameter-isolation-methods"><span class="toc-number">1.7.2.</span> <span class="toc-text">Parameter Isolation Methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conlusion"><span class="toc-number">1.8.</span> <span class="toc-text">Conlusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#appendix"><span class="toc-number">1.9.</span> <span class="toc-text">Appendix:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mind-map"><span class="toc-number">1.9.1.</span> <span class="toc-text">Mind Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#some-representative-replay-methodskeep-updating"><span class="toc-number">1.9.2.</span> <span class="toc-text">Some
-representative Replay Methods(Keep updating):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gem-gradient-episodic-memory-for-continual-learning6"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">GEM:
-Gradient Episodic Memory for Continual Learning8</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#for-more-blogs"><span class="toc-number">2.</span> <span class="toc-text">For More Blogs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#reference-acknowledgements"><span class="toc-number">3.</span> <span class="toc-text">Reference &amp;
-Acknowledgements</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-Continual-Learning"><span class="toc-number">1.</span> <span class="toc-text">What is Continual Learning?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-high-level-definition"><span class="toc-number">1.1.</span> <span class="toc-text">A high level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-low-level-definition"><span class="toc-number">1.2.</span> <span class="toc-text">A low level definition.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Motivation-amp-Application-scenarios"><span class="toc-number">1.3.</span> <span class="toc-text">Motivation &amp; Application scenarios</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Challenge-of-Continual-Learing"><span class="toc-number">1.4.</span> <span class="toc-text">The Challenge of Continual Learing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Four-Assumptions-of-Continual-Learning"><span class="toc-number">1.5.</span> <span class="toc-text">Four Assumptions of Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Task-incremental-Learning-the-easiest-scenario"><span class="toc-number">1.5.1.</span> <span class="toc-text">Task incremental Learning(the easiest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-incremental-Learning"><span class="toc-number">1.5.2.</span> <span class="toc-text">Class incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Domain-incremental-Learning"><span class="toc-number">1.5.3.</span> <span class="toc-text">Domain incremental Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-incremental-Learning-Task-Agnostic-Learning-the-hardest-scenario"><span class="toc-number">1.5.4.</span> <span class="toc-text">Data incremental Learning &#x2F; Task-Agnostic Learning (the hardest scenario)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-difference-between-Continuous-Learning-and-Multi-Task"><span class="toc-number">1.5.5.</span> <span class="toc-text">The difference between Continuous Learning and Multi-Task</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-key-definitions%EF%BC%81"><span class="toc-number">1.6.</span> <span class="toc-text">Some key definitions！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transfer-and-Interference"><span class="toc-number">1.6.1.</span> <span class="toc-text">Transfer and Interference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Possible-Scenarios-in-CL"><span class="toc-number">1.6.2.</span> <span class="toc-text">Possible Scenarios in CL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-method-of-Continual-Learning"><span class="toc-number">1.7.</span> <span class="toc-text">The method of Continual Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Replay-Methods"><span class="toc-number">1.7.1.</span> <span class="toc-text">Replay Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Regularization-Based-Methods"><span class="toc-number">1.7.2.</span> <span class="toc-text">Regularization-Based Methods</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parameter-Isolation-Methods"><span class="toc-number">1.7.3.</span> <span class="toc-text">Parameter Isolation Methods</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conlusion"><span class="toc-number">1.8.</span> <span class="toc-text">Conlusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Appendix"><span class="toc-number">1.9.</span> <span class="toc-text">Appendix:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mind-Map"><span class="toc-number">1.9.1.</span> <span class="toc-text">Mind Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Some-representative-Replay-Methods-Keep-updating"><span class="toc-number">1.9.2.</span> <span class="toc-text">Some representative Replay Methods(Keep updating):</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#iCaRL-incremental-classifier-and-representation-learning"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">iCaRL (incremental classifier and representation learning)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GEM-Gradient-Episodic-Memory-for-Continual-Learning6"><span class="toc-number">1.9.2.2.</span> <span class="toc-text">GEM: Gradient Episodic Memory for Continual Learning6</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#For-More-Blogs"><span class="toc-number">2.</span> <span class="toc-text">For More Blogs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference-amp-Acknowledgements"><span class="toc-number">3.</span> <span class="toc-text">Reference &amp; Acknowledgements</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
