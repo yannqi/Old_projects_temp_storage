@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL17.png">
 <meta property="og:image" content="https://yannqi.github.io/2022/07/24/CLsurvey/CL18.png">
 <meta property="article:published_time" content="2022-07-24T13:30:58.000Z">
-<meta property="article:modified_time" content="2022-10-23T13:31:43.320Z">
+<meta property="article:modified_time" content="2022-10-26T12:16:11.116Z">
 <meta property="article:author" content="Yang Qi">
 <meta property="article:tag" content="Continue Learning &#x2F; Life long Learning">
 <meta property="article:tag" content="Survey">
@@ -333,8 +333,9 @@
 <p><strong>Constrained Optimization</strong></p>
 <p>Minimize interference with old tasks by constraining updates on the new task. The goal is to optimize the loss on the current examples(s) without increasing the losses on the previously learned examples.</p>
 <p>Assume the examples are observed one at a time. Formulate the goal as the following constrained optimization problem. </p>
-<script type="math/tex; mode=display">\theta^{t}=\argmin_\theta \ell\left(f\left(x_{t} ; \theta\right), y_{t}\right)
-$$ $$s.t. \ell\left(f\left(x_{i} ; \theta\right), y_{i}\right) \leq \ell\left(f\left(x_{i} ; \theta^{t-1}\right), y_{i}\right) ; \forall i \in[0 \ldots t-1]</script><p>$f(. ; \theta)$ is a model parameterized by $\theta$, $\ell$ is the loss function. $t$ is the index of the current example and $i$ indexes the previous examples.</p>
+<script type="math/tex; mode=display">
+\theta^{t}=\argmin_\theta \ell\left(f\left(x_{t} ; \theta\right), y_{t}\right)</script><script type="math/tex; mode=display">
+s.t. \ell\left(f\left(x_{i} ; \theta\right), y_{i}\right) \leq \ell\left(f\left(x_{i} ; \theta^{t-1}\right), y_{i}\right) ; \forall i \in[0 \ldots t-1]</script><p>$f(. ; \theta)$ is a model parameterized by $\theta$, $\ell$ is the loss function. $t$ is the index of the current example and $i$ indexes the previous examples.</p>
 <p>The original constraints can be rephrased to the constraints in the gradient space:</p>
 <script type="math/tex; mode=display">
 \left\langle g, g_{i}\right\rangle=\left\langle\frac{\partial \ell\left(f\left(x_{t} ; \theta\right), y_{t}\right)}{\partial \theta}, \frac{\partial \ell\left(f\left(x_{i} ; \theta\right), y_{i}\right)}{\partial \theta}\right\rangle \geq 0</script><h3 id="Regularization-Based-Methods"><a href="#Regularization-Based-Methods" class="headerlink" title="Regularization-Based Methods"></a>Regularization-Based Methods</h3><p>These method avoids storing raw inputs, prioritizing privacy, and alleviating memory requirements.<br>In these methods, an extra regularization term is introduced in the loss function, to consolidate previous knowledge when learning on new data. We can further divide these methods into datafocused and prior-focused methods.</p>
