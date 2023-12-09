@@ -9,24 +9,23 @@
     <meta name="description" content="前言 APG(Accelerate Proximal Gradient)加速近端梯度算法 PGD (Proximal Gradient Descent)近端梯度下降法推导 Example of Proximal Gradient Descent   APG(Accelerate Proximal Gradient)加速近端梯度算法推导 Back to lasso example:     总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.">
-<meta property="og:url" content="https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/index.html">
+<meta property="og:url" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/index.html">
 <meta property="og:site_name" content="Yang Qi&#39;s Blog">
 <meta property="og:description" content="前言 APG(Accelerate Proximal Gradient)加速近端梯度算法 PGD (Proximal Gradient Descent)近端梯度下降法推导 Example of Proximal Gradient Descent   APG(Accelerate Proximal Gradient)加速近端梯度算法推导 Back to lasso example:     总结">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/3230730b816343b4b2d1232e2a3c712f.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/749cc856675d434999e24f4aba3a3ef0.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/875f2624edfc43c6a5c92604712875a6.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/f08de5ce7ee04dad92ea0766edfad67b.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/452422862ea54d30911aa2833d81e21d.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/1c4cc1caf9864c6ab2d5bf68ddf7f749.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/04390b3c2cdf41b89a30e46a1a23ec13.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/Lasso.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/ISTA.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/APG.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/Result.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/momentum.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/NAG.png">
+<meta property="og:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/NAG1.png">
 <meta property="article:published_time" content="2022-10-22T02:30:58.000Z">
-<meta property="article:modified_time" content="2022-10-26T12:14:56.206Z">
+<meta property="article:modified_time" content="2023-12-09T08:24:18.000Z">
 <meta property="article:author" content="Yang Qi">
 <meta property="article:tag" content="APG-NAG Optimizer">
-<meta property="article:tag" content="Optimizer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/3230730b816343b4b2d1232e2a3c712f.png">
+<meta name="twitter:image" content="https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/Lasso.png">
     
     
       
@@ -108,17 +107,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&text=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&is_video=false&description=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&body=Check out this article: https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&name=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&t=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&text=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&is_video=false&description=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&body=Check out this article: https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&name=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&t=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -163,7 +162,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="/tags/APG-NAG-Optimizer/" rel="tag">APG-NAG Optimizer</a>, <a class="tag-link-link" href="/tags/Optimizer/" rel="tag">Optimizer</a>
+        <a class="tag-link-link" href="/tags/APG-NAG-Optimizer/" rel="tag">APG-NAG Optimizer</a>
     </div>
 
 
@@ -229,7 +228,7 @@
 </ul>
 <p>总结+个人理解：这里原本想画图解释一下近端梯度下降法(Proximal Gradient Descent),但发现不是很好画，就简单用文字表述一下我对Proximal (近端)的理解, 理想情况下，梯度下降方向朝向是我们目标函数最优方向，但由于函数存在不可微分项，因此梯度下降的方向无法确定(虽然不可微分函数存在次梯度这一说(例如L1范数存在次梯度)，但f(x)整体梯度如果始终包含不可微分的函数的次微分的话，实际梯度与计算梯度将始终有一定偏差，随着迭代次数过多后，偏差更大。)。所以，我们将可微分项和不可微分项拿出来，首先确保我们的可微分项的梯度下降方向绝对正确，不可微分项再另想办法进行最小化，这种思想就是PGD的思想。个人认为Proximal(近端)主要有一种近似(接近)的含义在里面，而且表现在梯度的近端上，更进一步，主要表现在可微分项梯度和不可微分项的梯度与整体函数梯度的近端(接近程度)上。</p>
 <h3 id="Example-of-Proximal-Gradient-Descent"><a href="#Example-of-Proximal-Gradient-Descent" class="headerlink" title="Example of Proximal Gradient Descent"></a>Example of Proximal Gradient Descent</h3><p>参考CMU的PPT，也举一个例子，ISTA算法，便于更加直观的理解：<br><strong>Lasso criterion</strong> <a target="_blank" rel="noopener" href="https://www.lianxh.cn/news/c15e828b678e6.html">一篇对lasso的讲解，感觉非常不错</a><br>定义如下函数：</p>
-<script type="math/tex; mode=display">\begin{align} f(\beta)= \frac{1}{2} ||y-X\beta||^2_2 + \lambda ||\beta||_1\end{align}</script><p>即其$\min_{\beta} f(\beta)$如图所示，<br><img src="https://img-blog.csdnimg.cn/3230730b816343b4b2d1232e2a3c712f.png" alt="1"><br>上述公式就是一个典型的近端梯度下降算法(Proximal Gradient Algorithm)问题，可看作$g(\beta)= \frac{1}{2} ||y-X\beta||^2_2$,$h(\beta)=\lambda ||\beta||_1$。</p>
+<script type="math/tex; mode=display">\begin{align} f(\beta)= \frac{1}{2} ||y-X\beta||^2_2 + \lambda ||\beta||_1\end{align}</script><p>即其$\min_{\beta} f(\beta)$如图所示，<br><img src="Lasso.png" alt="1"><br>上述公式就是一个典型的近端梯度下降算法(Proximal Gradient Algorithm)问题，可看作$g(\beta)= \frac{1}{2} ||y-X\beta||^2_2$,$h(\beta)=\lambda ||\beta||_1$。</p>
 <p>则引入我们的近端算子(Proximal operator),</p>
 <script type="math/tex; mode=display">\begin{align} prox_{t} &=\argmin_{z} \frac{1}{2t}||\beta-z||^2_2+ \lambda ||z||_1 \nonumber \\ 
 &=S_{\lambda t}(\beta)\end{align}</script><p>其中，$S_{\lambda t}(\beta)$也称为 soft-thresholding operator，具体如下：</p>
@@ -241,7 +240,7 @@
 &=S_{\lambda t_k}(\beta^{(k-1)}+t_k X^T(y-X\beta^{(k-1)})) \end{align}</script><p>至此，随着k的迭代，可得到近似最优$\beta^*$</p>
 <p><del><em>12点半了，回宿舍，明天更</em></del> </p>
 <p>同时，该方法也被称为 iterative soft-thresholding algorithm (ISTA). </p>
-<p>如下图<sup><a href="#fn_1" id="reffn_1">1</a></sup>，与直接将$f(x)$求次梯度的方法相比，该方法可以有效收敛。<br><img src="https://img-blog.csdnimg.cn/749cc856675d434999e24f4aba3a3ef0.png" alt="1"></p>
+<p>如下图<sup><a href="#fn_1" id="reffn_1">1</a></sup>，与直接将$f(x)$求次梯度的方法相比，该方法可以有效收敛。<br><img src="ISTA.png" alt="1"></p>
 <h2 id="APG-Accelerate-Proximal-Gradient-加速近端梯度算法推导"><a href="#APG-Accelerate-Proximal-Gradient-加速近端梯度算法推导" class="headerlink" title="APG(Accelerate Proximal Gradient)加速近端梯度算法推导"></a>APG(Accelerate Proximal Gradient)加速近端梯度算法推导</h2><p>如果对PGD有一个清晰的认识后，那么APG的推导将变会变得无比清晰简单，再次重复一下我们的目标，</p>
 <script type="math/tex; mode=display">\begin{align} \min_{x}f(x)=g(x)+h(x) \end{align}</script><p>其中</p>
 <ul>
@@ -259,19 +258,19 @@ for \space k=1,2,3, \ldots  \nonumber
 <li>对于k&gt;1时，相当于$x^{(k-1)}$加了一个动量，变成$v$。</li>
 <li>如果$h(x)$不存在，即$f(x)$可微，则相当于梯度下降算法。</li>
 </ul>
-<p>公式(15)等同于公式(7)，公式(14)就是增加一个小的动量，以此达到加速的目的。如下图所示：<br><img src="https://img-blog.csdnimg.cn/875f2624edfc43c6a5c92604712875a6.png" alt="1"></p>
-<h3 id="Back-to-lasso-example"><a href="#Back-to-lasso-example" class="headerlink" title="Back to lasso example:"></a>Back to lasso example:</h3><p>回到刚才的例子，可以看到用APG方法，加速效果明显<br><img src="https://img-blog.csdnimg.cn/f08de5ce7ee04dad92ea0766edfad67b.png" alt="在这里插入图片描述"></p>
+<p>公式(15)等同于公式(7)，公式(14)就是增加一个小的动量，以此达到加速的目的。如下图所示：<br><img src="APG.png" alt="1"></p>
+<h3 id="Back-to-lasso-example"><a href="#Back-to-lasso-example" class="headerlink" title="Back to lasso example:"></a>Back to lasso example:</h3><p>回到刚才的例子，可以看到用APG方法，加速效果明显<br><img src="Result.png" alt="Result"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>PGD和APG主要用于目标函数中存在不可微分项的情况，在实际的深度学习算法中，该情况最主要用于稀疏优化，例如损失函数增加架构参数的L1范数，可以使架构参数变得稀疏。当然，该方法也有许多其它应用，总之，当你的函数中出现不可微分问题的时候，就可以来参考一下PGD算法。</p>
 <p>后续NAG优化器原理将放在(二)中 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554428/article/details/127386220?spm=1001.2014.3001.5501">(二)的链接</a>，太长了，拆一拆。后续部分会讲解NAG优化器，以及论文中如何将APG和NAG结合到一起，并尝试给出pytorch自定义优化器的代码实现(原论文是Mxnet)。</p>
 <p>篇二： </p>
 <h1 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h1><p>近期在阅读<strong>Data-Driven Sparse Structure Selection for Deep Neural Networks</strong>论文时，用到里面APG-NAG相关优化器的知识，原论文方法采用mxnet去实现的，在这里想迁移到pytorch中。因此手撕一下APG和NAG相关的知识。<br>在之前文章<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554428/article/details/127375349">APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理 (一)</a>中，详细描述了APG算法，本文将简略讲一下NAG优化器，并着重讲一下Data-Driven Sparse Structure Selection for Deep Neural Networks论文中APG-NAG优化器的实现。</p>
 <h1 id="NAG优化器"><a href="#NAG优化器" class="headerlink" title="NAG优化器"></a>NAG优化器</h1><p>NAG优化器主要可参考如下引用。讲解的非常细致，在这里引用<sup><a href="#fn_3" id="reffn_3">3</a></sup>和<sup><a href="#fn_4" id="reffn_4">4</a></sup>其中的话，并再用三张图简单描述一下：</p>
 <p><em>Momentum是基于动量原理的，就是每次更新参数时，梯度的方向都会和上一次迭代的方向有关，当一个球向山下滚的时候，它会越滚越快，能够加快收敛，但是这样也会存在一个问题，每次梯度都是本次和上次之和，如果是同向，那么将导致梯度很大，当到达谷底的时候很容易动量过大导致小球冲过谷底，跳过当前局部最优位置。<br>我们希望有一个更智能的球，一个知道它要去哪里的球，这样它知道在山坡再次向上倾斜之前减速。<br>Nesterov accelerated gradient是一种使动量项具有这种预见性的方法</em>    </p>
-<p>1.Momentum 更新<br><img src="https://img-blog.csdnimg.cn/452422862ea54d30911aa2833d81e21d.png" alt="1"></p>
+<p>1.Momentum 更新<br><img src="momentum.png" alt="1"></p>
 <ol>
-<li><p>NAG 更新<br><img src="https://img-blog.csdnimg.cn/1c4cc1caf9864c6ab2d5bf68ddf7f749.png" alt="1"></p>
+<li><p>NAG 更新<br><img src="NAG.png" alt="1"></p>
 </li>
-<li><p>两者对比(蓝色为动量，绿色为NAG)<br><img src="https://img-blog.csdnimg.cn/04390b3c2cdf41b89a30e46a1a23ec13.png" alt="1"></p>
+<li><p>两者对比(蓝色为动量，绿色为NAG)<br><img src="NAG1.png" alt="1"></p>
 <h1 id="APG-与-NAG的结合"><a href="#APG-与-NAG的结合" class="headerlink" title="APG 与 NAG的结合"></a>APG 与 NAG的结合</h1></li>
 </ol>
 <p>参考<strong>Data-Driven Sparse Structure Selection for Deep Neural Networks</strong>论文，其实也就是一个简单的上文提到的Lasso 问题的变种，定义如下目标函数，优化$\mathbf{x}$，</p>
@@ -349,17 +348,17 @@ x'^{(k)} &= S_{\gamma\eta_{(k)}}(z^{(k)}) +\mu^{(k)}v^{(k)}  \end{align}</script
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&text=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&is_video=false&description=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&body=Check out this article: https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&name=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yannqi.github.io/2022/10/22/APGNAG%20Optimizer/&t=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&text=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&is_video=false&description=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&body=Check out this article: https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&title=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&name=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理.&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://yannqi.github.io/2022/10/22/APGNAG_Optimizer/&t=_Tech. Blog_APG(Accelerate Proximal Gradient)加速近端梯度算法 和 NAG(Nesterov accelerated gradient)优化器原理."><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -380,7 +379,7 @@ x'^{(k)} &= S_{\gamma\eta_{(k)}}(z^{(k)}) +\mu^{(k)}v^{(k)}  \end{align}</script
     Copyright &copy;
     
     
-    2021-2022
+    2021-2077
     Yang Qi
   </div>
   <div class="footer-right">
